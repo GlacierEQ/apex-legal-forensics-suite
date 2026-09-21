@@ -186,5 +186,37 @@
         "license": "GPL-3.0"
       }
     ]
+  },
+  "file_digests": {
+    "backend/app/main.py": "ef052bf15f2cb80a7eb83a955d67ad221067fb5ec0aed453af454c3739b4c5bc",
+    "backend/app/terminal_ui.py": "9f425e3b1ebc9e74939348fcd1d0186a81d1272bd7efd33121fddec0dfc7821f",
+    "backend/tests/test_api.py": "421dfda5f917331ef2d703788d59e04456f381f0fc267e92b8137dbef455b230",
+    "frontend/src/app/page.tsx": "85593ff6acab2bd0570895927b240b66b6f8f219ed1abe9569c3de6ca39a5011",
+    "frontend/next.config.js": "70de348b638c0570ef2674e93ba88dfe4783cfd1aef49837dd62ba4f5f8ec667",
+    "frontend/server.js": "99251ff33769cbafd4c2a4c632c0171a064b05408111e57bb89679f2dfe23c47",
+    "frontend/package.json": "19e69972f8f5363fd02feebf2d8d83d4a1e4ea7360a8ee13f048485b8e795fd1",
+    "frontend/tailwind.config.js": "f255cce24418b198c5d345d9762de6f4485daea08bef23354972729f0467ce4f",
+    "frontend/tsconfig.json": "b43b1b6a01d594ec80735ef05e93e47ba3d632ec6df6669a421afe2f90a8eaab"
+  },
+  "tests_status": "9/9 UNIT TESTS PASSED (100% GREEN)",
+  "endpoints_verified": [
+    "/health",
+    "/mission",
+    "/api/v1/records/ingest",
+    "/api/v1/forensics/overview",
+    "/api/v1/forensics/allegations",
+    "/api/v1/forensics/contradictions",
+    "/api/v1/forensics/actors",
+    "/api/v1/forensics/events",
+    "/api/v1/forensics/motion-to-strike",
+    "/api/v1/forensics/search",
+    "/api/v1/forensics/export/motion",
+    "/api/v1/forensics/export/matrix"
+  ],
+  "terminal_ui": {
+    "status": "OPERATIONAL",
+    "port": 8000,
+    "dual_mode": "HTML5_AND_REST_API",
+    "doctrine": "FRE_601_602_DIRECT_ADMISSIBILITY"
   }
 }

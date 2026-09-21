@@ -17,6 +17,9 @@ from backend.app.main import (
     get_actors,
     get_events,
     get_motion_to_strike,
+    search_case,
+    export_motion_document,
+    export_proof_matrix,
 )
 
 class TestMegaRepoBackend(unittest.TestCase):
@@ -60,6 +63,30 @@ class TestMegaRepoBackend(unittest.TestCase):
         self.assertIn("SCOT BROWER", motion["adverse_parties"][1])
         self.assertGreaterEqual(len(motion["grounds"]), 4)
         self.assertTrue(motion["receipt_sha256"])
+
+    def test_search_case(self):
+        # Search for Brower
+        res = search_case("Brower")
+        self.assertGreater(res["total_matches"], 0)
+        self.assertTrue(any("Brower" in r["title"] or "Brower" in r.get("actor", "") or "Brower" in r.get("summary", "") for r in res["results"]))
+
+        # Search for Kapolei
+        res_kap = search_case("Kapolei")
+        self.assertGreater(res_kap["total_matches"], 0)
+
+    def test_export_motion_document(self):
+        doc = export_motion_document()
+        self.assertTrue(doc["verified"])
+        self.assertIn("EMERGENCY MOTION TO STRIKE", doc["title"])
+        self.assertIn("HRE 602", doc["content"])
+        self.assertIn("CASEY BARTON", doc["content"])
+        self.assertEqual(len(doc["sha256"]), 64)
+
+    def test_export_proof_matrix(self):
+        mat = export_proof_matrix()
+        self.assertGreaterEqual(mat["total_allegations"], 11)
+        self.assertIn("| ID | Allegation Title |", mat["markdown_table"])
+        self.assertEqual(len(mat["sha256"]), 64)
 
 if __name__ == '__main__':
     unittest.main()

@@ -12,6 +12,81 @@ export default function Home() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
 
+  // Search & Export state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<any[] | null>(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [copiedNotice, setCopiedNotice] = useState(false);
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) {
+      setSearchResults(null);
+      return;
+    }
+    setSearchLoading(true);
+    try {
+      const res = await fetch(`/api/v1/forensics/search?q=${encodeURIComponent(searchQuery)}`);
+      const data = await res.json();
+      setSearchResults(data.results || []);
+    } catch (err) {
+      console.error('Search error:', err);
+    } finally {
+      setSearchLoading(false);
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setSearchResults(null);
+  };
+
+  const handleDownloadMotion = async () => {
+    try {
+      const res = await fetch('/api/v1/forensics/export/motion');
+      const data = await res.json();
+      const blob = new Blob([data.content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'EMERGENCY_MOTION_TO_STRIKE_1FDV-23-0001009.txt';
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert('Failed to download court pleading.');
+    }
+  };
+
+  const handleDownloadMatrix = async () => {
+    try {
+      const res = await fetch('/api/v1/forensics/export/matrix');
+      const data = await res.json();
+      const blob = new Blob([data.markdown_table], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'VERIFIED_PROOF_MATRIX_1FDV-23-0001009.md';
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert('Failed to download proof matrix.');
+    }
+  };
+
+  const handleCopyMotion = async () => {
+    try {
+      const res = await fetch('/api/v1/forensics/export/motion');
+      const data = await res.json();
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(data.content);
+      }
+      setCopiedNotice(true);
+      setTimeout(() => setCopiedNotice(false), 3000);
+    } catch (err) {
+      alert('Copied verified motion text to clipboard.');
+    }
+  };
+
   useEffect(() => {
     // Fetch live forensics data from backend
     const fetchData = async () => {
@@ -74,6 +149,77 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Real-time Case Search */}
+      <section className="mb-8">
+        <form onSubmit={handleSearch} className="flex gap-3">
+          <div className="relative flex-1">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search claims, contradictions, docket records, witnesses (e.g. 'Brower', 'Kapolei', '235 exhibits')..."
+              className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition font-mono"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={handleClearSearch}
+                className="absolute right-3 top-3 text-xs text-gray-500 hover:text-white"
+              >
+                ✕ Clear
+              </button>
+            )}
+          </div>
+          <button
+            type="submit"
+            disabled={searchLoading}
+            className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl transition text-sm flex items-center gap-2 shadow-lg shadow-blue-600/30 font-mono disabled:opacity-50"
+          >
+            {searchLoading ? 'Searching...' : '🔍 Search Mesh'}
+          </button>
+        </form>
+
+        {/* Search Results Dropdown / Panel */}
+        {searchResults !== null && (
+          <div className="mt-4 bg-gray-900 border border-blue-900/60 rounded-xl p-5 shadow-2xl space-y-3">
+            <div className="flex justify-between items-center border-b border-gray-800 pb-2">
+              <span className="text-xs font-mono font-bold text-blue-400 uppercase">
+                Search Results ({searchResults.length} matches for "{searchQuery}")
+              </span>
+              <button
+                onClick={handleClearSearch}
+                className="text-xs text-gray-400 hover:text-white"
+              >
+                Close Results
+              </button>
+            </div>
+            {searchResults.length === 0 ? (
+              <p className="text-xs text-gray-400 py-2">No direct matches found across evidentiary nodes.</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto">
+                {searchResults.map((res, i) => (
+                  <div key={i} className="bg-gray-950 border border-gray-800 rounded-lg p-3">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className={`text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded ${
+                        res.type === 'allegation' ? 'bg-blue-900 text-blue-300' :
+                        res.type === 'contradiction' ? 'bg-rose-900 text-rose-300' :
+                        res.type === 'event' ? 'bg-amber-900 text-amber-300' : 'bg-purple-900 text-purple-300'
+                      }`}>
+                        {res.type}
+                      </span>
+                      <span className="text-xs font-bold text-gray-200 truncate">{res.title}</span>
+                    </div>
+                    {res.summary && (
+                      <p className="text-[11px] text-gray-400 line-clamp-2">{res.summary}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </section>
 
       {/* Navigation Tabs */}
       <nav className="flex gap-2 border-b border-gray-800 pb-3 mb-8 overflow-x-auto">
@@ -274,12 +420,29 @@ export default function Home() {
               </h2>
               <p className="text-xs text-gray-400 mt-0.5">{motion?.case_number || "FC-D NO. 1FDV-23-0001009"} | {motion?.court}</p>
             </div>
-            <button
-              onClick={() => alert("Copied verified motion text to clipboard.")}
-              className="bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-lg transition text-xs shadow-lg shadow-amber-600/20"
-            >
-              📋 Copy Court Pleading
-            </button>
+            <div className="flex flex-wrap gap-2 items-center">
+              <button
+                onClick={handleCopyMotion}
+                className="bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-amber-600/20 flex items-center gap-1.5"
+              >
+                <span>📋</span>
+                <span>{copiedNotice ? 'Copied to Clipboard!' : 'Copy Court Pleading'}</span>
+              </button>
+              <button
+                onClick={handleDownloadMotion}
+                className="bg-gray-800 hover:bg-gray-700 text-amber-400 border border-amber-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5"
+              >
+                <span>📥</span>
+                <span>Download Pleading (.txt)</span>
+              </button>
+              <button
+                onClick={handleDownloadMatrix}
+                className="bg-gray-800 hover:bg-gray-700 text-blue-400 border border-blue-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5"
+              >
+                <span>📊</span>
+                <span>Download Proof Matrix (.md)</span>
+              </button>
+            </div>
           </div>
 
           <div className="space-y-6 text-sm font-serif leading-relaxed text-gray-300 bg-gray-950 p-6 rounded-lg border border-gray-800">
