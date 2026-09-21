@@ -11,6 +11,11 @@ from backend.app.estate_mesh_engine import (
     get_estate_actors,
     get_estate_perjury_traps,
     get_estate_graph,
+    get_matter_detail,
+    generate_matter_packet,
+    generate_matter_pdf,
+    generate_matter_docx,
+    generate_matter_bundle_zip,
 )
 from backend.app.main import (
     get_estate_overview_route,
@@ -18,6 +23,11 @@ from backend.app.main import (
     get_estate_actors_route,
     get_estate_perjury_traps_route,
     get_estate_graph_route,
+    get_matter_detail_route,
+    get_matter_packet_route,
+    download_matter_pdf_route,
+    download_matter_docx_route,
+    download_matter_zip_route,
 )
 
 class TestEstateMeshEngine(unittest.TestCase):
@@ -84,6 +94,73 @@ class TestEstateMeshEngine(unittest.TestCase):
 
         graph_route = get_estate_graph_route()
         self.assertGreaterEqual(graph_route["node_count"], 200)
+
+    def test_matter_detail_and_dynamic_synthesis(self):
+        import zipfile
+        import io
+
+        # Test Navy Federal Credit Union matter ($10.5M)
+        matter = get_matter_detail("CASE_CHERRY_NFCU")
+        self.assertIsNotNone(matter)
+        self.assertEqual(matter["case_id"], "CASE_CHERRY_NFCU")
+        self.assertEqual(matter["total_damages"], 10500000.0)
+        self.assertGreaterEqual(len(matter["perjury_traps"]), 1)
+        self.assertGreaterEqual(len(matter["exhibits"]), 1)
+
+        # Generate full court-ready packet
+        packet = generate_matter_packet("CASE_CHERRY_NFCU")
+        self.assertTrue(packet["verified"])
+        self.assertIn("CASE_CHERRY_NFCU", packet["raw_text"])
+        self.assertIn("$10,500,000.00", packet["raw_text"])
+        self.assertIn("VERIFIED COMPLAINT", packet["raw_text"])
+        self.assertIn("HRE 601/602", packet["raw_text"])
+
+        # Generate PDF, DOCX, ZIP
+        pdf = generate_matter_pdf(packet)
+        self.assertTrue(pdf.startswith(b"%PDF"))
+        self.assertGreater(len(pdf), 5000)
+
+        docx = generate_matter_docx(packet)
+        self.assertTrue(docx.startswith(b"PK"))
+        self.assertGreater(len(docx), 5000)
+
+        zip_bytes = generate_matter_bundle_zip(packet)
+        self.assertTrue(zip_bytes.startswith(b"PK"))
+        with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as z:
+            names = z.namelist()
+            self.assertIn("01_CASE_CHERRY_NFCU_COMPLAINT_28LINE.pdf", names)
+            self.assertIn("01_CASE_CHERRY_NFCU_COMPLAINT.docx", names)
+            self.assertIn("00_FILING_MANIFEST.json", names)
+
+        # Route tests
+        detail_res = get_matter_detail_route("CASE_CHERRY_NFCU")
+        self.assertEqual(detail_res["case_id"], "CASE_CHERRY_NFCU")
+
+        packet_res = get_matter_packet_route("CASE_CHERRY_NFCU")
+        self.assertTrue(packet_res["verified"])
+
+        pdf_resp = download_matter_pdf_route("CASE_CHERRY_NFCU")
+        self.assertEqual(pdf_resp.media_type, "application/pdf")
+
+        docx_resp = download_matter_docx_route("CASE_CHERRY_NFCU")
+        self.assertIn("wordprocessingml", docx_resp.media_type)
+
+        zip_resp = download_matter_zip_route("CASE_CHERRY_NFCU")
+        self.assertEqual(zip_resp.media_type, "application/zip")
+
+    def test_cherry_chan_recovery_portfolio(self):
+        # Verify all 9 matters in Cherry Chan portfolio can generate packets cleanly
+        matters = get_estate_matters("02_CHERRY_CHAN")
+        self.assertEqual(len(matters), 9)
+        total_recovery_exposure = sum(m["total_damages"] for m in matters)
+        self.assertGreaterEqual(total_recovery_exposure, 42000000.0)
+
+        for m in matters:
+            cid = m["case_id"]
+            packet = generate_matter_packet(cid)
+            self.assertTrue(packet["verified"], f"Failed on matter {cid}")
+            self.assertGreater(len(packet["raw_text"]), 500)
+            self.assertEqual(packet["total_damages"], m["total_damages"])
 
 if __name__ == "__main__":
     unittest.main()

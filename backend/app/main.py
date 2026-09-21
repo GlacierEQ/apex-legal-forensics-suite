@@ -23,7 +23,19 @@ try:
         generate_federal_rico_pdf,
         generate_federal_rico_docx,
         generate_hawaii_filing_bundle_zip,
-        generate_federal_rico_bundle_zip
+        generate_federal_rico_bundle_zip,
+        generate_brower_odc_presentment,
+        generate_odc_presentment_pdf,
+        generate_odc_presentment_docx,
+        generate_odc_presentment_bundle_zip,
+        generate_federal_criminal_referral,
+        generate_criminal_referral_pdf,
+        generate_criminal_referral_docx,
+        generate_criminal_referral_bundle_zip,
+        generate_master_bates_exhibit_binder,
+        generate_master_bates_binder_pdf,
+        generate_master_bates_binder_docx,
+        generate_master_bates_bundle_zip
     )
 except ImportError:
     try:
@@ -35,7 +47,19 @@ except ImportError:
             generate_federal_rico_pdf,
             generate_federal_rico_docx,
             generate_hawaii_filing_bundle_zip,
-            generate_federal_rico_bundle_zip
+            generate_federal_rico_bundle_zip,
+            generate_brower_odc_presentment,
+            generate_odc_presentment_pdf,
+            generate_odc_presentment_docx,
+            generate_odc_presentment_bundle_zip,
+            generate_federal_criminal_referral,
+            generate_criminal_referral_pdf,
+            generate_criminal_referral_docx,
+            generate_criminal_referral_bundle_zip,
+            generate_master_bates_exhibit_binder,
+            generate_master_bates_binder_pdf,
+            generate_master_bates_binder_docx,
+            generate_master_bates_bundle_zip
         )
     except ImportError:
         generate_hawaii_filing_packet = None
@@ -46,6 +70,18 @@ except ImportError:
         generate_federal_rico_docx = None
         generate_hawaii_filing_bundle_zip = None
         generate_federal_rico_bundle_zip = None
+        generate_brower_odc_presentment = None
+        generate_odc_presentment_pdf = None
+        generate_odc_presentment_docx = None
+        generate_odc_presentment_bundle_zip = None
+        generate_federal_criminal_referral = None
+        generate_criminal_referral_pdf = None
+        generate_criminal_referral_docx = None
+        generate_criminal_referral_bundle_zip = None
+        generate_master_bates_exhibit_binder = None
+        generate_master_bates_binder_pdf = None
+        generate_master_bates_binder_docx = None
+        generate_master_bates_bundle_zip = None
 
 try:
     from backend.app.estate_mesh_engine import (
@@ -53,7 +89,12 @@ try:
         get_estate_matters,
         get_estate_actors,
         get_estate_perjury_traps,
-        get_estate_graph
+        get_estate_graph,
+        get_matter_detail,
+        generate_matter_packet,
+        generate_matter_pdf,
+        generate_matter_docx,
+        generate_matter_bundle_zip
     )
 except ImportError:
     try:
@@ -62,12 +103,24 @@ except ImportError:
             get_estate_matters,
             get_estate_actors,
             get_estate_perjury_traps,
-            get_estate_graph
+            get_estate_graph,
+            get_matter_detail,
+            generate_matter_packet,
+            generate_matter_pdf,
+            generate_matter_docx,
+            generate_matter_bundle_zip
         )
     except ImportError:
         get_estate_overview = None
         get_estate_matters = None
         get_estate_actors = None
+        get_estate_perjury_traps = None
+        get_estate_graph = None
+        get_matter_detail = None
+        generate_matter_packet = None
+        generate_matter_pdf = None
+        generate_matter_docx = None
+        generate_matter_bundle_zip = None
         get_estate_perjury_traps = None
         get_estate_graph = None
 
@@ -188,7 +241,15 @@ def root():
             "/api/v1/forensics/contradictions",
             "/api/v1/forensics/actors",
             "/api/v1/forensics/events",
-            "/api/v1/forensics/motion-to-strike"
+            "/api/v1/forensics/motion-to-strike",
+            "/api/v1/forensics/filing/hawaii-motion-packet",
+            "/api/v1/forensics/filing/federal-rico-complaint",
+            "/api/v1/forensics/filing/odc-presentment",
+            "/api/v1/forensics/filing/criminal-referral",
+            "/api/v1/forensics/filing/master-bates-binder",
+            "/api/v1/forensics/estate/overview",
+            "/api/v1/forensics/estate/matters",
+            "/api/v1/forensics/estate/matter/{case_id}"
         ]
     }
 
@@ -609,6 +670,144 @@ def download_federal_rico_bundle_zip_route():
         headers={"Content-Disposition": "attachment; filename=FEDERAL_CIVIL_RICO_FILING_BUNDLE_38.4M.zip"}
     )
 
+@app.get("/api/v1/forensics/filing/odc-presentment", tags=["Filings"])
+def get_odc_presentment():
+    data = load_case_ledger_data()
+    if generate_brower_odc_presentment:
+        return generate_brower_odc_presentment(data)
+    return {"error": "Filing engine unavailable"}
+
+@app.get("/api/v1/forensics/download/odc-presentment.pdf", tags=["Filings"])
+def download_odc_presentment_pdf():
+    data = load_case_ledger_data()
+    if not generate_brower_odc_presentment or not generate_odc_presentment_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    presentment = generate_brower_odc_presentment(data)
+    pdf_bytes = generate_odc_presentment_pdf(presentment)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=SCOT_BROWER_ODC_DISCIPLINARY_PRESENTMENT.pdf"}
+    )
+
+@app.get("/api/v1/forensics/download/odc-presentment.docx", tags=["Filings"])
+def download_odc_presentment_docx():
+    data = load_case_ledger_data()
+    if not generate_brower_odc_presentment or not generate_odc_presentment_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    presentment = generate_brower_odc_presentment(data)
+    docx_bytes = generate_odc_presentment_docx(presentment)
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=SCOT_BROWER_ODC_DISCIPLINARY_PRESENTMENT.docx"}
+    )
+
+@app.get("/api/v1/forensics/download/odc-presentment-bundle.zip", tags=["Filings"])
+def download_odc_presentment_bundle_zip_route():
+    data = load_case_ledger_data()
+    if not generate_brower_odc_presentment or not generate_odc_presentment_bundle_zip:
+        raise HTTPException(status_code=500, detail="Zip bundle generator unavailable")
+    presentment = generate_brower_odc_presentment(data)
+    zip_bytes = generate_odc_presentment_bundle_zip(presentment)
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=SCOT_BROWER_ODC_DISCIPLINARY_BUNDLE.zip"}
+    )
+
+@app.get("/api/v1/forensics/filing/criminal-referral", tags=["Filings"])
+def get_criminal_referral():
+    data = load_case_ledger_data()
+    if generate_federal_criminal_referral:
+        return generate_federal_criminal_referral(data)
+    return {"error": "Filing engine unavailable"}
+
+@app.get("/api/v1/forensics/download/criminal-referral.pdf", tags=["Filings"])
+def download_criminal_referral_pdf():
+    data = load_case_ledger_data()
+    if not generate_federal_criminal_referral or not generate_criminal_referral_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    referral = generate_federal_criminal_referral(data)
+    pdf_bytes = generate_criminal_referral_pdf(referral)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=FEDERAL_CRIMINAL_REFERRAL_DOJ_FBI_USPS.pdf"}
+    )
+
+@app.get("/api/v1/forensics/download/criminal-referral.docx", tags=["Filings"])
+def download_criminal_referral_docx():
+    data = load_case_ledger_data()
+    if not generate_federal_criminal_referral or not generate_criminal_referral_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    referral = generate_federal_criminal_referral(data)
+    docx_bytes = generate_criminal_referral_docx(referral)
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=FEDERAL_CRIMINAL_REFERRAL_DOJ_FBI_USPS.docx"}
+    )
+
+@app.get("/api/v1/forensics/download/criminal-referral-bundle.zip", tags=["Filings"])
+def download_criminal_referral_bundle_zip_route():
+    data = load_case_ledger_data()
+    if not generate_federal_criminal_referral or not generate_criminal_referral_bundle_zip:
+        raise HTTPException(status_code=500, detail="Zip bundle generator unavailable")
+    referral = generate_federal_criminal_referral(data)
+    zip_bytes = generate_criminal_referral_bundle_zip(referral)
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=FEDERAL_CRIMINAL_REFERRAL_BUNDLE.zip"}
+    )
+
+@app.get("/api/v1/forensics/filing/master-bates-binder", tags=["Filings"])
+def get_master_bates_binder():
+    data = load_case_ledger_data()
+    if generate_master_bates_exhibit_binder:
+        return generate_master_bates_exhibit_binder(data)
+    return {"error": "Filing engine unavailable"}
+
+@app.get("/api/v1/forensics/download/master-bates-binder.pdf", tags=["Filings"])
+def download_master_bates_binder_pdf():
+    data = load_case_ledger_data()
+    if not generate_master_bates_exhibit_binder or not generate_master_bates_binder_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    binder = generate_master_bates_exhibit_binder(data)
+    pdf_bytes = generate_master_bates_binder_pdf(binder)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=MASTER_BATES_STAMPED_EXHIBIT_BINDER.pdf"}
+    )
+
+@app.get("/api/v1/forensics/download/master-bates-binder.docx", tags=["Filings"])
+def download_master_bates_binder_docx():
+    data = load_case_ledger_data()
+    if not generate_master_bates_exhibit_binder or not generate_master_bates_binder_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    binder = generate_master_bates_exhibit_binder(data)
+    docx_bytes = generate_master_bates_binder_docx(binder)
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=MASTER_BATES_STAMPED_EXHIBIT_BINDER.docx"}
+    )
+
+@app.get("/api/v1/forensics/download/master-bates-bundle.zip", tags=["Filings"])
+def download_master_bates_bundle_zip_route():
+    data = load_case_ledger_data()
+    if not generate_master_bates_exhibit_binder or not generate_master_bates_bundle_zip:
+        raise HTTPException(status_code=500, detail="Zip bundle generator unavailable")
+    binder = generate_master_bates_exhibit_binder(data)
+    zip_bytes = generate_master_bates_bundle_zip(binder)
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=MASTER_BATES_EXHIBIT_BINDER_BUNDLE.zip"}
+    )
+
 @app.get("/api/v1/forensics/estate/overview", tags=["Estate Mesh"])
 def get_estate_overview_route():
     if not get_estate_overview:
@@ -621,6 +820,70 @@ def get_estate_matters_route(portfolio: Optional[str] = None):
         return {"error": "Estate engine unavailable"}
     matters = get_estate_matters(portfolio)
     return {"count": len(matters), "matters": matters}
+
+@app.get("/api/v1/forensics/estate/matter/{case_id}", tags=["Estate Mesh"])
+def get_matter_detail_route(case_id: str):
+    if not get_matter_detail:
+        raise HTTPException(status_code=500, detail="Estate engine unavailable")
+    m = get_matter_detail(case_id)
+    if not m:
+        raise HTTPException(status_code=404, detail=f"Matter {case_id} not found")
+    return m
+
+@app.get("/api/v1/forensics/estate/matter/{case_id}/packet", tags=["Estate Mesh"])
+def get_matter_packet_route(case_id: str):
+    if not generate_matter_packet:
+        raise HTTPException(status_code=500, detail="Estate engine unavailable")
+    try:
+        packet = generate_matter_packet(case_id)
+        return packet
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.get("/api/v1/forensics/download/matter/{case_id}.pdf", tags=["Estate Mesh"])
+def download_matter_pdf_route(case_id: str):
+    if not generate_matter_packet or not generate_matter_pdf:
+        raise HTTPException(status_code=500, detail="Generator unavailable")
+    try:
+        packet = generate_matter_packet(case_id)
+        pdf_bytes = generate_matter_pdf(packet)
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={case_id}_COMPLAINT_28LINE.pdf"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.get("/api/v1/forensics/download/matter/{case_id}.docx", tags=["Estate Mesh"])
+def download_matter_docx_route(case_id: str):
+    if not generate_matter_packet or not generate_matter_docx:
+        raise HTTPException(status_code=500, detail="Generator unavailable")
+    try:
+        packet = generate_matter_packet(case_id)
+        docx_bytes = generate_matter_docx(packet)
+        return Response(
+            content=docx_bytes,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            headers={"Content-Disposition": f"attachment; filename={case_id}_COMPLAINT.docx"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.get("/api/v1/forensics/download/matter/{case_id}.zip", tags=["Estate Mesh"])
+def download_matter_zip_route(case_id: str):
+    if not generate_matter_packet or not generate_matter_bundle_zip:
+        raise HTTPException(status_code=500, detail="Generator unavailable")
+    try:
+        packet = generate_matter_packet(case_id)
+        zip_bytes = generate_matter_bundle_zip(packet)
+        return Response(
+            content=zip_bytes,
+            media_type="application/zip",
+            headers={"Content-Disposition": f"attachment; filename={case_id}_FULL_FILING_BUNDLE.zip"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
 @app.get("/api/v1/forensics/estate/actors", tags=["Estate Mesh"])
 def get_estate_actors_route():
@@ -772,12 +1035,108 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
             complaint = generate_federal_rico_complaint(data)
             zip_bytes = generate_federal_rico_bundle_zip(complaint)
             self._send_bytes(200, "application/zip", zip_bytes, "FEDERAL_CIVIL_RICO_FILING_BUNDLE_38.4M.zip")
+        elif path == "/api/v1/forensics/filing/odc-presentment":
+            data = load_case_ledger_data()
+            self._send_json(200, generate_brower_odc_presentment(data) if generate_brower_odc_presentment else {})
+        elif path == "/api/v1/forensics/download/odc-presentment.pdf":
+            data = load_case_ledger_data()
+            presentment = generate_brower_odc_presentment(data)
+            pdf_bytes = generate_odc_presentment_pdf(presentment)
+            self._send_bytes(200, "application/pdf", pdf_bytes, "SCOT_BROWER_ODC_DISCIPLINARY_PRESENTMENT.pdf")
+        elif path == "/api/v1/forensics/download/odc-presentment.docx":
+            data = load_case_ledger_data()
+            presentment = generate_brower_odc_presentment(data)
+            docx_bytes = generate_odc_presentment_docx(presentment)
+            self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", docx_bytes, "SCOT_BROWER_ODC_DISCIPLINARY_PRESENTMENT.docx")
+        elif path in ("/api/v1/forensics/download/odc-presentment-bundle.zip", "/api/v1/forensics/download/odc-presentment.zip"):
+            data = load_case_ledger_data()
+            presentment = generate_brower_odc_presentment(data)
+            zip_bytes = generate_odc_presentment_bundle_zip(presentment)
+            self._send_bytes(200, "application/zip", zip_bytes, "SCOT_BROWER_ODC_DISCIPLINARY_BUNDLE.zip")
+        elif path == "/api/v1/forensics/filing/criminal-referral":
+            data = load_case_ledger_data()
+            self._send_json(200, generate_federal_criminal_referral(data) if generate_federal_criminal_referral else {})
+        elif path == "/api/v1/forensics/download/criminal-referral.pdf":
+            data = load_case_ledger_data()
+            referral = generate_federal_criminal_referral(data)
+            pdf_bytes = generate_criminal_referral_pdf(referral)
+            self._send_bytes(200, "application/pdf", pdf_bytes, "FEDERAL_CRIMINAL_REFERRAL_DOJ_FBI_USPS.pdf")
+        elif path == "/api/v1/forensics/download/criminal-referral.docx":
+            data = load_case_ledger_data()
+            referral = generate_federal_criminal_referral(data)
+            docx_bytes = generate_criminal_referral_docx(referral)
+            self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", docx_bytes, "FEDERAL_CRIMINAL_REFERRAL_DOJ_FBI_USPS.docx")
+        elif path in ("/api/v1/forensics/download/criminal-referral-bundle.zip", "/api/v1/forensics/download/criminal-referral.zip"):
+            data = load_case_ledger_data()
+            referral = generate_federal_criminal_referral(data)
+            zip_bytes = generate_criminal_referral_bundle_zip(referral)
+            self._send_bytes(200, "application/zip", zip_bytes, "FEDERAL_CRIMINAL_REFERRAL_BUNDLE.zip")
+        elif path == "/api/v1/forensics/filing/master-bates-binder":
+            data = load_case_ledger_data()
+            self._send_json(200, generate_master_bates_exhibit_binder(data) if generate_master_bates_exhibit_binder else {})
+        elif path == "/api/v1/forensics/download/master-bates-binder.pdf":
+            data = load_case_ledger_data()
+            binder = generate_master_bates_exhibit_binder(data)
+            pdf_bytes = generate_master_bates_binder_pdf(binder)
+            self._send_bytes(200, "application/pdf", pdf_bytes, "MASTER_BATES_STAMPED_EXHIBIT_BINDER.pdf")
+        elif path == "/api/v1/forensics/download/master-bates-binder.docx":
+            data = load_case_ledger_data()
+            binder = generate_master_bates_exhibit_binder(data)
+            docx_bytes = generate_master_bates_binder_docx(binder)
+            self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", docx_bytes, "MASTER_BATES_STAMPED_EXHIBIT_BINDER.docx")
+        elif path in ("/api/v1/forensics/download/master-bates-bundle.zip", "/api/v1/forensics/download/master-bates-binder.zip"):
+            data = load_case_ledger_data()
+            binder = generate_master_bates_exhibit_binder(data)
+            zip_bytes = generate_master_bates_bundle_zip(binder)
+            self._send_bytes(200, "application/zip", zip_bytes, "MASTER_BATES_EXHIBIT_BINDER_BUNDLE.zip")
         elif path == "/api/v1/forensics/estate/overview":
             self._send_json(200, get_estate_overview() if get_estate_overview else {})
         elif path == "/api/v1/forensics/estate/matters":
             port = query.get("portfolio", [None])[0]
             matters = get_estate_matters(port) if get_estate_matters else []
             self._send_json(200, {"count": len(matters), "matters": matters})
+        elif path.startswith("/api/v1/forensics/estate/matter/"):
+            sub = path[len("/api/v1/forensics/estate/matter/"):]
+            if sub.endswith("/packet"):
+                cid = sub[:-len("/packet")]
+                packet = generate_matter_packet(cid) if generate_matter_packet else None
+                if packet:
+                    self._send_json(200, packet)
+                else:
+                    self._send_json(404, {"error": f"Matter {cid} packet not found"})
+            else:
+                cid = sub
+                m = get_matter_detail(cid) if get_matter_detail else None
+                if m:
+                    self._send_json(200, m)
+                else:
+                    self._send_json(404, {"error": f"Matter {cid} not found"})
+        elif path.startswith("/api/v1/forensics/download/matter/"):
+            sub = path[len("/api/v1/forensics/download/matter/"):]
+            if sub.endswith(".pdf"):
+                cid = sub[:-4]
+                try:
+                    packet = generate_matter_packet(cid)
+                    pdf_bytes = generate_matter_pdf(packet)
+                    self._send_bytes(200, "application/pdf", pdf_bytes, f"{cid}_COMPLAINT_28LINE.pdf")
+                except Exception as e:
+                    self._send_json(404, {"error": str(e)})
+            elif sub.endswith(".docx"):
+                cid = sub[:-5]
+                try:
+                    packet = generate_matter_packet(cid)
+                    docx_bytes = generate_matter_docx(packet)
+                    self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", docx_bytes, f"{cid}_COMPLAINT.docx")
+                except Exception as e:
+                    self._send_json(404, {"error": str(e)})
+            elif sub.endswith(".zip"):
+                cid = sub[:-4]
+                try:
+                    packet = generate_matter_packet(cid)
+                    zip_bytes = generate_matter_bundle_zip(packet)
+                    self._send_bytes(200, "application/zip", zip_bytes, f"{cid}_FULL_FILING_BUNDLE.zip")
+                except Exception as e:
+                    self._send_json(404, {"error": str(e)})
         elif path == "/api/v1/forensics/estate/actors":
             actors = get_estate_actors() if get_estate_actors else []
             self._send_json(200, {"count": len(actors), "actors": actors})

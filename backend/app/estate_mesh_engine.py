@@ -8,8 +8,31 @@ Epistemic Standard: L0–L5 Holographic Mesh
 
 import sqlite3
 import os
+import hashlib
+import time
+import io
+import zipfile
+import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+
+try:
+    from backend.app.legal_filing_engine import (
+        build_28_line_pdf,
+        build_pleading_docx,
+        format_28_line_pleading
+    )
+except ImportError:
+    try:
+        from legal_filing_engine import (
+            build_28_line_pdf,
+            build_pleading_docx,
+            format_28_line_pleading
+        )
+    except ImportError:
+        build_28_line_pdf = None
+        build_pleading_docx = None
+        format_28_line_pleading = None
 
 DB_CANDIDATE_PATHS = [
     Path(__file__).parent.parent / "data" / "estate_holographic_mesh.db",
@@ -245,3 +268,185 @@ def get_estate_graph() -> Dict[str, Any]:
         }
     finally:
         conn.close()
+
+
+def get_matter_detail(case_id: str) -> Optional[Dict[str, Any]]:
+    """Returns complete forensic detail for any of the 21 estate matters, including exhibits, traps, and actors."""
+    conn = get_db_connection()
+    if not conn:
+        return None
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM matters WHERE case_id = ?", (case_id,))
+        m_row = cur.fetchone()
+        if not m_row:
+            return None
+        
+        matter = dict(m_row)
+        
+        # Perjury traps
+        cur.execute("SELECT * FROM perjury_traps WHERE case_id = ? ORDER BY trap_num ASC", (case_id,))
+        traps = [dict(r) for r in cur.fetchall()]
+        matter["perjury_traps"] = traps
+        
+        # Exhibits
+        cur.execute("SELECT * FROM exhibits WHERE case_id = ? ORDER BY exhibit_id ASC", (case_id,))
+        exhibits = [dict(r) for r in cur.fetchall()]
+        matter["exhibits"] = exhibits
+        
+        # Filings
+        cur.execute("SELECT * FROM filings WHERE case_id = ? ORDER BY tier ASC", (case_id,))
+        filings = [dict(r) for r in cur.fetchall()]
+        matter["filings"] = filings
+        
+        # Connected Actors via conspiracy_actors affiliated_cases or edges
+        cur.execute("SELECT actor_name, role, exposure_usd, predicate_acts FROM conspiracy_actors WHERE affiliated_cases LIKE ?", (f"%{case_id}%",))
+        actors = [dict(r) for r in cur.fetchall()]
+        matter["conspiracy_actors"] = actors
+        
+        return matter
+    finally:
+        conn.close()
+
+
+def generate_matter_packet(case_id: str) -> Dict[str, Any]:
+    """
+    Generates a full-stack verified court pleading packet for any of the 21 matters
+    in the APEX estate, including Cherry Chan recovery portfolio matters.
+    """
+    matter = get_matter_detail(case_id)
+    if not matter:
+        raise ValueError(f"Matter {case_id} not found in estate database")
+        
+    court = matter.get("court", "COURT OF COMPETENT JURISDICTION")
+    case_num = matter.get("case_num", f"CASE-REF-{case_id}")
+    title = matter.get("title", f"Matter: {case_id}")
+    portfolio = matter.get("portfolio", "GENERAL_ESTATE")
+    total_damages = matter.get("total_damages", 0.0)
+    
+    caption = f"""{court}
+
+{title.upper()}
+
+{case_num}
+
+VERIFIED COMPLAINT AND DEMAND FOR STATUTORY RELIEF
+TOTAL ADVERSE CLAIM: ${total_damages:,.2f}
+(Evidentiary Primacy Enforced pursuant to FRE 601/602 and HRE 601/602)
+"""
+
+    jurisdiction = f"""I. JURISDICTION & VENUE
+1. This action arises under controlling statutory authority and substantive law governing {court}.
+2. Venue and subject-matter jurisdiction are properly vested in this tribunal.
+3. This action is prosecuted with full direct eyewitness standing and verified evidentiary competence.
+"""
+
+    actors_section = "II. DEFENDANTS & ADVERSE ENTERPRISE ENTITIES\n"
+    for i, a in enumerate(matter.get("conspiracy_actors", []), 1):
+        actors_section += f"{i}. {a.get('actor_name')}: Role: {a.get('role')}; Exposure: ${a.get('exposure_usd', 0.0):,.2f}\n   Predicate Acts: {a.get('predicate_acts', 'N/A')}\n"
+    if not matter.get("conspiracy_actors"):
+        actors_section += "1. Named institutional and individual defendants according to formal docket ledger.\n"
+
+    traps_section = "III. CROSS-EXAMINATION PERJURY DILEMMA TRAPS & FACTUAL SPECIFICATIONS\n"
+    for t in matter.get("perjury_traps", []):
+        traps_section += f"TRAP #{t.get('trap_num')}: {t.get('topic')}\n"
+        traps_section += f"  Q: \"{t.get('foundation_question')}\"\n"
+        traps_section += f"  Impeachment Dilemma: {t.get('impeachment_dilemma')}\n"
+        traps_section += f"  Statutory Penalty: {t.get('statutory_penalty')}\n\n"
+
+    exhibits_section = "V. CERTIFIED EVIDENTIARY EXHIBITS SCHEDULE\n"
+    for ex in matter.get("exhibits", []):
+        exhibits_section += f"Exhibit {ex.get('exhibit_id')}: {ex.get('description')}\n"
+        exhibits_section += f"  Authentication: {ex.get('auth_rule')} | SHA-256: {str(ex.get('sha256', 'N/A'))[:16]}...\n"
+
+    prayer = f"""VI. PRAYER FOR RELIEF
+WHEREFORE, Plaintiff demands judgment against Defendants:
+A. Actual and economic damages: ${matter.get('economic_damages', 0.0):,.2f};
+B. Statutory and treble damages: ${matter.get('statutory_damages', 0.0):,.2f};
+C. General and punitive damages: ${(matter.get('general_damages', 0.0) + matter.get('punitive_damages', 0.0)):,.2f};
+D. TOTAL COMPREHENSIVE ADVERSE JUDGMENT: ${total_damages:,.2f};
+E. Declaratory and equitable vacatur relief; and
+F. Pre-judgment interest, attorney fees, and litigation costs.
+
+DEMAND FOR JURY TRIAL
+Plaintiff hereby demands trial by jury on all counts so triable.
+
+DATED: Honolulu, Hawaii, September 21, 2026.
+"""
+
+    verification = """VERIFICATION UNDER PENALTY OF PERJURY
+(Pursuant to 28 U.S.C. § 1746 and FRE/HRE 601/602)
+I declare under penalty of perjury under the laws of the United States and the State of Hawaii that I have read the foregoing complaint and know the contents thereof, and the same is true of my own firsthand knowledge.
+Executed on September 21, 2026.
+"""
+
+    full_text = f"{caption}\n\n{jurisdiction}\n\n{actors_section}\n\n{traps_section}\n\n{exhibits_section}\n\n{prayer}\n\n{verification}"
+    
+    formatted_28 = format_28_line_pleading([caption, jurisdiction, actors_section, traps_section, exhibits_section, prayer, verification], f"{case_id} COMPLAINT") if format_28_line_pleading else full_text
+    sha256_hash = hashlib.sha256(full_text.encode("utf-8")).hexdigest()
+    
+    return {
+        "case_id": case_id,
+        "title": title,
+        "court": court,
+        "case_num": case_num,
+        "portfolio": portfolio,
+        "total_damages": total_damages,
+        "sha256": sha256_hash,
+        "raw_text": full_text,
+        "formatted_28_lines": formatted_28,
+        "matter_detail": matter,
+        "verified": True
+    }
+
+
+def generate_matter_pdf(matter_data: Dict[str, Any]) -> bytes:
+    if not build_28_line_pdf:
+        raise RuntimeError("build_28_line_pdf unavailable")
+    return build_28_line_pdf(
+        matter_data.get("raw_text", ""),
+        matter_data.get("title", ""),
+        matter_data.get("case_num", ""),
+        matter_data.get("court", "")
+    )
+
+
+def generate_matter_docx(matter_data: Dict[str, Any]) -> bytes:
+    if not build_pleading_docx:
+        raise RuntimeError("build_pleading_docx unavailable")
+    return build_pleading_docx(
+        matter_data.get("raw_text", ""),
+        matter_data.get("title", ""),
+        matter_data.get("case_num", ""),
+        matter_data.get("court", "")
+    )
+
+
+def generate_matter_bundle_zip(matter_data: Dict[str, Any]) -> bytes:
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        case_id = matter_data.get("case_id", "MATTER")
+        pdf_bytes = generate_matter_pdf(matter_data)
+        docx_bytes = generate_matter_docx(matter_data)
+        zf.writestr(f"01_{case_id}_COMPLAINT_28LINE.pdf", pdf_bytes)
+        zf.writestr(f"01_{case_id}_COMPLAINT.docx", docx_bytes)
+        zf.writestr(f"01_{case_id}_FULLTEXT.txt", matter_data.get("raw_text", ""))
+        
+        detail = matter_data.get("matter_detail", {})
+        zf.writestr("02_PERJURY_TRAPS_SCHEDULE.json", json.dumps(detail.get("perjury_traps", []), indent=2))
+        zf.writestr("03_CERTIFIED_EXHIBITS_LIST.json", json.dumps(detail.get("exhibits", []), indent=2))
+        
+        manifest = {
+            "case_id": case_id,
+            "title": matter_data.get("title", ""),
+            "court": matter_data.get("court", ""),
+            "total_damages_usd": matter_data.get("total_damages", 0.0),
+            "generated_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "files": {
+                f"01_{case_id}_COMPLAINT_28LINE.pdf": hashlib.sha256(pdf_bytes).hexdigest(),
+                f"01_{case_id}_COMPLAINT.docx": hashlib.sha256(docx_bytes).hexdigest(),
+            }
+        }
+        zf.writestr("00_FILING_MANIFEST.json", json.dumps(manifest, indent=2))
+    return buf.getvalue()
+

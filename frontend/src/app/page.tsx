@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'mesh' | 'ingest'>('allegations');
+  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'ethics' | 'mesh' | 'ingest'>('allegations');
   const [allegations, setAllegations] = useState<any[]>([]);
   const [contradictions, setContradictions] = useState<any[]>([]);
   const [motion, setMotion] = useState<any>(null);
@@ -317,6 +317,18 @@ export default function Home() {
         </button>
 
         <button
+          onClick={() => setActiveTab('ethics')}
+          className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
+            activeTab === 'ethics'
+              ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30'
+              : 'bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+          }`}
+        >
+          <span>⚡ Ethics & Criminal Strike (Vector 3)</span>
+          <span className="bg-rose-500/20 text-rose-300 text-xs px-2 py-0.5 rounded font-mono">ODC / DOJ / FBI</span>
+        </button>
+
+        <button
           onClick={() => setActiveTab('mesh')}
           className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
             activeTab === 'mesh'
@@ -467,6 +479,22 @@ export default function Home() {
               >
                 <span>📦</span>
                 <span>Download JEFS Bundle (.zip)</span>
+              </a>
+              <a
+                href="/api/v1/forensics/download/master-bates-binder.pdf"
+                download
+                className="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-indigo-700/20 flex items-center gap-1.5"
+              >
+                <span>📑</span>
+                <span>Master Bates Binder PDF</span>
+              </a>
+              <a
+                href="/api/v1/forensics/download/master-bates-bundle.zip"
+                download
+                className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-purple-700/20 flex items-center gap-1.5"
+              >
+                <span>🗂️</span>
+                <span>Master Bates Bundle (.zip)</span>
               </a>
               <button
                 onClick={handleCopyHawaii}
@@ -712,6 +740,125 @@ export default function Home() {
         </section>
       )}
 
+      {/* TAB 4b: ETHICS & CRIMINAL STRIKE (VECTOR 3) */}
+      {activeTab === 'ethics' && (
+        <section className="space-y-6">
+          {/* ODC Presentment Card */}
+          <div className="bg-gray-900 border border-rose-900/60 rounded-xl p-8 shadow-xl">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-gray-800 pb-4">
+              <div>
+                <span className="text-xs font-bold text-rose-400 uppercase tracking-wider">Vector 3.1: Professional Ethics Presentment</span>
+                <h2 className="text-xl font-bold text-white mt-1">
+                  HAWAII OFFICE OF DISCIPLINARY COUNSEL FORMAL PRESENTMENT
+                </h2>
+                <p className="text-xs text-gray-400 mt-0.5">Respondent: Scot Stuart Brower (Hawaii Bar No. 3448) | Mandatory Sanctions & Suspension</p>
+              </div>
+              <div className="flex flex-wrap gap-2 items-center">
+                <a
+                  href="/api/v1/forensics/download/odc-presentment.pdf"
+                  download
+                  className="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-red-700/20 flex items-center gap-1.5"
+                >
+                  <span>📄</span>
+                  <span>ODC Presentment PDF</span>
+                </a>
+                <a
+                  href="/api/v1/forensics/download/odc-presentment.docx"
+                  download
+                  className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-blue-700/20 flex items-center gap-1.5"
+                >
+                  <span>📝</span>
+                  <span>ODC Presentment DOCX</span>
+                </a>
+                <a
+                  href="/api/v1/forensics/download/odc-presentment-bundle.zip"
+                  download
+                  className="bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-emerald-700/20 flex items-center gap-1.5"
+                >
+                  <span>📦</span>
+                  <span>ODC Bundle (.zip)</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                <div className="text-[10px] uppercase font-mono font-bold text-rose-400">Charge 1: HRPC 3.3(a)(1)</div>
+                <div className="text-xs font-bold text-white mt-1">Candor Toward Tribunal</div>
+                <p className="text-[11px] text-gray-400 mt-1">Falsely representing Defendant failed to appear on June 19, 2024 despite physical courthouse presence.</p>
+              </div>
+              <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                <div className="text-[10px] uppercase font-mono font-bold text-rose-400">Charge 2: HRPC 8.4(c)</div>
+                <div className="text-xs font-bold text-white mt-1">Dishonesty, Fraud, Deceit</div>
+                <p className="text-[11px] text-gray-400 mt-1">Substantive custody inversion via clerical praecipe (Dkt 193 vs Dkt 201) to evade judicial review.</p>
+              </div>
+              <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                <div className="text-[10px] uppercase font-mono font-bold text-rose-400">Charge 3: HRPC 8.4(d)</div>
+                <div className="text-xs font-bold text-white mt-1">Prejudice to Administration of Justice</div>
+                <p className="text-[11px] text-gray-400 mt-1">Ex parte concealment and sealing of 235 defense exhibits without notice or service on hearing morning.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Federal Criminal Referral Card */}
+          <div className="bg-gray-900 border border-amber-900/60 rounded-xl p-8 shadow-xl">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-gray-800 pb-4">
+              <div>
+                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">Vector 3.2: Federal Criminal Prosecution Referral</span>
+                <h2 className="text-xl font-bold text-white mt-1">
+                  FORMAL CRIMINAL REFERRAL (DOJ PUBLIC INTEGRITY / FBI / USPS-OIG)
+                </h2>
+                <p className="text-xs text-gray-400 mt-0.5">Target: Scot S. Brower et al. | 18 U.S.C. §§ 1341, 1506, 1512, 1519, 241, 242</p>
+              </div>
+              <div className="flex flex-wrap gap-2 items-center">
+                <a
+                  href="/api/v1/forensics/download/criminal-referral.pdf"
+                  download
+                  className="bg-amber-700 hover:bg-amber-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-amber-700/20 flex items-center gap-1.5"
+                >
+                  <span>⚖️</span>
+                  <span>Criminal Referral PDF</span>
+                </a>
+                <a
+                  href="/api/v1/forensics/download/criminal-referral.docx"
+                  download
+                  className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-blue-700/20 flex items-center gap-1.5"
+                >
+                  <span>📝</span>
+                  <span>Criminal Referral DOCX</span>
+                </a>
+                <a
+                  href="/api/v1/forensics/download/criminal-referral-bundle.zip"
+                  download
+                  className="bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-emerald-700/20 flex items-center gap-1.5"
+                >
+                  <span>📦</span>
+                  <span>Criminal Referral Bundle (.zip)</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                <div className="text-[10px] uppercase font-mono font-bold text-amber-400">18 U.S.C. § 1506 / § 1519</div>
+                <div className="text-xs font-bold text-white mt-1">Theft / Alteration of Record</div>
+                <p className="text-[11px] text-gray-400 mt-1">Falsification and fraudulent alteration of official court docket entries and clerical filings.</p>
+              </div>
+              <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                <div className="text-[10px] uppercase font-mono font-bold text-amber-400">18 U.S.C. § 1341 / § 1343</div>
+                <div className="text-xs font-bold text-white mt-1">Mail & Wire Fraud Schemes</div>
+                <p className="text-[11px] text-gray-400 mt-1">Transmitting fraudulent praecipe via electronic court filers to execute property and custody seizure.</p>
+              </div>
+              <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                <div className="text-[10px] uppercase font-mono font-bold text-amber-400">18 U.S.C. § 241 / § 242</div>
+                <div className="text-xs font-bold text-white mt-1">Conspiracy Against Civil Rights</div>
+                <p className="text-[11px] text-gray-400 mt-1">Coordinated deprivation of fundamental parental due process under color of state law.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* TAB 5: ESTATE HOLOGRAPHIC MESH (21 CASES · $220.5M) */}
       {activeTab === 'mesh' && (
         <section className="space-y-6">
@@ -831,6 +978,29 @@ export default function Home() {
                           {(m.win_prob * 100).toFixed(1)}%
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-3 pt-2 border-t border-gray-800 flex flex-wrap gap-1.5 justify-end">
+                      <a
+                        href={`/api/v1/forensics/download/matter/${m.case_id}.pdf`}
+                        download
+                        className="bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-[10px] font-mono px-2 py-1 rounded transition"
+                      >
+                        📄 PDF
+                      </a>
+                      <a
+                        href={`/api/v1/forensics/download/matter/${m.case_id}.docx`}
+                        download
+                        className="bg-blue-950/80 hover:bg-blue-800 text-blue-200 border border-blue-800/60 text-[10px] font-mono px-2 py-1 rounded transition"
+                      >
+                        📝 DOCX
+                      </a>
+                      <a
+                        href={`/api/v1/forensics/download/matter/${m.case_id}.zip`}
+                        download
+                        className="bg-emerald-950/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-800/60 text-[10px] font-mono px-2 py-1 rounded transition"
+                      >
+                        📦 ZIP
+                      </a>
                     </div>
                   </div>
                 ))}

@@ -15,6 +15,18 @@ from backend.app.legal_filing_engine import (
     generate_federal_rico_docx,
     generate_hawaii_filing_bundle_zip,
     generate_federal_rico_bundle_zip,
+    generate_brower_odc_presentment,
+    generate_odc_presentment_pdf,
+    generate_odc_presentment_docx,
+    generate_odc_presentment_bundle_zip,
+    generate_federal_criminal_referral,
+    generate_criminal_referral_pdf,
+    generate_criminal_referral_docx,
+    generate_criminal_referral_bundle_zip,
+    generate_master_bates_exhibit_binder,
+    generate_master_bates_binder_pdf,
+    generate_master_bates_binder_docx,
+    generate_master_bates_bundle_zip,
 )
 from backend.app.main import (
     load_case_ledger_data,
@@ -28,6 +40,18 @@ from backend.app.main import (
     download_federal_rico_docx,
     download_hawaii_filing_bundle_zip_route,
     download_federal_rico_bundle_zip_route,
+    get_odc_presentment,
+    download_odc_presentment_pdf,
+    download_odc_presentment_docx,
+    download_odc_presentment_bundle_zip_route,
+    get_criminal_referral,
+    download_criminal_referral_pdf,
+    download_criminal_referral_docx,
+    download_criminal_referral_bundle_zip_route,
+    get_master_bates_binder,
+    download_master_bates_binder_pdf,
+    download_master_bates_binder_docx,
+    download_master_bates_bundle_zip_route,
 )
 
 class TestLegalFilingEngine(unittest.TestCase):
@@ -187,6 +211,126 @@ class TestLegalFilingEngine(unittest.TestCase):
         rico_route_resp = download_federal_rico_bundle_zip_route()
         self.assertEqual(rico_route_resp.media_type, "application/zip")
         self.assertTrue(rico_route_resp.body.startswith(b"PK"))
+
+    def test_vector_3_odc_presentment(self):
+        import zipfile
+        import io
+
+        presentment = generate_brower_odc_presentment(self.data)
+        self.assertTrue(presentment["verified"])
+        self.assertIn("SCOT S. BROWER", presentment["respondent"])
+        self.assertIn("Bar No. 3448", presentment["respondent"])
+        self.assertIn("HRPC Rule 3.3", presentment["raw_text"])
+        self.assertIn("HRPC Rule 8.4", presentment["raw_text"])
+
+        # PDF & DOCX checks
+        pdf = generate_odc_presentment_pdf(presentment)
+        self.assertTrue(pdf.startswith(b"%PDF"))
+        self.assertGreater(len(pdf), 5000)
+
+        docx = generate_odc_presentment_docx(presentment)
+        self.assertTrue(docx.startswith(b"PK"))
+        self.assertGreater(len(docx), 5000)
+
+        # ZIP Bundle
+        zip_bytes = generate_odc_presentment_bundle_zip(presentment)
+        self.assertTrue(zip_bytes.startswith(b"PK"))
+        with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as z:
+            names = z.namelist()
+            self.assertIn("01_ODC_FORMAL_PRESENTMENT_SCOT_BROWER_28LINE.pdf", names)
+            self.assertIn("01_ODC_FORMAL_PRESENTMENT_SCOT_BROWER.docx", names)
+            self.assertIn("00_ODC_PRESENTMENT_MANIFEST.json", names)
+
+        # Main route check
+        endpoint_res = get_odc_presentment()
+        self.assertTrue(endpoint_res["verified"])
+        pdf_resp = download_odc_presentment_pdf()
+        self.assertEqual(pdf_resp.media_type, "application/pdf")
+        docx_resp = download_odc_presentment_docx()
+        self.assertIn("wordprocessingml", docx_resp.media_type)
+        bundle_resp = download_odc_presentment_bundle_zip_route()
+        self.assertEqual(bundle_resp.media_type, "application/zip")
+
+    def test_vector_3_federal_criminal_referral(self):
+        import zipfile
+        import io
+
+        referral = generate_federal_criminal_referral(self.data)
+        self.assertTrue(referral["verified"])
+        self.assertIn("DOJ", referral["agencies"][0])
+        self.assertIn("FBI", referral["agencies"][1])
+        self.assertGreaterEqual(len(referral["predicate_acts"]), 6)
+        self.assertTrue(any("1506" in s for s in referral["predicate_acts"]))
+        self.assertTrue(any("1519" in s for s in referral["predicate_acts"]))
+        self.assertTrue(any("1341" in s for s in referral["predicate_acts"]))
+
+        # PDF & DOCX checks
+        pdf = generate_criminal_referral_pdf(referral)
+        self.assertTrue(pdf.startswith(b"%PDF"))
+        self.assertGreater(len(pdf), 5000)
+
+        docx = generate_criminal_referral_docx(referral)
+        self.assertTrue(docx.startswith(b"PK"))
+        self.assertGreater(len(docx), 5000)
+
+        # ZIP Bundle
+        zip_bytes = generate_criminal_referral_bundle_zip(referral)
+        self.assertTrue(zip_bytes.startswith(b"PK"))
+        with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as z:
+            names = z.namelist()
+            self.assertIn("01_FEDERAL_CRIMINAL_REFERRAL_DOJ_FBI_USPS_28LINE.pdf", names)
+            self.assertIn("01_FEDERAL_CRIMINAL_REFERRAL_DOJ_FBI_USPS.docx", names)
+            self.assertIn("00_CRIMINAL_REFERRAL_MANIFEST.json", names)
+
+        # Main route check
+        endpoint_res = get_criminal_referral()
+        self.assertTrue(endpoint_res["verified"])
+        pdf_resp = download_criminal_referral_pdf()
+        self.assertEqual(pdf_resp.media_type, "application/pdf")
+        docx_resp = download_criminal_referral_docx()
+        self.assertIn("wordprocessingml", docx_resp.media_type)
+        bundle_resp = download_criminal_referral_bundle_zip_route()
+        self.assertEqual(bundle_resp.media_type, "application/zip")
+
+    def test_master_bates_exhibit_binder(self):
+        import zipfile
+        import io
+
+        binder = generate_master_bates_exhibit_binder(self.data)
+        self.assertTrue(binder["verified"])
+        self.assertEqual(binder["bates_prefix"], "BARTON-")
+        self.assertEqual(binder["total_exhibits"], 4)
+        self.assertEqual(binder["total_bates_pages"], 28)
+        self.assertIn("BARTON-000001", binder["raw_text"])
+        self.assertIn("BARTON-000028", binder["raw_text"])
+
+        # PDF & DOCX checks
+        pdf = generate_master_bates_binder_pdf(binder)
+        self.assertTrue(pdf.startswith(b"%PDF"))
+        self.assertGreater(len(pdf), 5000)
+
+        docx = generate_master_bates_binder_docx(binder)
+        self.assertTrue(docx.startswith(b"PK"))
+        self.assertGreater(len(docx), 5000)
+
+        # ZIP Bundle
+        zip_bytes = generate_master_bates_bundle_zip(binder)
+        self.assertTrue(zip_bytes.startswith(b"PK"))
+        with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as z:
+            names = z.namelist()
+            self.assertIn("01_MASTER_BATES_NUMBERED_EXHIBIT_BINDER.pdf", names)
+            self.assertIn("01_MASTER_BATES_NUMBERED_EXHIBIT_BINDER.docx", names)
+            self.assertIn("00_MASTER_BINDER_MANIFEST.json", names)
+
+        # Main route check
+        endpoint_res = get_master_bates_binder()
+        self.assertTrue(endpoint_res["verified"])
+        pdf_resp = download_master_bates_binder_pdf()
+        self.assertEqual(pdf_resp.media_type, "application/pdf")
+        docx_resp = download_master_bates_binder_docx()
+        self.assertIn("wordprocessingml", docx_resp.media_type)
+        bundle_resp = download_master_bates_bundle_zip_route()
+        self.assertEqual(bundle_resp.media_type, "application/zip")
 
 if __name__ == "__main__":
     unittest.main()
