@@ -1,0 +1,190 @@
+{
+  "project_name": "apex-legal-forensics-suite",
+  "mission": "Autonomous Legal Discovery & Timeline Forensics Suite",
+  "timestamp": 1789974773.0401824,
+  "operator": "Casey Barton / GlacierEQ",
+  "epistemic_level": "L5_AGENT_SWARM",
+  "verification_summary": {
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "total_files": 18
+  },
+  "file_hashes": {
+    "README.md": "2815fd0082e07b377675e389d6b8c97bc91390f34066ef7ad85cedbd7a5b0bf1",
+    "apex.capabilities.yaml": "875b68d12b93dbc42d515884245f6e7fc17c2ec95f04f566ba927b7936e294e3",
+    "docker-compose.yml": "4f9187924f48a3ad2624a0033af1d89c7e47485fffb473e056469a214ab52911",
+    "Makefile": "9e0e399837744efc490132e1d1ba5c18683da757fc15adf0eeaddb6243a35fcb",
+    ".gitignore": "66ecd945456ae82594371a1b52a8ac022efa990783551f567f60ac4f5444c4c5",
+    "backend/requirements.txt": "5ab306f441bbcb5900a57e5614e342b694473c3d633be1e6e9c7fce5922923e3",
+    "backend/Dockerfile": "0897c49db4d53c3d3f5dacc250725e802e2dcfb6d518cf4b679d334b28e44436",
+    "backend/app/main.py": "61061bab4b9bf1bb556b3b929cb525934ad96a6517ae56ce527c7c730ad3b4d7",
+    "backend/app/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "backend/tests/test_api.py": "aab396162849f9dc5acd46dd6388c86595af5d9a8e9b9ef327e37e9f0d7fe88b",
+    "backend/tests/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "frontend/package.json": "19e69972f8f5363fd02feebf2d8d83d4a1e4ea7360a8ee13f048485b8e795fd1",
+    "frontend/tsconfig.json": "b43b1b6a01d594ec80735ef05e93e47ba3d632ec6df6669a421afe2f90a8eaab",
+    "frontend/tailwind.config.js": "f255cce24418b198c5d345d9762de6f4485daea08bef23354972729f0467ce4f",
+    "frontend/src/app/globals.css": "3634ef3ed8d356183e9dc093a8e7c34cd0bace3b340df579a83c9d4ed72ea001",
+    "frontend/src/app/layout.tsx": "4a68cee61dbdd28cb4cb7084bbd2b9e6a357306d66818f40700dff2a408c73d8",
+    "frontend/src/app/page.tsx": "b96468d4e943aa7701c919d2b66cc1f7a04e72830f1c6c9d59bb97fd5015a755",
+    ".github/workflows/ci.yml": "226d99042c33012b75d67560115090cb2ba81d4ec69ce0196508ecbca2a17194"
+  },
+  "lincoln_logs_used": {
+    "legal tech python": [],
+    "document forensics": [
+      {
+        "name": "oletools",
+        "full_name": "decalage2/oletools",
+        "html_url": "https://github.com/decalage2/oletools",
+        "stars": 3418,
+        "description": "oletools - python tools to analyze MS OLE2 files (Structured Storage, Compound File Binary Format) and MS Office documents, for malware analysis, forensics and debugging.",
+        "topics": [
+          "compound",
+          "forensics",
+          "macros",
+          "malware-analysis",
+          "ms-office-documents",
+          "ole-files",
+          "olefile",
+          "parser",
+          "pyparsing",
+          "python",
+          "python-library",
+          "rtf",
+          "security",
+          "vba"
+        ],
+        "license": "NOASSERTION"
+      },
+      {
+        "name": "StegoForge",
+        "full_name": "Nour833/StegoForge",
+        "html_url": "https://github.com/Nour833/StegoForge",
+        "stars": 592,
+        "description": "The ultimate steganography and digital forensics toolkit. Hide and extract data across images, audio, video, documents, and network packets, or run 11 advanced detection engines to uncover hidden payloads.",
+        "topics": [
+          "cryptography",
+          "ctf",
+          "ctf-tools",
+          "cybersecurity",
+          "forensics",
+          "python",
+          "security",
+          "security-tools",
+          "steganography"
+        ],
+        "license": "MIT"
+      }
+    ],
+    "fastapi template": [
+      {
+        "name": "full-stack-fastapi-template",
+        "full_name": "fastapi/full-stack-fastapi-template",
+        "html_url": "https://github.com/fastapi/full-stack-fastapi-template",
+        "stars": 45661,
+        "description": "Full-stack web application template with FastAPI, React, SQLModel, PostgreSQL, Vite, Tailwind CSS, shadcn/ui, FastAPI Cloud, and Docker Compose.",
+        "topics": [
+          "docker",
+          "docker-compose",
+          "fastapi",
+          "fastapi-cloud",
+          "full-stack",
+          "github-actions",
+          "jwt",
+          "openapi",
+          "playwright",
+          "postgresql",
+          "pytest",
+          "python",
+          "react",
+          "shadcn-ui",
+          "sqlmodel",
+          "tailwindcss",
+          "tanstack-query",
+          "tanstack-router",
+          "typescript",
+          "vite"
+        ],
+        "license": "MIT"
+      },
+      {
+        "name": "FastAPI-template",
+        "full_name": "s3rius/FastAPI-template",
+        "html_url": "https://github.com/s3rius/FastAPI-template",
+        "stars": 2828,
+        "description": "Feature rich robust FastAPI template.",
+        "topics": [
+          "aerich",
+          "alembic",
+          "asynchronous",
+          "asyncio",
+          "cookiecutter",
+          "cookiecutter-python3",
+          "cookiecutter-template",
+          "fastapi",
+          "fastapi-boilerplate",
+          "fastapi-template",
+          "graphql",
+          "opentelemetry",
+          "ormar",
+          "prometheus",
+          "python3",
+          "sentry",
+          "sqlalchemy-orm",
+          "strawberry-graphql",
+          "tortoise-orm"
+        ],
+        "license": "MIT"
+      }
+    ],
+    "nextjs dashboard": [
+      {
+        "name": "refine",
+        "full_name": "refinedev/refine",
+        "html_url": "https://github.com/refinedev/refine",
+        "stars": 35702,
+        "description": "A React Framework for building  internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.",
+        "topics": [
+          "admin",
+          "admin-ui",
+          "ant-design",
+          "crud",
+          "developer-tools",
+          "frontend-framework",
+          "good-first-issue",
+          "graphql",
+          "hacktoberfest",
+          "headless",
+          "internal-tools",
+          "javascript",
+          "low-code",
+          "nestjs",
+          "nextjs",
+          "open-source-project",
+          "react",
+          "react-framework",
+          "react-hooks",
+          "typescript"
+        ],
+        "license": "MIT"
+      },
+      {
+        "name": "homepage",
+        "full_name": "gethomepage/homepage",
+        "html_url": "https://github.com/gethomepage/homepage",
+        "stars": 32781,
+        "description": "A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations.",
+        "topics": [
+          "docker",
+          "homepage",
+          "nextjs",
+          "node",
+          "react",
+          "self-hosted",
+          "startpage"
+        ],
+        "license": "GPL-3.0"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+schema: apex.capabilities/v1
+repository: GlacierEQ/apex-legal-forensics-suite
+status: active
+domains:
+  - fullstack
+  - autonomous_systems
+  - forensics
+capabilities:
+  - id: apex-legal-forensics-suite.core.api
+    description: Core FastAPI async service and forensic dispatch engine.
+    entrypoint: backend/app/main.py
+    interface: http
+  - id: apex-legal-forensics-suite.ui.dashboard
+    description: Responsive Next.js interactive command dashboard.
+    entrypoint: frontend/src/app/page.tsx
+    interface: web
+risk:
+  destructive_actions: false
+owner_intent:
+  role: sovereign_mega_repo
