@@ -905,6 +905,73 @@ def get_estate_graph_route():
         return {"error": "Estate engine unavailable"}
     return get_estate_graph()
 
+def load_estate_capabilities(domain: Optional[str] = None) -> Dict[str, Any]:
+    for p in [Path("/root/apex-boot-core-repo/CAPABILITY_MANIFEST.json"), Path("/root/CAPABILITY_MANIFEST.json")]:
+        if p.exists():
+            try:
+                data = json.loads(p.read_text())
+                caps = data.get("capabilities", [])
+                if domain:
+                    caps = [c for c in caps if c.get("domain", "").upper() == domain.strip().upper()]
+                domains = sorted(list(set(c.get("domain", "") for c in caps if c.get("domain"))))
+                return {
+                    "schema": data.get("schema", "glaciereq.capability-inventory.v2"),
+                    "total_capabilities": len(caps),
+                    "domains": domains,
+                    "capabilities": caps
+                }
+            except Exception:
+                pass
+    return {"total_capabilities": 0, "domains": [], "capabilities": []}
+
+def load_strike_manifest() -> Dict[str, Any]:
+    receipt_path = Path("/root/artifacts/strikes/APEX_STRIKE_EXECUTION_RECEIPT.json")
+    packets_dir = Path("/root/artifacts/strikes/packets")
+    data = {}
+    if receipt_path.exists():
+        try:
+            data = json.loads(receipt_path.read_text())
+        except Exception:
+            pass
+    unpacked = []
+    if packets_dir.exists():
+        for d in sorted(packets_dir.iterdir()):
+            if d.is_dir():
+                files = [{"name": f.name, "size_bytes": f.stat().st_size} for f in sorted(d.iterdir())]
+                unpacked.append({
+                    "folder": d.name,
+                    "files": files,
+                    "count": len(files)
+                })
+    data["unpacked_packages"] = unpacked
+    data["unpacked_package_count"] = len(unpacked)
+    data["total_unpacked_files"] = sum(p["count"] for p in unpacked)
+    return data
+
+@app.get("/api/v1/forensics/estate/capabilities", tags=["Estate Capabilities"])
+def get_estate_capabilities_route(domain: Optional[str] = None):
+    return load_estate_capabilities(domain)
+
+@app.get("/api/v1/forensics/strikes/manifest", tags=["Strikes"])
+def get_strike_manifest_route():
+    return load_strike_manifest()
+
+@app.get("/api/v1/forensics/download/unpacked/{folder}/{filename}", tags=["Strikes"])
+def download_unpacked_file_route(folder: str, filename: str):
+    packets_dir = Path("/root/artifacts/strikes/packets")
+    target_file = (packets_dir / folder / filename).resolve()
+    if not str(target_file).startswith(str(packets_dir.resolve())) or not target_file.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    media_type = "application/octet-stream"
+    if filename.endswith(".pdf"): media_type = "application/pdf"
+    elif filename.endswith(".docx"): media_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    elif filename.endswith(".txt"): media_type = "text/plain; charset=utf-8"
+    elif filename.endswith(".json"): media_type = "application/json"
+    return Response(
+        content=target_file.read_bytes(),
+        media_type=media_type,
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
@@ -1146,6 +1213,29 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
             self._send_json(200, {"count": len(traps), "traps": traps})
         elif path == "/api/v1/forensics/estate/graph":
             self._send_json(200, get_estate_graph() if get_estate_graph else {"nodes": [], "edges": []})
+        elif path == "/api/v1/forensics/estate/capabilities":
+            dom = query.get("domain", [None])[0]
+            self._send_json(200, load_estate_capabilities(dom))
+        elif path == "/api/v1/forensics/strikes/manifest":
+            self._send_json(200, load_strike_manifest())
+        elif path.startswith("/api/v1/forensics/download/unpacked/"):
+            subpath = path[len("/api/v1/forensics/download/unpacked/"):]
+            parts = subpath.split("/", 1)
+            if len(parts) == 2:
+                folder, filename = parts
+                packets_dir = Path("/root/artifacts/strikes/packets")
+                target_file = (packets_dir / folder / filename).resolve()
+                if str(target_file).startswith(str(packets_dir.resolve())) and target_file.exists():
+                    media_type = "application/octet-stream"
+                    if filename.endswith(".pdf"): media_type = "application/pdf"
+                    elif filename.endswith(".docx"): media_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    elif filename.endswith(".txt"): media_type = "text/plain; charset=utf-8"
+                    elif filename.endswith(".json"): media_type = "application/json"
+                    self._send_bytes(200, media_type, target_file.read_bytes(), filename)
+                else:
+                    self._send_json(404, {"error": "File not found"})
+            else:
+                self._send_json(400, {"error": "Invalid file path"})
         else:
             self._send_json(404, {"error": f"Not Found: {path}"})
 

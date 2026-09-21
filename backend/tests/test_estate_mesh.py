@@ -28,6 +28,9 @@ from backend.app.main import (
     download_matter_pdf_route,
     download_matter_docx_route,
     download_matter_zip_route,
+    get_estate_capabilities_route,
+    get_strike_manifest_route,
+    download_unpacked_file_route,
 )
 
 class TestEstateMeshEngine(unittest.TestCase):
@@ -161,6 +164,31 @@ class TestEstateMeshEngine(unittest.TestCase):
             self.assertTrue(packet["verified"], f"Failed on matter {cid}")
             self.assertGreater(len(packet["raw_text"]), 500)
             self.assertEqual(packet["total_damages"], m["total_damages"])
+
+    def test_estate_capabilities_route(self):
+        res = get_estate_capabilities_route()
+        self.assertGreaterEqual(res["total_capabilities"], 60)
+        self.assertGreaterEqual(len(res["domains"]), 8)
+        self.assertIn("MEGA_SKILLS", res["domains"])
+        self.assertIn("LEGAL_WARFARE", res["domains"])
+
+        skills_res = get_estate_capabilities_route("MEGA_SKILLS")
+        self.assertGreaterEqual(skills_res["total_capabilities"], 5)
+        for c in skills_res["capabilities"]:
+            self.assertEqual(c["domain"], "MEGA_SKILLS")
+
+    def test_strike_manifest_and_unpacked_files(self):
+        manifest = get_strike_manifest_route()
+        self.assertIn("unpacked_packages", manifest)
+        self.assertGreaterEqual(manifest["unpacked_package_count"], 20)
+        self.assertGreaterEqual(manifest["total_unpacked_files"], 100)
+
+        # Test downloading an unpacked file from the first available package
+        folder = manifest["unpacked_packages"][0]["folder"]
+        filename = manifest["unpacked_packages"][0]["files"][0]["name"]
+        file_resp = download_unpacked_file_route(folder, filename)
+        self.assertEqual(file_resp.status_code, 200)
+        self.assertGreater(len(file_resp.body), 0)
 
 if __name__ == "__main__":
     unittest.main()

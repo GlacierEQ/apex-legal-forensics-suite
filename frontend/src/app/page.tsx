@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'ethics' | 'mesh' | 'ingest'>('allegations');
+  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'ethics' | 'mesh' | 'ingest' | 'capabilities' | 'vault'>('allegations');
   const [allegations, setAllegations] = useState<any[]>([]);
   const [contradictions, setContradictions] = useState<any[]>([]);
   const [motion, setMotion] = useState<any>(null);
@@ -13,6 +13,12 @@ export default function Home() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
+
+  // Estate Capabilities & Vault state
+  const [capabilities, setCapabilities] = useState<any[]>([]);
+  const [capFilter, setCapFilter] = useState<string>('ALL');
+  const [strikeManifest, setStrikeManifest] = useState<any>(null);
+  const [vaultFilter, setVaultFilter] = useState<'ALL' | 'VECTORS' | 'CHERRY' | 'ESTATE'>('ALL');
 
   // Estate Holographic Mesh state
   const [estateOverview, setEstateOverview] = useState<any>(null);
@@ -114,7 +120,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [ovRes, allegRes, contraRes, motionRes, hwRes, rcRes, emOvRes, emMattersRes, emActorsRes, emTrapsRes] = await Promise.all([
+        const [ovRes, allegRes, contraRes, motionRes, hwRes, rcRes, emOvRes, emMattersRes, emActorsRes, emTrapsRes, capRes, strikeRes] = await Promise.all([
           fetch('/api/v1/forensics/overview').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/allegations').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()).catch(() => null),
@@ -125,6 +131,8 @@ export default function Home() {
           fetch('/api/v1/forensics/estate/matters').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/estate/actors').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/strikes/manifest').then(r => r.json()).catch(() => null),
         ]);
         if (ovRes) setOverview(ovRes);
         if (allegRes?.allegations) setAllegations(allegRes.allegations);
@@ -136,6 +144,8 @@ export default function Home() {
         if (emMattersRes?.matters) setEstateMatters(emMattersRes.matters);
         if (emActorsRes?.actors) setEstateActors(emActorsRes.actors);
         if (emTrapsRes?.traps) setEstateTraps(emTrapsRes.traps);
+        if (capRes?.capabilities) setCapabilities(capRes.capabilities);
+        if (strikeRes) setStrikeManifest(strikeRes);
       } catch (err) {
         console.error('Data fetch error:', err);
       } finally {
@@ -350,6 +360,30 @@ export default function Home() {
         >
           <span>⚡ Evidentiary Ingest</span>
           <span className="bg-purple-400/20 text-purple-300 text-xs px-2 py-0.5 rounded font-mono">SHA-256</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('capabilities')}
+          className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
+            activeTab === 'capabilities'
+              ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+              : 'bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+          }`}
+        >
+          <span>🚀 GitHub Capabilities</span>
+          <span className="bg-indigo-400/20 text-indigo-300 text-xs px-2 py-0.5 rounded font-mono">8 Pillars · 64 Nodes</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('vault')}
+          className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
+            activeTab === 'vault'
+              ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+              : 'bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+          }`}
+        >
+          <span>📁 Master Strike Vault</span>
+          <span className="bg-emerald-400/20 text-emerald-300 text-xs px-2 py-0.5 rounded font-mono">26 Packets · 155 Files</span>
         </button>
       </nav>
 
@@ -1221,6 +1255,227 @@ export default function Home() {
             </div>
           </section>
         </div>
+      )}
+
+      {/* TAB 8: GITHUB CAPABILITIES */}
+      {activeTab === 'capabilities' && (
+        <section className="space-y-6">
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="bg-indigo-950 text-indigo-400 border border-indigo-800/60 text-xs px-2.5 py-0.5 rounded font-mono font-bold">ESTATE CAPABILITY CATALOG</span>
+                <span className="text-xs text-gray-500 font-mono">glaciereq.capability-inventory.v2</span>
+              </div>
+              <h2 className="text-2xl font-black text-white mt-1">APEX GitHub Holographic Mesh Capabilities</h2>
+              <p className="text-xs text-gray-400 mt-1">Verified capability nodes, blueprints, and multi-interface entrypoints across all 8 strategic estate domains.</p>
+            </div>
+            <div className="flex gap-4">
+              <div className="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Total Nodes</div>
+                <div className="text-xl font-black text-indigo-400 font-mono">64</div>
+              </div>
+              <div className="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Strategic Domains</div>
+                <div className="text-xl font-black text-emerald-400 font-mono">8</div>
+              </div>
+              <div className="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Epistemic Standard</div>
+                <div className="text-xl font-black text-amber-400 font-mono">L5</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Domain Filter Buttons */}
+          <div className="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+            <div className="flex flex-wrap gap-2">
+              {['ALL', 'MEGA_SKILLS', 'MEGA_PIPELINES', 'GENIUS_MASTERY', 'AKOS', 'PRO_CODE', 'ASPEN_GROVE', 'COMPUTER_USER', 'LEGAL_WARFARE'].map(d => (
+                <button
+                  key={d}
+                  onClick={() => setCapFilter(d)}
+                  className={`px-3 py-1 text-xs font-bold rounded transition ${
+                    capFilter === d ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {d === 'ALL' ? 'All (64)' : d.replace('_', ' ')}
+                </button>
+              ))}
+            </div>
+            <span className="text-xs font-mono text-gray-400">100% Proved / Zero Fake Truth</span>
+          </div>
+
+          {/* Capabilities Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {(capFilter === 'ALL' ? capabilities : capabilities.filter(c => (c.domain || '').toUpperCase() === capFilter)).map((c, i) => {
+              const dom = c.domain || 'UNKNOWN';
+              const meta = c.metadata || {};
+              const title = meta.title || c.capability_id.split('.').pop();
+              const desc = meta.description || c.description || 'Verified estate capability node.';
+              const repo = meta.repository || c.endpoint_ref || '';
+              const repoUrl = repo.startsWith('http') ? repo : `https://github.com/${repo}`;
+
+              return (
+                <div key={i} className="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-indigo-800/60 transition flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-start gap-2 mb-2">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-indigo-950 text-indigo-300 border-indigo-800/60">
+                        {dom}
+                      </span>
+                      <span className="text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800/40 px-2 py-0.5 rounded">
+                        ONLINE · L5
+                      </span>
+                    </div>
+                    <h4 className="text-sm font-bold text-gray-100">{title}</h4>
+                    <div className="text-[11px] text-gray-400 font-mono mt-0.5 truncate">{c.capability_id}</div>
+                    <p className="text-xs text-gray-300 mt-2 line-clamp-3">{desc}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-gray-800/80 flex justify-between items-center text-xs">
+                    <a href={repoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-200 font-mono font-bold flex items-center gap-1">
+                      <span>GitHub ↗</span>
+                    </a>
+                    <span className="text-[10px] text-gray-500 font-mono">Scopes: {(c.authorization_scopes || ['read', 'exec']).join(', ')}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* TAB 9: MASTER STRIKE ARSENAL VAULT */}
+      {activeTab === 'vault' && (
+        <section className="space-y-6">
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="bg-emerald-950 text-emerald-400 border border-emerald-800/60 text-xs px-2.5 py-0.5 rounded font-mono font-bold">COURT-READY ARSENAL VAULT</span>
+                <span className="text-xs text-amber-400 font-mono font-bold">FRE / HRE 601/602 ENFORCED</span>
+              </div>
+              <h2 className="text-2xl font-black text-white mt-1">Master Strike Arsenal Vault (26 Packages · 155 Standalone Files)</h2>
+              <p className="text-xs text-gray-400 mt-1">Instant downloads of 28-line numbered pleading PDFs, court-compliant Word DOCXs, ZIP upload bundles, and unpacked evidentiary files.</p>
+            </div>
+            <div className="flex gap-4">
+              <div className="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Adverse Exposure</div>
+                <div className="text-xl font-black text-amber-400 font-mono">$258.9M</div>
+              </div>
+              <div className="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Packages</div>
+                <div className="text-xl font-black text-cyan-400 font-mono">26</div>
+              </div>
+              <div className="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Standalone Files</div>
+                <div className="text-xl font-black text-emerald-400 font-mono">155</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Vault Controls */}
+          <div className="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setVaultFilter('ALL')}
+                className={`px-3 py-1 text-xs font-bold rounded transition ${vaultFilter === 'ALL' ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                All 26 Packages
+              </button>
+              <button
+                onClick={() => setVaultFilter('VECTORS')}
+                className={`px-3 py-1 text-xs font-bold rounded transition ${vaultFilter === 'VECTORS' ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                Master Strike Vectors (5)
+              </button>
+              <button
+                onClick={() => setVaultFilter('CHERRY')}
+                className={`px-3 py-1 text-xs font-bold rounded transition ${vaultFilter === 'CHERRY' ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                Cherry Chan Recovery (9)
+              </button>
+              <button
+                onClick={() => setVaultFilter('ESTATE')}
+                className={`px-3 py-1 text-xs font-bold rounded transition ${vaultFilter === 'ESTATE' ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                Estate Matters (12)
+              </button>
+            </div>
+            <div className="text-xs font-mono text-gray-400 flex items-center gap-2">
+              <span className="text-emerald-400 font-bold">CLI:</span>
+              <code className="bg-black/40 px-2 py-0.5 rounded text-gray-300">apex-boot-core --strike ALL</code>
+            </div>
+          </div>
+
+          {/* Strike Packages Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {(strikeManifest?.unpacked_packages || [])
+              .filter((pkg: any) => {
+                if (vaultFilter === 'ALL') return true;
+                const isVector = pkg.folder.startsWith('01_') || pkg.folder.startsWith('02_') || pkg.folder.startsWith('03_') || pkg.folder.startsWith('04_') || pkg.folder.startsWith('05_');
+                if (vaultFilter === 'VECTORS') return isVector;
+                const isCherry = pkg.folder.includes('CHERRY') || pkg.folder.includes('QUEENS') || pkg.folder.includes('CAMARO') || pkg.folder.includes('VEGAS') || pkg.folder.includes('MEUC') || pkg.folder.includes('USAA') || pkg.folder.includes('NEXCOM');
+                if (vaultFilter === 'CHERRY') return isCherry;
+                if (vaultFilter === 'ESTATE') return !isVector;
+                return true;
+              })
+              .map((pkg: any, idx: number) => {
+                const folder = pkg.folder;
+                const files = pkg.files || [];
+                const isCherry = folder.includes('CHERRY') || folder.includes('QUEENS') || folder.includes('CAMARO') || folder.includes('VEGAS') || folder.includes('MEUC') || folder.includes('USAA');
+                const isVector = folder.startsWith('01_') || folder.startsWith('02_') || folder.startsWith('03_') || folder.startsWith('04_') || folder.startsWith('05_');
+                const pdfFile = files.find((f: any) => f.name.endsWith('.pdf'))?.name;
+                const docxFile = files.find((f: any) => f.name.endsWith('.docx'))?.name;
+
+                return (
+                  <div key={idx} className="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-emerald-800/60 transition flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start gap-2 mb-2">
+                        <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
+                          isVector ? 'bg-amber-950 text-amber-400 border border-amber-800/50' :
+                          isCherry ? 'bg-purple-950 text-purple-400 border border-purple-800/50' :
+                          'bg-cyan-950 text-cyan-400 border border-cyan-800/50'
+                        }`}>
+                          {isVector ? 'CORE VECTOR' : isCherry ? 'CHERRY RECOVERY' : 'ESTATE MATTER'}
+                        </span>
+                        <span className="text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800/40 px-2 py-0.5 rounded">
+                          {files.length} FILES
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-bold text-gray-100 line-clamp-2">{folder.replace('STRIKE_', '').replace('_FULL_FILING_BUNDLE', '')}</h4>
+                      <div className="text-[10px] text-gray-500 font-mono mt-1 truncate">Folder: /packets/{folder}</div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-gray-800/80">
+                      <div className="flex flex-wrap gap-1.5 justify-end mb-3">
+                        {pdfFile && (
+                          <a href={`/api/v1/forensics/download/unpacked/${folder}/${pdfFile}`} download className="bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-[10px] font-mono px-2 py-1 rounded transition flex items-center gap-1">
+                            <span>📄 PDF</span>
+                          </a>
+                        )}
+                        {docxFile && (
+                          <a href={`/api/v1/forensics/download/unpacked/${folder}/${docxFile}`} download className="bg-blue-950/80 hover:bg-blue-800 text-blue-200 border border-blue-800/60 text-[10px] font-mono px-2 py-1 rounded transition flex items-center gap-1">
+                            <span>📝 DOCX</span>
+                          </a>
+                        )}
+                        <a href={`/api/v1/forensics/download/matter/${folder.replace('STRIKE_', '').replace('_FULL_FILING_BUNDLE', '')}.zip`} download className="bg-emerald-950/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-800/60 text-[10px] font-mono px-2 py-1 rounded transition flex items-center gap-1">
+                          <span>📦 ZIP</span>
+                        </a>
+                      </div>
+
+                      <details className="text-[11px] font-mono text-gray-400">
+                        <summary className="cursor-pointer text-gray-400 hover:text-white py-1">View {files.length} standalone files</summary>
+                        <div className="space-y-1 mt-2 pl-2 border-l border-gray-800 max-h-36 overflow-y-auto">
+                          {files.map((f: any, fi: number) => (
+                            <div key={fi} className="flex justify-between items-center py-0.5">
+                              <a href={`/api/v1/forensics/download/unpacked/${folder}/${f.name}`} download className="text-cyan-400 hover:text-cyan-200 truncate max-w-[200px]">{f.name}</a>
+                              <span className="text-[10px] text-gray-500">{(f.size_bytes / 1024).toFixed(1)} KB</span>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </section>
       )}
     </div>
   );

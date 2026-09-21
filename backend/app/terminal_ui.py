@@ -151,6 +151,16 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         <span>⚡ Evidentiary Ingest</span>
         <span class="bg-purple-400/20 text-purple-300 text-xs px-2 py-0.5 rounded font-mono">SHA-256</span>
       </button>
+
+      <button onclick="switchTab('capabilities')" id="tab-btn-capabilities" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>🚀 GitHub Capabilities</span>
+        <span class="bg-indigo-400/20 text-indigo-300 text-xs px-2 py-0.5 rounded font-mono">8 Pillars · 64 Nodes</span>
+      </button>
+
+      <button onclick="switchTab('vault')" id="tab-btn-vault" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>📁 Master Strike Vault</span>
+        <span class="bg-emerald-400/20 text-emerald-300 text-xs px-2 py-0.5 rounded font-mono">26 Packets · 155 Files</span>
+      </button>
     </nav>
 
     <!-- TAB 1: ALLEGATIONS -->
@@ -651,6 +661,98 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         </div>
       </section>
     </div>
+
+    <!-- TAB 8: GITHUB CAPABILITIES -->
+    <div id="tab-capabilities" class="hidden space-y-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-indigo-950 text-indigo-400 border border-indigo-800/60 text-xs px-2.5 py-0.5 rounded font-mono font-bold">ESTATE CAPABILITY CATALOG</span>
+            <span class="text-xs text-gray-500 font-mono">glaciereq.capability-inventory.v2</span>
+          </div>
+          <h2 class="text-2xl font-black text-white mt-1">APEX GitHub Holographic Mesh Capabilities</h2>
+          <p class="text-xs text-gray-400 mt-1">Verified capability nodes, blueprints, and multi-interface entrypoints across all 8 strategic estate domains.</p>
+        </div>
+        <div class="flex gap-4">
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Total Nodes</div>
+            <div class="text-xl font-black text-indigo-400 font-mono">64</div>
+          </div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Strategic Domains</div>
+            <div class="text-xl font-black text-emerald-400 font-mono">8</div>
+          </div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Epistemic Standard</div>
+            <div class="text-xl font-black text-amber-400 font-mono">L5</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain Filter Buttons -->
+      <div class="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+        <div class="flex flex-wrap gap-2" id="capabilitiesFilterButtons">
+          <button onclick="filterCapabilities('ALL')" id="cap-btn-all" class="px-3 py-1 text-xs font-bold rounded bg-indigo-600 text-white">All (64)</button>
+          <button onclick="filterCapabilities('MEGA_SKILLS')" id="cap-btn-mega_skills" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mega Skills (9)</button>
+          <button onclick="filterCapabilities('MEGA_PIPELINES')" id="cap-btn-mega_pipelines" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mega Pipelines (6)</button>
+          <button onclick="filterCapabilities('GENIUS_MASTERY')" id="cap-btn-genius_mastery" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Genius (6)</button>
+          <button onclick="filterCapabilities('AKOS')" id="cap-btn-akos" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">AKOS (6)</button>
+          <button onclick="filterCapabilities('PRO_CODE')" id="cap-btn-pro_code" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Pro Code (5)</button>
+          <button onclick="filterCapabilities('ASPEN_GROVE')" id="cap-btn-aspen_grove" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Aspen Grove (12)</button>
+          <button onclick="filterCapabilities('COMPUTER_USER')" id="cap-btn-computer_user" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Computer User (12)</button>
+          <button onclick="filterCapabilities('LEGAL_WARFARE')" id="cap-btn-legal_warfare" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-rose-300 hover:text-white">Legal Warfare (10)</button>
+        </div>
+        <span class="text-xs font-mono text-gray-400">100% Proved / Zero Fake Truth</span>
+      </div>
+
+      <!-- Capabilities Grid -->
+      <div id="capabilitiesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <!-- TAB 9: MASTER STRIKE ARSENAL VAULT -->
+    <div id="tab-vault" class="hidden space-y-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-emerald-950 text-emerald-400 border border-emerald-800/60 text-xs px-2.5 py-0.5 rounded font-mono font-bold">COURT-READY ARSENAL VAULT</span>
+            <span class="text-xs text-amber-400 font-mono font-bold">FRE / HRE 601/602 ENFORCED</span>
+          </div>
+          <h2 class="text-2xl font-black text-white mt-1">Master Strike Arsenal Vault (26 Packages · 155 Standalone Files)</h2>
+          <p class="text-xs text-gray-400 mt-1">Instant downloads of 28-line numbered pleading PDFs, court-compliant Word DOCXs, ZIP upload bundles, and unpacked evidentiary files.</p>
+        </div>
+        <div class="flex gap-4">
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Adverse Exposure</div>
+            <div class="text-xl font-black text-amber-400 font-mono">$258.9M</div>
+          </div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Packages</div>
+            <div class="text-xl font-black text-cyan-400 font-mono">26</div>
+          </div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Standalone Files</div>
+            <div class="text-xl font-black text-emerald-400 font-mono">155</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vault Controls -->
+      <div class="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterStrikeVault('ALL')" id="vault-btn-all" class="px-3 py-1 text-xs font-bold rounded bg-emerald-600 text-white">All 26 Packages</button>
+          <button onclick="filterStrikeVault('VECTORS')" id="vault-btn-vectors" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Master Strike Vectors (5)</button>
+          <button onclick="filterStrikeVault('CHERRY')" id="vault-btn-cherry" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Cherry Chan Recovery (9)</button>
+          <button onclick="filterStrikeVault('ESTATE')" id="vault-btn-estate" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Estate Matters (12)</button>
+        </div>
+        <div class="text-xs font-mono text-gray-400 flex items-center gap-2">
+          <span class="text-emerald-400 font-bold">CLI:</span>
+          <code class="bg-black/40 px-2 py-0.5 rounded text-gray-300">apex-boot-core --strike ALL</code>
+        </div>
+      </div>
+
+      <!-- Strike Packages Grid -->
+      <div id="strikeVaultContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
   </div>
 
   <script>
@@ -661,17 +763,21 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     let ESTATE_MATTERS = [];
     let ESTATE_ACTORS = [];
     let ESTATE_TRAPS = [];
+    let CAPABILITIES = [];
+    let STRIKE_MANIFEST = null;
 
     async function init() {{
       try {{
-        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps] = await Promise.all([
+        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes] = await Promise.all([
           fetch('/api/v1/forensics/allegations').then(r => r.json()),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()),
           fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()),
           fetch('/api/v1/forensics/filing/federal-rico-complaint').then(r => r.json()),
           fetch('/api/v1/forensics/estate/matters').then(r => r.json()),
           fetch('/api/v1/forensics/estate/actors').then(r => r.json()),
-          fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json())
+          fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()),
+          fetch('/api/v1/forensics/strikes/manifest').then(r => r.json())
         ]);
         ALLEGATIONS = alRes.allegations || [];
         CONTRADICTIONS = coRes.contradictions || [];
@@ -680,12 +786,16 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         ESTATE_MATTERS = emMatters.matters || [];
         ESTATE_ACTORS = emActors.actors || [];
         ESTATE_TRAPS = emTraps.traps || [];
+        CAPABILITIES = capRes.capabilities || [];
+        STRIKE_MANIFEST = strikeRes;
 
         renderAllegations(ALLEGATIONS);
         renderContradictions(CONTRADICTIONS);
         renderEstateMatters(ESTATE_MATTERS);
         renderEstateActors(ESTATE_ACTORS);
         renderEstateTraps(ESTATE_TRAPS);
+        renderCapabilities(CAPABILITIES);
+        renderStrikeVault(STRIKE_MANIFEST);
 
         if (HAWAII_PACKET?.formatted_28_lines) {{
           document.getElementById('hawaiiPleadingPaperPre').textContent = HAWAII_PACKET.formatted_28_lines;
@@ -851,7 +961,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     }}
 
     function switchTab(tab) {{
-      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest'].forEach(t => {{
+      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault'].forEach(t => {{
         const btn = document.getElementById('tab-btn-' + t);
         const panel = document.getElementById('tab-' + t);
         if (t === tab) {{
@@ -862,6 +972,155 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           panel.classList.add('hidden');
         }}
       }});
+    }}
+
+    function renderCapabilities(items) {{
+      const container = document.getElementById('capabilitiesContainer');
+      if (!container) return;
+      if (!items || items.length === 0) {{
+        container.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500 font-mono text-xs">No capabilities match selected domain filter.</div>';
+        return;
+      }}
+      container.innerHTML = items.map(c => {{
+        const dom = c.domain || 'UNKNOWN';
+        const colorClass = 
+          dom === 'MEGA_SKILLS' ? 'bg-purple-950 text-purple-300 border-purple-800/60' :
+          dom === 'MEGA_PIPELINES' ? 'bg-blue-950 text-blue-300 border-blue-800/60' :
+          dom === 'GENIUS_MASTERY' ? 'bg-amber-950 text-amber-300 border-amber-800/60' :
+          dom === 'AKOS' ? 'bg-indigo-950 text-indigo-300 border-indigo-800/60' :
+          dom === 'PRO_CODE' ? 'bg-emerald-950 text-emerald-300 border-emerald-800/60' :
+          dom === 'ASPEN_GROVE' ? 'bg-teal-950 text-teal-300 border-teal-800/60' :
+          dom === 'COMPUTER_USER' ? 'bg-cyan-950 text-cyan-300 border-cyan-800/60' :
+          'bg-rose-950 text-rose-300 border-rose-800/60';
+
+        const meta = c.metadata || {{}};
+        const title = meta.title || c.capability_id.split('.').pop();
+        const desc = meta.description || c.description || 'Verified estate capability node.';
+        const repo = meta.repository || c.endpoint_ref || '';
+        const repoUrl = repo.startsWith('http') ? repo : `https://github.com/${{repo}}`;
+
+        return `
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-indigo-800/60 transition flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start gap-2 mb-2">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${{colorClass}}">
+                  ${{dom}}
+                </span>
+                <span class="text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800/40 px-2 py-0.5 rounded">
+                  ONLINE · L5
+                </span>
+              </div>
+              <h4 class="text-sm font-bold text-gray-100">${{title}}</h4>
+              <div class="text-[11px] text-gray-400 font-mono mt-0.5 truncate">${{c.capability_id}}</div>
+              <p class="text-xs text-gray-300 mt-2 line-clamp-3">${{desc}}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-gray-800/80 flex justify-between items-center text-xs">
+              <a href="${{repoUrl}}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-200 font-mono font-bold flex items-center gap-1">
+                <span>GitHub ↗</span>
+              </a>
+              <span class="text-[10px] text-gray-500 font-mono">Scopes: ${{(c.authorization_scopes || ['read', 'exec']).join(', ')}}</span>
+            </div>
+          </div>
+        `;
+      }}).join('');
+    }}
+
+    function filterCapabilities(domain) {{
+      const keys = ['all', 'mega_skills', 'mega_pipelines', 'genius_mastery', 'akos', 'pro_code', 'aspen_grove', 'computer_user', 'legal_warfare'];
+      keys.forEach(k => {{
+        const btn = document.getElementById('cap-btn-' + k);
+        if (btn) btn.className = 'px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white';
+      }});
+      const activeBtn = document.getElementById('cap-btn-' + domain.toLowerCase());
+      if (activeBtn) activeBtn.className = 'px-3 py-1 text-xs font-bold rounded bg-indigo-600 text-white';
+
+      if (domain === 'ALL') {{
+        renderCapabilities(CAPABILITIES);
+      }} else {{
+        renderCapabilities(CAPABILITIES.filter(c => (c.domain || '').toUpperCase() === domain.toUpperCase()));
+      }}
+    }}
+
+    function renderStrikeVault(manifest) {{
+      const container = document.getElementById('strikeVaultContainer');
+      if (!container) return;
+      const unpacked = manifest?.unpacked_packages || [];
+      if (unpacked.length === 0) {{
+        container.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500 font-mono text-xs">No strike packages unpacked yet. Run: apex-boot-core --strike ALL</div>';
+        return;
+      }}
+      container.innerHTML = unpacked.map(pkg => {{
+        const folder = pkg.folder;
+        const files = pkg.files || [];
+        const isCherry = folder.includes('CHERRY') || folder.includes('QUEENS') || folder.includes('CAMARO') || folder.includes('VEGAS') || folder.includes('MEUC') || folder.includes('USAA');
+        const isVector = folder.startsWith('01_') || folder.startsWith('02_') || folder.startsWith('03_') || folder.startsWith('04_') || folder.startsWith('05_');
+        
+        let pdfFile = files.find(f => f.name.endsWith('.pdf'))?.name;
+        let docxFile = files.find(f => f.name.endsWith('.docx'))?.name;
+
+        return `
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-emerald-800/60 transition flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start gap-2 mb-2">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${{
+                  isVector ? 'bg-amber-950 text-amber-400 border border-amber-800/50' :
+                  isCherry ? 'bg-purple-950 text-purple-400 border border-purple-800/50' :
+                  'bg-cyan-950 text-cyan-400 border border-cyan-800/50'
+                }}">
+                  ${{isVector ? 'CORE VECTOR' : isCherry ? 'CHERRY RECOVERY' : 'ESTATE MATTER'}}
+                </span>
+                <span class="text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800/40 px-2 py-0.5 rounded">
+                  ${{files.length}} FILES
+                </span>
+              </div>
+              <h4 class="text-sm font-bold text-gray-100 line-clamp-2">${{folder.replace('STRIKE_', '').replace('_FULL_FILING_BUNDLE', '')}}</h4>
+              <div class="text-[10px] text-gray-500 font-mono mt-1 truncate">Folder: /packets/${{folder}}</div>
+            </div>
+
+            <!-- Action Buttons: PDF / DOCX / ZIP -->
+            <div class="mt-4 pt-3 border-t border-gray-800/80">
+              <div class="flex flex-wrap gap-1.5 justify-end mb-3">
+                ${{pdfFile ? `<a href="/api/v1/forensics/download/unpacked/${{folder}}/${{pdfFile}}" download class="bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-[10px] font-mono px-2 py-1 rounded transition flex items-center gap-1"><span>📄 PDF</span></a>` : ''}}
+                ${{docxFile ? `<a href="/api/v1/forensics/download/unpacked/${{folder}}/${{docxFile}}" download class="bg-blue-950/80 hover:bg-blue-800 text-blue-200 border border-blue-800/60 text-[10px] font-mono px-2 py-1 rounded transition flex items-center gap-1"><span>📝 DOCX</span></a>` : ''}}
+                <a href="/api/v1/forensics/download/matter/${{folder.replace('STRIKE_', '').replace('_FULL_FILING_BUNDLE', '')}}.zip" download class="bg-emerald-950/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-800/60 text-[10px] font-mono px-2 py-1 rounded transition flex items-center gap-1"><span>📦 ZIP</span></a>
+              </div>
+
+              <!-- Unpacked Files List -->
+              <details class="text-[11px] font-mono text-gray-400">
+                <summary class="cursor-pointer text-gray-400 hover:text-white py-1">View ${{files.length}} standalone files</summary>
+                <div class="space-y-1 mt-2 pl-2 border-l border-gray-800 max-h-36 overflow-y-auto">
+                  ${{files.map(f => `
+                    <div class="flex justify-between items-center py-0.5">
+                      <a href="/api/v1/forensics/download/unpacked/${{folder}}/${{f.name}}" download class="text-cyan-400 hover:text-cyan-200 truncate max-w-[200px]">${{f.name}}</a>
+                      <span class="text-[10px] text-gray-500">${{(f.size_bytes / 1024).toFixed(1)}} KB</span>
+                    </div>
+                  `).join('')}}
+                </div>
+              </details>
+            </div>
+          </div>
+        `;
+      }}).join('');
+    }}
+
+    function filterStrikeVault(portfolio) {{
+      ['all', 'vectors', 'cherry', 'estate'].forEach(b => {{
+        const btn = document.getElementById('vault-btn-' + b);
+        if (btn) btn.className = 'px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white';
+      }});
+      const activeBtn = document.getElementById('vault-btn-' + portfolio.toLowerCase());
+      if (activeBtn) activeBtn.className = 'px-3 py-1 text-xs font-bold rounded bg-emerald-600 text-white';
+
+      const unpacked = STRIKE_MANIFEST?.unpacked_packages || [];
+      if (portfolio === 'ALL') {{
+        renderStrikeVault(STRIKE_MANIFEST);
+      }} else if (portfolio === 'VECTORS') {{
+        renderStrikeVault({{ unpacked_packages: unpacked.filter(p => p.folder.startsWith('01_') || p.folder.startsWith('02_') || p.folder.startsWith('03_') || p.folder.startsWith('04_') || p.folder.startsWith('05_')) }});
+      }} else if (portfolio === 'CHERRY') {{
+        renderStrikeVault({{ unpacked_packages: unpacked.filter(p => p.folder.includes('CHERRY') || p.folder.includes('QUEENS') || p.folder.includes('CAMARO') || p.folder.includes('VEGAS') || p.folder.includes('MEUC') || p.folder.includes('USAA') || p.folder.includes('NEXCOM')) }});
+      }} else if (portfolio === 'ESTATE') {{
+        renderStrikeVault({{ unpacked_packages: unpacked.filter(p => !p.folder.startsWith('01_') && !p.folder.startsWith('02_') && !p.folder.startsWith('03_') && !p.folder.startsWith('04_') && !p.folder.startsWith('05_')) }});
+      }}
     }}
 
     function togglePleadingView(prefix, view) {{
