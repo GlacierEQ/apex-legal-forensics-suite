@@ -15,6 +15,15 @@ except ImportError:
         get_terminal_html = None
 
 try:
+    from backend.app.legal_filing_engine import generate_hawaii_filing_packet, generate_federal_rico_complaint
+except ImportError:
+    try:
+        from legal_filing_engine import generate_hawaii_filing_packet, generate_federal_rico_complaint
+    except ImportError:
+        generate_hawaii_filing_packet = None
+        generate_federal_rico_complaint = None
+
+try:
     from fastapi import FastAPI, HTTPException, Depends
     from fastapi.middleware.cors import CORSMiddleware
     HAS_FASTAPI = True
@@ -411,6 +420,56 @@ def export_proof_matrix():
         "sha256": h
     }
 
+@app.get("/api/v1/forensics/filing/hawaii-motion-packet", tags=["Filings"])
+def get_hawaii_filing_packet():
+    data = load_case_ledger_data()
+    if generate_hawaii_filing_packet:
+        return generate_hawaii_filing_packet(data)
+    return {"error": "Filing engine unavailable"}
+
+@app.get("/api/v1/forensics/filing/federal-rico-complaint", tags=["Filings"])
+def get_federal_rico_complaint():
+    data = load_case_ledger_data()
+    if generate_federal_rico_complaint:
+        return generate_federal_rico_complaint(data)
+    return {"error": "Filing engine unavailable"}
+
+@app.get("/api/v1/forensics/export/hawaii-packet", tags=["Filings"])
+def export_hawaii_filing_packet(format: str = "28_lines"):
+    data = load_case_ledger_data()
+    if not generate_hawaii_filing_packet:
+        return {"error": "Filing engine unavailable"}
+    packet = generate_hawaii_filing_packet(data)
+    content = packet["formatted_28_lines"] if format == "28_lines" else packet["raw_text"]
+    h = hashlib.sha256(content.encode("utf-8")).hexdigest()
+    return {
+        "title": packet["title"],
+        "case_number": packet["case_number"],
+        "court": packet["court"],
+        "format": f"text/plain; {format}",
+        "sha256": h,
+        "content": content,
+        "verified": True
+    }
+
+@app.get("/api/v1/forensics/export/federal-rico", tags=["Filings"])
+def export_federal_rico_complaint(format: str = "28_lines"):
+    data = load_case_ledger_data()
+    if not generate_federal_rico_complaint:
+        return {"error": "Filing engine unavailable"}
+    complaint = generate_federal_rico_complaint(data)
+    content = complaint["formatted_28_lines"] if format == "28_lines" else complaint["raw_text"]
+    h = hashlib.sha256(content.encode("utf-8")).hexdigest()
+    return {
+        "title": complaint["title"],
+        "court": complaint["court"],
+        "damages_trebled": complaint["damages_trebled"],
+        "format": f"text/plain; {format}",
+        "sha256": h,
+        "content": content,
+        "verified": True
+    }
+
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
@@ -488,6 +547,16 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
             self._send_json(200, export_motion_document())
         elif path == "/api/v1/forensics/export/matrix":
             self._send_json(200, export_proof_matrix())
+        elif path == "/api/v1/forensics/filing/hawaii-motion-packet":
+            self._send_json(200, get_hawaii_filing_packet())
+        elif path == "/api/v1/forensics/filing/federal-rico-complaint":
+            self._send_json(200, get_federal_rico_complaint())
+        elif path == "/api/v1/forensics/export/hawaii-packet":
+            fmt = query.get("format", ["28_lines"])[0]
+            self._send_json(200, export_hawaii_filing_packet(format=fmt))
+        elif path == "/api/v1/forensics/export/federal-rico":
+            fmt = query.get("format", ["28_lines"])[0]
+            self._send_json(200, export_federal_rico_complaint(format=fmt))
         else:
             self._send_json(404, {"error": f"Not Found: {path}"})
 

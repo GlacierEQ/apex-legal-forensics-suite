@@ -1,6 +1,7 @@
 """
 APEX Legal Forensics Suite - Standalone Interactive Terminal UI
 Autonomous HTML5 / Tailwind Web Terminal for Case 1FDV-23-0001009 Forensics & Provenance Ledger.
+Includes Vector 1 (Hawaii Family Court Filing Packet) & Vector 2 (Federal Civil RICO Engine).
 """
 
 def get_terminal_html(overview: dict, allegations: list, contradictions: list, motion: dict) -> str:
@@ -55,6 +56,11 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         <div>
           <div class="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Contradictions</div>
           <div class="text-lg font-black text-rose-400 font-mono">{contra_count} <span class="text-xs text-gray-500">Nodes</span></div>
+        </div>
+        <div class="w-px h-8 bg-gray-800"></div>
+        <div>
+          <div class="text-[10px] uppercase tracking-wider text-gray-500 font-bold">RICO Claim</div>
+          <div class="text-lg font-black text-amber-400 font-mono">$38.4M <span class="text-xs text-gray-500">Trebled</span></div>
         </div>
         <div class="w-px h-8 bg-gray-800"></div>
         <div>
@@ -117,12 +123,17 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       </button>
 
       <button onclick="switchTab('motion')" id="tab-btn-motion" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
-        <span>📜 Emergency Motion to Strike</span>
-        <span class="bg-amber-400/20 text-amber-300 text-xs px-2 py-0.5 rounded font-mono">HRE 602</span>
+        <span>📜 Hawaii Filing Packet (Vector 1)</span>
+        <span class="bg-amber-400/20 text-amber-300 text-xs px-2 py-0.5 rounded font-mono">28-Line / HRE 602</span>
+      </button>
+
+      <button onclick="switchTab('rico')" id="tab-btn-rico" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>⚖️ Federal Civil RICO (Vector 2)</span>
+        <span class="bg-rose-400/20 text-rose-300 text-xs px-2 py-0.5 rounded font-mono">$38.4M</span>
       </button>
 
       <button onclick="switchTab('ingest')" id="tab-btn-ingest" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
-        <span>⚡ Evidentiary Exhibit Ingest</span>
+        <span>⚡ Evidentiary Ingest</span>
         <span class="bg-purple-400/20 text-purple-300 text-xs px-2 py-0.5 rounded font-mono">SHA-256</span>
       </button>
     </nav>
@@ -154,66 +165,188 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       </div>
     </div>
 
-    <!-- TAB 3: MOTION TO STRIKE -->
+    <!-- TAB 3: HAWAII FILING PACKET (VECTOR 1) -->
     <div id="tab-motion" class="hidden bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-xl">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-gray-800 pb-4">
         <div>
-          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Filing-Ready Legal Vehicle</span>
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Vector 1: Official Hawaii Family Court Filing Packet</span>
           <h2 class="text-xl font-bold text-white mt-1">
-            DEFENDANT'S EMERGENCY MOTION TO STRIKE PROPOSED ORDER UNDER HRE 602 & HFCR RULE 11
+            DEFENDANT'S EMERGENCY MOTION TO STRIKE PROPOSED ORDER & VACATE DKT 201 AB INITIO
           </h2>
-          <p class="text-xs text-gray-400 mt-0.5">FC-D NO. 1FDV-23-0001009 | FAMILY COURT OF THE FIRST CIRCUIT, STATE OF HAWAII</p>
+          <p class="text-xs text-gray-400 mt-0.5">FC-D NO. 1FDV-23-0001009 | FIRST CIRCUIT COURT OF HAWAII</p>
         </div>
         <div class="flex flex-wrap gap-2 items-center">
-          <button onclick="copyMotionPleading()" id="copyMotionBtn" class="bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-amber-600/20 flex items-center gap-1.5">
+          <button onclick="copyHawaiiPacket()" id="copyHawaiiBtn" class="bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-amber-600/20 flex items-center gap-1.5">
             <span>📋</span>
-            <span id="copyMotionLabel">Copy Court Pleading</span>
+            <span id="copyHawaiiLabel">Copy Hawaii Packet</span>
           </button>
-          <button onclick="downloadMotionPleading()" class="bg-gray-800 hover:bg-gray-700 text-amber-400 border border-amber-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5">
+          <button onclick="downloadHawaiiPacket('28_lines')" class="bg-gray-800 hover:bg-gray-700 text-amber-400 border border-amber-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5">
             <span>📥</span>
-            <span>Download Pleading (.txt)</span>
+            <span>Download 28-Line Pleading (.txt)</span>
+          </button>
+          <button onclick="downloadHawaiiPacket('raw')" class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5">
+            <span>📄</span>
+            <span>Raw Pleading (.txt)</span>
           </button>
           <button onclick="downloadProofMatrix()" class="bg-gray-800 hover:bg-gray-700 text-blue-400 border border-blue-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5">
             <span>📊</span>
-            <span>Download Proof Matrix (.md)</span>
+            <span>Proof Matrix (.md)</span>
           </button>
         </div>
       </div>
 
-      <div class="space-y-6 text-sm font-serif leading-relaxed text-gray-300 bg-gray-950 p-6 rounded-lg border border-gray-800">
+      <!-- Packet View Toggles -->
+      <div class="flex gap-2 mb-4">
+        <button onclick="togglePleadingView('hawaii', 'preview')" id="btn-hawaii-preview" class="px-3 py-1 text-xs font-bold rounded bg-blue-600 text-white">Component Summary</button>
+        <button onclick="togglePleadingView('hawaii', '28lines')" id="btn-hawaii-28lines" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Official 28-Line Pleading Paper</button>
+      </div>
+
+      <div id="hawaii-view-preview" class="space-y-6 text-sm font-serif leading-relaxed text-gray-300 bg-gray-950 p-6 rounded-lg border border-gray-800">
         <div>
-          <div class="text-xs font-mono font-bold text-gray-500 uppercase mb-2">I. Statement of Personal Knowledge & Movant Competency</div>
+          <div class="text-xs font-mono font-bold text-gray-500 uppercase mb-2">I. Notice of Motion & Evidentiary Grounds</div>
           <p class="text-xs leading-relaxed">
-            COMES NOW Defendant CASEY BARTON, proceeding pro se, and pursuant to Hawaii Rules of Evidence (HRE) Rule 602, 
-            Federal Rules of Evidence (FRE) Rule 602, and Hawaii Family Court Rules (HFCR) Rule 11, hereby submits this Emergency Motion to Strike 
-            the Proposed Order submitted by Scot Brower, Esq. Movant testifies under penalty of perjury under 28 U.S.C. § 1746 
-            based upon direct, firsthand personal knowledge of the facts set forth herein.
+            Emergency Notice to counsel Scot Brower, Esq. that Defendant Casey Barton moves under HRE 602, FRE 602, and HFCR Rule 11 to strike the proposed order and vacate Dkt 201 ab initio.
           </p>
         </div>
 
         <div>
-          <div class="text-xs font-mono font-bold text-gray-500 uppercase mb-2">II. Substantive Grounds for Strike & Sanctions</div>
-          <ul class="list-decimal list-inside space-y-2 text-xs">
-            <li class="pl-1 text-gray-200">Lack of Personal Knowledge (HRE 602 / FRE 602): Proposed order recites unsworn representations of counsel without competent foundation.</li>
-            <li class="pl-1 text-gray-200">Physical Denial of Hearing Evidence: 235 exhibits sealed ex parte on morning of hearing without notice or service (Dkt 193).</li>
-            <li class="pl-1 text-gray-200">Mathematical Impossibility of Failure to Appear: Cellular and GPS records place Defendant physically inside Kapolei Courthouse on June 19, 2024.</li>
-            <li class="pl-1 text-gray-200">Substantive Ex Parte Custody Inversion via Fraudulent Praecipe (Dkt 193 vs Dkt 201).</li>
+          <div class="text-xs font-mono font-bold text-gray-500 uppercase mb-2">II. Substantive Evidentiary Exhibits Bound</div>
+          <ul class="space-y-2 text-xs">
+            <li class="bg-gray-900 p-3 rounded border border-gray-800">
+              <strong class="text-emerald-400 font-mono">Exhibit "A" (Kapolei GPS Telemetry):</strong> Certified cellular tower and device Wi-Fi connection proves continuous physical presence inside Kapolei Courthouse at 1:35 PM on June 19, 2024, with direct visual contact with Scot Brower at 1:36 PM. Mathematical destruction of failure to appear.
+            </li>
+            <li class="bg-gray-900 p-3 rounded border border-gray-800">
+              <strong class="text-rose-400 font-mono">Exhibit "B" (Dkt 193 vs Dkt 201 Word-Diff):</strong> Demonstrates substantive custody inversion disguised as administrative clerical correction. Void ab initio under Hawaii Supreme Court precedent.
+            </li>
+            <li class="bg-gray-900 p-3 rounded border border-gray-800">
+              <strong class="text-amber-400 font-mono">Exhibit "C" (Ex Parte Sealed 235 Exhibits):</strong> Proof of physical denial of defense evidence without service or notice morning of hearing.
+            </li>
+            <li class="bg-gray-900 p-3 rounded border border-gray-800">
+              <strong class="text-blue-400 font-mono">Exhibit "D" (Proof Matrix & PACT Reports):</strong> 37 consecutive professional observation reports documenting 100% positive parenting.
+            </li>
           </ul>
         </div>
 
         <div>
-          <div class="text-xs font-mono font-bold text-gray-500 uppercase mb-2">III. Requested Relief</div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs text-amber-300">
-            <li class="pl-1">Strike the proposed order in its entirety.</li>
-            <li class="pl-1">Vacate all orders entered in reliance on fraudulent ex parte praecipe ab initio.</li>
-            <li class="pl-1">Issue mandatory referral to Hawaii Office of Disciplinary Counsel (ODC) pursuant to HRPC 3.3.</li>
-            <li class="pl-1">Impose monetary sanctions under HFCR Rule 11.</li>
-          </ul>
+          <div class="text-xs font-mono font-bold text-gray-500 uppercase mb-2">III. Sworn Declaration & Verification Clause</div>
+          <p class="text-xs text-gray-400 font-mono">
+            Signed by Casey Barton under penalty of perjury under HRE 602, FRE 602, and 28 U.S.C. § 1746 with full personal knowledge.
+          </p>
         </div>
+      </div>
+
+      <div id="hawaii-view-28lines" class="hidden bg-gray-950 p-4 rounded-lg border border-gray-800 overflow-x-auto">
+        <pre id="hawaiiPleadingPaperPre" class="text-xs font-mono text-gray-300 leading-tight max-h-[600px] overflow-y-auto whitespace-pre"></pre>
       </div>
     </div>
 
-    <!-- TAB 4: LIVE INGESTION -->
+    <!-- TAB 4: FEDERAL CIVIL RICO ENGINE (VECTOR 2) -->
+    <div id="tab-rico" class="hidden bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-xl">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-gray-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">Vector 2: Federal Civil RICO & § 1983 Complaint Engine</span>
+          <h2 class="text-xl font-bold text-white mt-1">
+            UNITED STATES DISTRICT COURT FOR THE DISTRICT OF HAWAII
+          </h2>
+          <p class="text-xs text-gray-400 mt-0.5">CASEY BARTON v. SCOT BROWER, GREG RYAN, NATASHA SHAW, CSEA, ET AL. | CIVIL NO. 1:26-cv-00...</p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <button onclick="copyRicoComplaint()" id="copyRicoBtn" class="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-rose-600/20 flex items-center gap-1.5">
+            <span>📋</span>
+            <span id="copyRicoLabel">Copy Federal Complaint</span>
+          </button>
+          <button onclick="downloadRicoComplaint('28_lines')" class="bg-gray-800 hover:bg-gray-700 text-rose-400 border border-rose-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5">
+            <span>📥</span>
+            <span>Download 28-Line Complaint (.txt)</span>
+          </button>
+          <button onclick="downloadRicoComplaint('raw')" class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5">
+            <span>📄</span>
+            <span>Raw Complaint (.txt)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Damages Banner -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-gray-950 border border-gray-800 p-4 rounded-xl">
+          <div class="text-[10px] uppercase font-bold text-gray-500">Actual Economic Injury</div>
+          <div class="text-2xl font-black text-gray-200 font-mono mt-1">$12,800,000.00</div>
+          <div class="text-[11px] text-gray-500 mt-1">Direct enterprise & asset destruction</div>
+        </div>
+        <div class="bg-rose-950/40 border border-rose-800/60 p-4 rounded-xl">
+          <div class="text-[10px] uppercase font-bold text-rose-400">Statutory Treble Damages</div>
+          <div class="text-2xl font-black text-rose-400 font-mono mt-1">$38,400,000.00</div>
+          <div class="text-[11px] text-rose-300 mt-1">18 U.S.C. § 1964(c) Mandate</div>
+        </div>
+        <div class="bg-gray-950 border border-gray-800 p-4 rounded-xl">
+          <div class="text-[10px] uppercase font-bold text-gray-500">Defendants Sued</div>
+          <div class="text-lg font-bold text-amber-400 font-mono mt-1">Brower · Ryan · Shaw · CSEA</div>
+          <div class="text-[11px] text-gray-500 mt-1">Joint & Several Liability + Jury Trial Demand</div>
+        </div>
+      </div>
+
+      <!-- Pleading View Toggles -->
+      <div class="flex gap-2 mb-4">
+        <button onclick="togglePleadingView('rico', 'preview')" id="btn-rico-preview" class="px-3 py-1 text-xs font-bold rounded bg-rose-600 text-white">Causes of Action</button>
+        <button onclick="togglePleadingView('rico', '28lines')" id="btn-rico-28lines" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Official 28-Line Complaint</button>
+      </div>
+
+      <div id="rico-view-preview" class="space-y-4">
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <div class="flex justify-between items-center text-xs font-mono mb-1">
+            <span class="font-bold text-rose-400">COUNT I: SUBSTANTIVE RICO VIOLATION</span>
+            <span class="text-gray-500">18 U.S.C. § 1962(c)</span>
+          </div>
+          <p class="text-xs text-gray-300">Conducting affairs of extortionate enterprise through pattern of racketeering activity (Mail fraud 18 U.S.C. § 1341, Wire fraud 18 U.S.C. § 1343, Extortion 18 U.S.C. § 1951).</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <div class="flex justify-between items-center text-xs font-mono mb-1">
+            <span class="font-bold text-rose-400">COUNT II: RICO CONSPIRACY</span>
+            <span class="text-gray-500">18 U.S.C. § 1962(d)</span>
+          </div>
+          <p class="text-xs text-gray-300">Conspiring to execute predicate acts to coerce forfeiture of parental custody and $12.8M in enterprise property.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <div class="flex justify-between items-center text-xs font-mono mb-1">
+            <span class="font-bold text-blue-400">COUNT III: 42 U.S.C. § 1983 — PROCEDURAL DUE PROCESS</span>
+            <span class="text-gray-500">Fourteenth Amendment</span>
+          </div>
+          <p class="text-xs text-gray-300">Ex parte sealing of 235 exhibits, manufacturing false default while physically in courthouse, and substantive custody inversion via clerical praecipe.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <div class="flex justify-between items-center text-xs font-mono mb-1">
+            <span class="font-bold text-blue-400">COUNT IV: 42 U.S.C. § 1983 — PARENTAL LIBERTY</span>
+            <span class="text-gray-500">Troxel v. Granville Standard</span>
+          </div>
+          <p class="text-xs text-gray-300">Arbitrary and malicious deprivation of fundamental parental rights in direct contravention of 37 unblemished PACT observation reports.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <div class="flex justify-between items-center text-xs font-mono mb-1">
+            <span class="font-bold text-amber-400">COUNT V: 42 U.S.C. § 1985(3) — CIVIL RIGHTS CONSPIRACY</span>
+            <span class="text-gray-500">Equal Protection</span>
+          </div>
+          <p class="text-xs text-gray-300">Systemic conspiracy targeting pro se litigants and fathers through coordinated document concealment and pre-hearing administrative seizures.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <div class="flex justify-between items-center text-xs font-mono mb-1">
+            <span class="font-bold text-emerald-400">COUNT VI: VACATUR OF VOID STATE COURT ORDERS</span>
+            <span class="text-gray-500">Extrinsic Fraud on Tribunal</span>
+          </div>
+          <p class="text-xs text-gray-300">Inherent federal equitable jurisdiction declaring all state court custody orders void ab initio due to structural extrinsic fraud.</p>
+        </div>
+      </div>
+
+      <div id="rico-view-28lines" class="hidden bg-gray-950 p-4 rounded-lg border border-gray-800 overflow-x-auto">
+        <pre id="ricoPleadingPaperPre" class="text-xs font-mono text-gray-300 leading-tight max-h-[600px] overflow-y-auto whitespace-pre"></pre>
+      </div>
+    </div>
+
+    <!-- TAB 5: LIVE INGESTION -->
     <div id="tab-ingest" class="hidden grid grid-cols-1 md:grid-cols-3 gap-8">
       <section class="md:col-span-1 bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-xl">
         <h2 class="text-lg font-bold text-gray-100 mb-4 flex items-center gap-2">
@@ -266,17 +399,31 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
   <script>
     let ALLEGATIONS = [];
     let CONTRADICTIONS = [];
+    let HAWAII_PACKET = null;
+    let RICO_COMPLAINT = null;
 
     async function init() {{
       try {{
-        const [alRes, coRes] = await Promise.all([
+        const [alRes, coRes, hwRes, rcRes] = await Promise.all([
           fetch('/api/v1/forensics/allegations').then(r => r.json()),
-          fetch('/api/v1/forensics/contradictions').then(r => r.json())
+          fetch('/api/v1/forensics/contradictions').then(r => r.json()),
+          fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()),
+          fetch('/api/v1/forensics/filing/federal-rico-complaint').then(r => r.json())
         ]);
         ALLEGATIONS = alRes.allegations || [];
         CONTRADICTIONS = coRes.contradictions || [];
+        HAWAII_PACKET = hwRes;
+        RICO_COMPLAINT = rcRes;
+
         renderAllegations(ALLEGATIONS);
         renderContradictions(CONTRADICTIONS);
+
+        if (HAWAII_PACKET?.formatted_28_lines) {{
+          document.getElementById('hawaiiPleadingPaperPre').textContent = HAWAII_PACKET.formatted_28_lines;
+        }}
+        if (RICO_COMPLAINT?.formatted_28_lines) {{
+          document.getElementById('ricoPleadingPaperPre').textContent = RICO_COMPLAINT.formatted_28_lines;
+        }}
       }} catch (err) {{
         console.error('Init fetch error:', err);
       }}
@@ -341,7 +488,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     }}
 
     function switchTab(tab) {{
-      ['allegations', 'contradictions', 'motion', 'ingest'].forEach(t => {{
+      ['allegations', 'contradictions', 'motion', 'rico', 'ingest'].forEach(t => {{
         const btn = document.getElementById('tab-btn-' + t);
         const panel = document.getElementById('tab-' + t);
         if (t === tab) {{
@@ -352,6 +499,25 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           panel.classList.add('hidden');
         }}
       }});
+    }}
+
+    function togglePleadingView(prefix, view) {{
+      const prevDiv = document.getElementById(prefix + '-view-preview');
+      const linesDiv = document.getElementById(prefix + '-view-28lines');
+      const btnPrev = document.getElementById('btn-' + prefix + '-preview');
+      const btnLines = document.getElementById('btn-' + prefix + '-28lines');
+
+      if (view === 'preview') {{
+        prevDiv.classList.remove('hidden');
+        linesDiv.classList.add('hidden');
+        btnPrev.className = 'px-3 py-1 text-xs font-bold rounded bg-blue-600 text-white';
+        btnLines.className = 'px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white';
+      }} else {{
+        prevDiv.classList.add('hidden');
+        linesDiv.classList.remove('hidden');
+        btnLines.className = 'px-3 py-1 text-xs font-bold rounded bg-blue-600 text-white';
+        btnPrev.className = 'px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white';
+      }}
     }}
 
     async function doSearch() {{
@@ -397,34 +563,65 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       document.getElementById('searchResultsPanel').classList.add('hidden');
     }}
 
-    async function copyMotionPleading() {{
+    async function copyHawaiiPacket() {{
       try {{
-        const res = await fetch('/api/v1/forensics/export/motion');
+        const res = await fetch('/api/v1/forensics/export/hawaii-packet?format=28_lines');
         const data = await res.json();
         if (navigator.clipboard) {{
           await navigator.clipboard.writeText(data.content);
         }}
-        const lbl = document.getElementById('copyMotionLabel');
-        lbl.textContent = 'Copied to Clipboard!';
-        setTimeout(() => {{ lbl.textContent = 'Copy Court Pleading'; }}, 3000);
+        const lbl = document.getElementById('copyHawaiiLabel');
+        lbl.textContent = 'Copied 28-Line Packet!';
+        setTimeout(() => {{ lbl.textContent = 'Copy Hawaii Packet'; }}, 3000);
       }} catch (err) {{
-        alert('Pleading copied to clipboard.');
+        alert('Hawaii packet copied to clipboard.');
       }}
     }}
 
-    async function downloadMotionPleading() {{
+    async function downloadHawaiiPacket(format) {{
       try {{
-        const res = await fetch('/api/v1/forensics/export/motion');
+        const res = await fetch(`/api/v1/forensics/export/hawaii-packet?format=${{format}}`);
         const data = await res.json();
         const blob = new Blob([data.content], {{ type: 'text/plain;charset=utf-8' }});
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'EMERGENCY_MOTION_TO_STRIKE_1FDV-23-0001009.txt';
+        a.download = `HAWAII_FAMILY_COURT_EMERGENCY_MOTION_PACKET_1FDV-23-0001009_${{format}}.txt`;
         a.click();
         URL.revokeObjectURL(url);
       }} catch (err) {{
-        alert('Failed to download court pleading.');
+        alert('Download error');
+      }}
+    }}
+
+    async function copyRicoComplaint() {{
+      try {{
+        const res = await fetch('/api/v1/forensics/export/federal-rico?format=28_lines');
+        const data = await res.json();
+        if (navigator.clipboard) {{
+          await navigator.clipboard.writeText(data.content);
+        }}
+        const lbl = document.getElementById('copyRicoLabel');
+        lbl.textContent = 'Copied Federal Complaint!';
+        setTimeout(() => {{ lbl.textContent = 'Copy Federal Complaint'; }}, 3000);
+      }} catch (err) {{
+        alert('RICO complaint copied to clipboard.');
+      }}
+    }}
+
+    async function downloadRicoComplaint(format) {{
+      try {{
+        const res = await fetch(`/api/v1/forensics/export/federal-rico?format=${{format}}`);
+        const data = await res.json();
+        const blob = new Blob([data.content], {{ type: 'text/plain;charset=utf-8' }});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `FEDERAL_CIVIL_RICO_COMPLAINT_38.4M_${{format}}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }} catch (err) {{
+        alert('Download error');
       }}
     }}
 
