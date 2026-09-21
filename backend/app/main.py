@@ -233,3 +233,90 @@ def get_motion_to_strike():
         "evidentiary_invariants": "FRE 601/602 & HRE 601/602 Direct Admissibility Enforced",
         "receipt_sha256": hashlib.sha256(b"MOTION_TO_STRIKE_1FDV_23_0001009").hexdigest()
     }
+
+
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import urllib.parse
+
+class ForensicsHTTPHandler(BaseHTTPRequestHandler):
+    def _send_json(self, status_code: int, data: Any):
+        body = json.dumps(data, indent=2).encode("utf-8")
+        self.send_response(status_code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
+    def do_GET(self):
+        parsed = urllib.parse.urlparse(self.path)
+        path = parsed.path
+        if path == "/":
+            self._send_json(200, root())
+        elif path == "/health":
+            self._send_json(200, health_check())
+        elif path == "/mission":
+            st = get_mission_status()
+            self._send_json(200, st.model_dump() if hasattr(st, "model_dump") else st.dict())
+        elif path == "/api/v1/records":
+            self._send_json(200, list_records())
+        elif path == "/api/v1/forensics/overview":
+            self._send_json(200, get_forensics_overview())
+        elif path == "/api/v1/forensics/allegations":
+            self._send_json(200, get_allegations())
+        elif path == "/api/v1/forensics/contradictions":
+            self._send_json(200, get_contradictions())
+        elif path == "/api/v1/forensics/actors":
+            self._send_json(200, get_actors())
+        elif path == "/api/v1/forensics/events":
+            self._send_json(200, get_events())
+        elif path == "/api/v1/forensics/motion-to-strike":
+            self._send_json(200, get_motion_to_strike())
+        else:
+            self._send_json(404, {"error": f"Not Found: {path}"})
+
+    def do_POST(self):
+        parsed = urllib.parse.urlparse(self.path)
+        path = parsed.path
+        if path == "/api/v1/records/ingest":
+            content_len = int(self.headers.get("Content-Length", 0))
+            post_body = self.rfile.read(content_len)
+            try:
+                data = json.loads(post_body.decode("utf-8"))
+                rec = IngestRecord(**data)
+                res = ingest_record(rec)
+                self._send_json(200, res.model_dump() if hasattr(res, "model_dump") else res.dict())
+            except Exception as e:
+                self._send_json(400, {"error": str(e)})
+        else:
+            self._send_json(404, {"error": f"Not Found: {path}"})
+
+    def log_message(self, format, *args):
+        pass
+
+def run_server(port: int = 8000, host: str = "0.0.0.0"):
+    server = HTTPServer((host, port), ForensicsHTTPHandler)
+    print(f"🏛️ APEX Legal Forensics Engine listening on http://{host}:{port}")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="APEX Legal Forensics Suite HTTP Engine")
+    parser.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    parser.add_argument("--host", type=str, default="0.0.0.0", help="Host interface (default: 0.0.0.0)")
+    args = parser.parse_args()
+    run_server(port=args.port, host=args.host)
