@@ -11,7 +11,27 @@ Evidentiary Standard: FRE 601/602 & HRE 601/602 Personal Knowledge & Competency
 
 import hashlib
 import time
+import io
+import textwrap
+import zipfile
+import json
 from typing import Dict, Any, List
+
+try:
+    from reportlab.lib.pagesizes import letter
+    from reportlab.pdfgen import canvas
+    from reportlab.lib import colors
+    REPORTLAB_AVAILABLE = True
+except ImportError:
+    REPORTLAB_AVAILABLE = False
+
+try:
+    import docx
+    from docx.shared import Inches, Pt, RGBColor
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    DOCX_AVAILABLE = True
+except ImportError:
+    DOCX_AVAILABLE = False
 
 def format_28_line_pleading(body_paragraphs: List[str], header_title: str = "") -> str:
     """
@@ -476,3 +496,255 @@ CASEY BARTON
         "formatted_28_lines": formatted_28_lines,
         "verified": True
     }
+
+
+def build_28_line_pdf(content_text: str, doc_title: str, case_num: str, court_name: str) -> bytes:
+    """
+    Renders court-ready 28-line numbered legal pleading PDF.
+    Complies with Hawaii Family Court Rules (HFCR Rule 10) and RCCH Rule 3.
+    """
+    if not REPORTLAB_AVAILABLE:
+        raise RuntimeError("reportlab library is not installed")
+
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter)
+    
+    raw_lines = content_text.split('\n')
+    wrapped_lines = []
+    for line in raw_lines:
+        line_s = line.rstrip()
+        if not line_s:
+            wrapped_lines.append('')
+        elif len(line_s) <= 70:
+            wrapped_lines.append(line_s)
+        else:
+            w_sub = textwrap.wrap(line_s, width=70)
+            wrapped_lines.extend(w_sub)
+            
+    lines_per_page = 28
+    total_lines = len(wrapped_lines)
+    pages = [wrapped_lines[i:i + lines_per_page] for i in range(0, total_lines, lines_per_page)]
+    total_pages = len(pages) if pages else 1
+    
+    for page_idx, page_lines in enumerate(pages):
+        # Double vertical rule on left (pleading margin)
+        c.setStrokeColor(colors.HexColor('#888888'))
+        c.setLineWidth(0.75)
+        c.line(54, 55, 54, 735)
+        c.setLineWidth(0.25)
+        c.line(57, 55, 57, 735)
+        # Single vertical rule on right
+        c.line(565, 55, 565, 735)
+        
+        # Header for page 2+
+        if page_idx > 0:
+            c.setFont('Helvetica-Bold', 8)
+            c.setFillColor(colors.HexColor('#333333'))
+            c.drawString(72, 745, f"{court_name} | {case_num}")
+            c.drawRightString(565, 745, doc_title[:38])
+            c.setLineWidth(0.5)
+            c.line(72, 740, 565, 740)
+            
+        # Draw line numbers 1-28
+        c.setFont('Courier', 8)
+        c.setFillColor(colors.HexColor('#666666'))
+        for i in range(1, 29):
+            y = 720 - (i - 1) * 23.5
+            c.drawString(32, y - 2, f"{i:2d}")
+            
+        # Draw text lines
+        c.setFont('Courier', 9.5)
+        c.setFillColor(colors.black)
+        for i, line_text in enumerate(page_lines):
+            y = 720 - i * 23.5
+            c.drawString(72, y - 2, line_text)
+            
+        # Footer
+        c.setFont('Helvetica', 8)
+        c.setFillColor(colors.HexColor('#555555'))
+        c.drawString(72, 40, f"{case_num} - {doc_title[:42]}")
+        c.drawCentredString(310, 40, f"- {page_idx + 1} of {total_pages} -")
+        c.drawRightString(565, 40, "APEX HOLOGRAPHIC MESH")
+        
+        c.showPage()
+        
+    c.save()
+    return buf.getvalue()
+
+
+def build_pleading_docx(content_text: str, doc_title: str, case_num: str, court_name: str) -> bytes:
+    """
+    Renders court-ready Word DOCX pleading document with formal caption,
+    standard 1-inch margins, Times New Roman, and 1.5 line spacing.
+    """
+    if not DOCX_AVAILABLE:
+        raise RuntimeError("python-docx library is not installed")
+
+    doc = docx.Document()
+    for section in doc.sections:
+        section.top_margin = Inches(1.0)
+        section.bottom_margin = Inches(1.0)
+        section.left_margin = Inches(1.0)
+        section.right_margin = Inches(1.0)
+        
+    # Title / Caption Box
+    p_title = doc.add_paragraph()
+    r_title = p_title.add_run(f"{court_name}\n{case_num}\n\n{doc_title}\n")
+    r_title.font.name = "Times New Roman"
+    r_title.font.size = Pt(12)
+    r_title.font.bold = True
+    p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    
+    # Body Paragraphs
+    for para in content_text.split('\n\n'):
+        para_s = para.strip()
+        if not para_s:
+            continue
+        p = doc.add_paragraph()
+        p.paragraph_format.line_spacing = 1.5
+        p.paragraph_format.space_after = Pt(6)
+        r = p.add_run(para_s)
+        r.font.name = "Times New Roman"
+        r.font.size = Pt(11)
+        
+    buf = io.BytesIO()
+    doc.save(buf)
+    return buf.getvalue()
+
+
+def generate_hawaii_packet_pdf(packet_data: Dict[str, Any]) -> bytes:
+    """Generates official court-ready PDF for Hawaii Family Court Filing Packet."""
+    court = packet_data.get("court", "FAMILY COURT OF THE FIRST CIRCUIT, STATE OF HAWAII")
+    case_num = packet_data.get("case_number", "FC-D NO. 1FDV-23-0001009")
+    doc_title = packet_data.get("title", "EMERGENCY MOTION PACKET & EXHIBIT BINDER")
+    raw_text = packet_data.get("raw_text", "")
+    return build_28_line_pdf(raw_text, doc_title, case_num, court)
+
+
+def generate_hawaii_packet_docx(packet_data: Dict[str, Any]) -> bytes:
+    """Generates official court-ready DOCX for Hawaii Family Court Filing Packet."""
+    court = packet_data.get("court", "FAMILY COURT OF THE FIRST CIRCUIT, STATE OF HAWAII")
+    case_num = packet_data.get("case_number", "FC-D NO. 1FDV-23-0001009")
+    doc_title = packet_data.get("title", "EMERGENCY MOTION PACKET & EXHIBIT BINDER")
+    raw_text = packet_data.get("raw_text", "")
+    return build_pleading_docx(raw_text, doc_title, case_num, court)
+
+
+def generate_federal_rico_pdf(rico_data: Dict[str, Any]) -> bytes:
+    """Generates official court-ready PDF for Federal Civil RICO Complaint."""
+    court = rico_data.get("court", "UNITED STATES DISTRICT COURT FOR THE DISTRICT OF HAWAII")
+    case_num = "CIVIL NO. 1:26-cv-001009"
+    doc_title = rico_data.get("title", "VERIFIED FEDERAL CIVIL RICO & § 1983 COMPLAINT ($38.4M TREBLED)")
+    raw_text = rico_data.get("raw_text", "")
+    return build_28_line_pdf(raw_text, doc_title, case_num, court)
+
+
+def generate_federal_rico_docx(rico_data: Dict[str, Any]) -> bytes:
+    """Generates official court-ready DOCX for Federal Civil RICO Complaint."""
+    court = rico_data.get("court", "UNITED STATES DISTRICT COURT FOR THE DISTRICT OF HAWAII")
+    case_num = "CIVIL NO. 1:26-cv-001009"
+    doc_title = rico_data.get("title", "VERIFIED FEDERAL CIVIL RICO & § 1983 COMPLAINT ($38.4M TREBLED)")
+    raw_text = rico_data.get("raw_text", "")
+    return build_pleading_docx(raw_text, doc_title, case_num, court)
+
+
+def generate_hawaii_filing_bundle_zip(packet_data: Dict[str, Any]) -> bytes:
+    """
+    Assembles complete, court-ready Hawaii Family Court filing bundle into a zip archive
+    ready for JEFS court electronic upload, including 28-line PDF, DOCX, exhibits, and manifest.
+    """
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        # 1. 28-line PDF
+        pdf_bytes = generate_hawaii_packet_pdf(packet_data)
+        zf.writestr("01_HAWAII_EMERGENCY_MOTION_PACKET_28LINE.pdf", pdf_bytes)
+        
+        # 2. DOCX
+        docx_bytes = generate_hawaii_packet_docx(packet_data)
+        zf.writestr("01_HAWAII_EMERGENCY_MOTION_PACKET.docx", docx_bytes)
+        
+        # 3. Full Text
+        raw_text = packet_data.get("raw_text", "")
+        zf.writestr("01_HAWAII_EMERGENCY_MOTION_PACKET_FULLTEXT.txt", raw_text)
+        
+        # 4. Exhibits A-D
+        comps = packet_data.get("components", {})
+        ex_a = comps.get("exhibit_a", "")
+        ex_b = comps.get("exhibit_b", "")
+        ex_c = comps.get("exhibit_c", "")
+        ex_d = comps.get("exhibit_d", "")
+        decl = comps.get("declaration", "")
+        
+        zf.writestr("02_EXHIBIT_A_TELEMETRY_KAPOLEI_PRESENCE.txt", ex_a)
+        zf.writestr("03_EXHIBIT_B_PRAECIPE_WORD_DIFF_INVERSION.txt", ex_b)
+        zf.writestr("04_EXHIBIT_C_JEFS_SEAL_CONCEALMENT_RECEIPT.txt", ex_c)
+        zf.writestr("05_EXHIBIT_D_PROOF_CONTRADICTION_MATRIX.txt", ex_d)
+        zf.writestr("06_SWORN_DECLARATION_CASEY_BARTON.txt", decl)
+        
+        # 5. Manifest with SHA-256 digests
+        manifest = {
+            "case_number": packet_data.get("case_number", "FC-D NO. 1FDV-23-0001009"),
+            "court": packet_data.get("court", "FAMILY COURT OF THE FIRST CIRCUIT, STATE OF HAWAII"),
+            "title": packet_data.get("title", ""),
+            "generated_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "evidentiary_standard": "HRE 601/602 & FRE 601/602 Direct Eyewitness Admissibility",
+            "files": {
+                "01_HAWAII_EMERGENCY_MOTION_PACKET_28LINE.pdf": hashlib.sha256(pdf_bytes).hexdigest(),
+                "01_HAWAII_EMERGENCY_MOTION_PACKET.docx": hashlib.sha256(docx_bytes).hexdigest(),
+                "01_HAWAII_EMERGENCY_MOTION_PACKET_FULLTEXT.txt": hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
+                "02_EXHIBIT_A_TELEMETRY_KAPOLEI_PRESENCE.txt": hashlib.sha256(ex_a.encode("utf-8")).hexdigest(),
+                "03_EXHIBIT_B_PRAECIPE_WORD_DIFF_INVERSION.txt": hashlib.sha256(ex_b.encode("utf-8")).hexdigest(),
+                "04_EXHIBIT_C_JEFS_SEAL_CONCEALMENT_RECEIPT.txt": hashlib.sha256(ex_c.encode("utf-8")).hexdigest(),
+                "05_EXHIBIT_D_PROOF_CONTRADICTION_MATRIX.txt": hashlib.sha256(ex_d.encode("utf-8")).hexdigest(),
+                "06_SWORN_DECLARATION_CASEY_BARTON.txt": hashlib.sha256(decl.encode("utf-8")).hexdigest(),
+            }
+        }
+        zf.writestr("00_FILING_MANIFEST_AND_SHA256_RECEIPTS.json", json.dumps(manifest, indent=2))
+        
+    return buf.getvalue()
+
+
+def generate_federal_rico_bundle_zip(rico_data: Dict[str, Any]) -> bytes:
+    """
+    Assembles complete, court-ready Federal Civil RICO & § 1983 complaint bundle into a zip archive
+    ready for CM/ECF federal court electronic upload.
+    """
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        # 1. 28-line PDF
+        pdf_bytes = generate_federal_rico_pdf(rico_data)
+        zf.writestr("01_FEDERAL_CIVIL_RICO_COMPLAINT_28LINE.pdf", pdf_bytes)
+        
+        # 2. DOCX
+        docx_bytes = generate_federal_rico_docx(rico_data)
+        zf.writestr("01_FEDERAL_CIVIL_RICO_COMPLAINT.docx", docx_bytes)
+        
+        # 3. Full Text
+        raw_text = rico_data.get("raw_text", "")
+        zf.writestr("01_FEDERAL_CIVIL_RICO_COMPLAINT_FULLTEXT.txt", raw_text)
+        
+        # 4. Causes and Damages Schedule
+        causes = "\n".join(rico_data.get("causes_of_action", []))
+        zf.writestr("02_CAUSES_OF_ACTION_AND_PREDICATE_ACTS.txt", causes)
+        
+        # 5. Manifest
+        manifest = {
+            "case_number": "CIVIL NO. 1:26-cv-001009",
+            "court": rico_data.get("court", "UNITED STATES DISTRICT COURT FOR THE DISTRICT OF HAWAII"),
+            "title": rico_data.get("title", ""),
+            "generated_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "damages_actual_usd": rico_data.get("damages_actual", 12800000.0),
+            "damages_trebled_usd": rico_data.get("damages_trebled", 38400000.0),
+            "defendants": rico_data.get("defendants", []),
+            "evidentiary_standard": "FRE 601/602 Direct Eyewitness Competence",
+            "files": {
+                "01_FEDERAL_CIVIL_RICO_COMPLAINT_28LINE.pdf": hashlib.sha256(pdf_bytes).hexdigest(),
+                "01_FEDERAL_CIVIL_RICO_COMPLAINT.docx": hashlib.sha256(docx_bytes).hexdigest(),
+                "01_FEDERAL_CIVIL_RICO_COMPLAINT_FULLTEXT.txt": hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
+                "02_CAUSES_OF_ACTION_AND_PREDICATE_ACTS.txt": hashlib.sha256(causes.encode("utf-8")).hexdigest(),
+            }
+        }
+        zf.writestr("00_RICO_FILING_MANIFEST_AND_SHA256_RECEIPTS.json", json.dumps(manifest, indent=2))
+        
+    return buf.getvalue()
+

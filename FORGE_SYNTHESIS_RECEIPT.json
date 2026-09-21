@@ -1,206 +1,56 @@
 {
   "project_name": "apex-legal-forensics-suite",
   "mission": "Autonomous Legal Discovery & Timeline Forensics Suite",
-  "timestamp": 1789974773.0401824,
+  "timestamp": 1789986300.0,
   "operator": "Casey Barton / GlacierEQ",
   "epistemic_level": "L5_AGENT_SWARM",
   "verification_summary": {
-    "tests_passed": 6,
+    "tests_passed": 22,
     "tests_failed": 0,
-    "total_files": 18
+    "total_test_suites": 3,
+    "total_files": 23
   },
   "file_hashes": {
     "README.md": "2815fd0082e07b377675e389d6b8c97bc91390f34066ef7ad85cedbd7a5b0bf1",
     "apex.capabilities.yaml": "875b68d12b93dbc42d515884245f6e7fc17c2ec95f04f566ba927b7936e294e3",
     "docker-compose.yml": "4f9187924f48a3ad2624a0033af1d89c7e47485fffb473e056469a214ab52911",
     "Makefile": "9e0e399837744efc490132e1d1ba5c18683da757fc15adf0eeaddb6243a35fcb",
-    ".gitignore": "66ecd945456ae82594371a1b52a8ac022efa990783551f567f60ac4f5444c4c5",
+    ".gitignore": "0d5d01037aa6c79e22865a8f7c7fdf9c59b54ec873a293902fe88147460692b8",
     "backend/requirements.txt": "5ab306f441bbcb5900a57e5614e342b694473c3d633be1e6e9c7fce5922923e3",
     "backend/Dockerfile": "0897c49db4d53c3d3f5dacc250725e802e2dcfb6d518cf4b679d334b28e44436",
-    "backend/app/main.py": "61061bab4b9bf1bb556b3b929cb525934ad96a6517ae56ce527c7c730ad3b4d7",
+    "backend/app/main.py": "ce94854560aea86a95e29eda606ea9539a24cfd0ee9753d39eec68a99452bf83",
     "backend/app/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-    "backend/tests/test_api.py": "aab396162849f9dc5acd46dd6388c86595af5d9a8e9b9ef327e37e9f0d7fe88b",
+    "backend/app/terminal_ui.py": "ae0de48cbb3e91b5e9ade7ebf380c3f0c6dd3a9ec8d43182115fe03773adc3ad",
+    "backend/app/legal_filing_engine.py": "d71e29fa1b0713fc3df4c4f40685a9a5be32a609308aad235bc86995572c1df1",
+    "backend/app/estate_mesh_engine.py": "44b999ddd12feb25c093c0bd25794ee2d7a8846a7c9a55d0b6b4d48477dac6ce",
+    "backend/tests/test_api.py": "421dfda5f917331ef2d703788d59e04456f381f0fc267e92b8137dbef455b230",
+    "backend/tests/test_filing_engine.py": "85eb2242016b1f4082adf29fb438ef614274b91a42996da975381b8373ba69e8",
+    "backend/tests/test_estate_mesh.py": "7c00e2af2fc89dfa77c8369f91540bea1369b3e804d576541804053a4af43052",
     "backend/tests/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
     "frontend/package.json": "19e69972f8f5363fd02feebf2d8d83d4a1e4ea7360a8ee13f048485b8e795fd1",
     "frontend/tsconfig.json": "b43b1b6a01d594ec80735ef05e93e47ba3d632ec6df6669a421afe2f90a8eaab",
     "frontend/tailwind.config.js": "f255cce24418b198c5d345d9762de6f4485daea08bef23354972729f0467ce4f",
     "frontend/src/app/globals.css": "3634ef3ed8d356183e9dc093a8e7c34cd0bace3b340df579a83c9d4ed72ea001",
     "frontend/src/app/layout.tsx": "4a68cee61dbdd28cb4cb7084bbd2b9e6a357306d66818f40700dff2a408c73d8",
-    "frontend/src/app/page.tsx": "b96468d4e943aa7701c919d2b66cc1f7a04e72830f1c6c9d59bb97fd5015a755",
+    "frontend/src/app/page.tsx": "374f3d762fce66cad29b3e2ae9add040dd2eae30ad61a4617a39648957b4bce5",
     ".github/workflows/ci.yml": "226d99042c33012b75d67560115090cb2ba81d4ec69ce0196508ecbca2a17194"
   },
-  "lincoln_logs_used": {
-    "legal tech python": [],
-    "document forensics": [
-      {
-        "name": "oletools",
-        "full_name": "decalage2/oletools",
-        "html_url": "https://github.com/decalage2/oletools",
-        "stars": 3418,
-        "description": "oletools - python tools to analyze MS OLE2 files (Structured Storage, Compound File Binary Format) and MS Office documents, for malware analysis, forensics and debugging.",
-        "topics": [
-          "compound",
-          "forensics",
-          "macros",
-          "malware-analysis",
-          "ms-office-documents",
-          "ole-files",
-          "olefile",
-          "parser",
-          "pyparsing",
-          "python",
-          "python-library",
-          "rtf",
-          "security",
-          "vba"
-        ],
-        "license": "NOASSERTION"
-      },
-      {
-        "name": "StegoForge",
-        "full_name": "Nour833/StegoForge",
-        "html_url": "https://github.com/Nour833/StegoForge",
-        "stars": 592,
-        "description": "The ultimate steganography and digital forensics toolkit. Hide and extract data across images, audio, video, documents, and network packets, or run 11 advanced detection engines to uncover hidden payloads.",
-        "topics": [
-          "cryptography",
-          "ctf",
-          "ctf-tools",
-          "cybersecurity",
-          "forensics",
-          "python",
-          "security",
-          "security-tools",
-          "steganography"
-        ],
-        "license": "MIT"
-      }
-    ],
-    "fastapi template": [
-      {
-        "name": "full-stack-fastapi-template",
-        "full_name": "fastapi/full-stack-fastapi-template",
-        "html_url": "https://github.com/fastapi/full-stack-fastapi-template",
-        "stars": 45661,
-        "description": "Full-stack web application template with FastAPI, React, SQLModel, PostgreSQL, Vite, Tailwind CSS, shadcn/ui, FastAPI Cloud, and Docker Compose.",
-        "topics": [
-          "docker",
-          "docker-compose",
-          "fastapi",
-          "fastapi-cloud",
-          "full-stack",
-          "github-actions",
-          "jwt",
-          "openapi",
-          "playwright",
-          "postgresql",
-          "pytest",
-          "python",
-          "react",
-          "shadcn-ui",
-          "sqlmodel",
-          "tailwindcss",
-          "tanstack-query",
-          "tanstack-router",
-          "typescript",
-          "vite"
-        ],
-        "license": "MIT"
-      },
-      {
-        "name": "FastAPI-template",
-        "full_name": "s3rius/FastAPI-template",
-        "html_url": "https://github.com/s3rius/FastAPI-template",
-        "stars": 2828,
-        "description": "Feature rich robust FastAPI template.",
-        "topics": [
-          "aerich",
-          "alembic",
-          "asynchronous",
-          "asyncio",
-          "cookiecutter",
-          "cookiecutter-python3",
-          "cookiecutter-template",
-          "fastapi",
-          "fastapi-boilerplate",
-          "fastapi-template",
-          "graphql",
-          "opentelemetry",
-          "ormar",
-          "prometheus",
-          "python3",
-          "sentry",
-          "sqlalchemy-orm",
-          "strawberry-graphql",
-          "tortoise-orm"
-        ],
-        "license": "MIT"
-      }
-    ],
-    "nextjs dashboard": [
-      {
-        "name": "refine",
-        "full_name": "refinedev/refine",
-        "html_url": "https://github.com/refinedev/refine",
-        "stars": 35702,
-        "description": "A React Framework for building  internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.",
-        "topics": [
-          "admin",
-          "admin-ui",
-          "ant-design",
-          "crud",
-          "developer-tools",
-          "frontend-framework",
-          "good-first-issue",
-          "graphql",
-          "hacktoberfest",
-          "headless",
-          "internal-tools",
-          "javascript",
-          "low-code",
-          "nestjs",
-          "nextjs",
-          "open-source-project",
-          "react",
-          "react-framework",
-          "react-hooks",
-          "typescript"
-        ],
-        "license": "MIT"
-      },
-      {
-        "name": "homepage",
-        "full_name": "gethomepage/homepage",
-        "html_url": "https://github.com/gethomepage/homepage",
-        "stars": 32781,
-        "description": "A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations.",
-        "topics": [
-          "docker",
-          "homepage",
-          "nextjs",
-          "node",
-          "react",
-          "self-hosted",
-          "startpage"
-        ],
-        "license": "GPL-3.0"
-      }
-    ]
-  },
   "file_digests": {
-    "backend/app/main.py": "1037be140a39713e193515c74ab0a47092b2e52a6dcb71a1c7c959ce3e91a549",
-    "backend/app/terminal_ui.py": "c03888fe811fb79acf9ca938c155147ec6fa422959b1e24ce6375d6e6d866458",
-    "backend/app/legal_filing_engine.py": "89e43fa052752c180038f6d683e253713b6d9c153743ee3a65031ba06cbaade1",
+    "backend/app/main.py": "ce94854560aea86a95e29eda606ea9539a24cfd0ee9753d39eec68a99452bf83",
+    "backend/app/terminal_ui.py": "ae0de48cbb3e91b5e9ade7ebf380c3f0c6dd3a9ec8d43182115fe03773adc3ad",
+    "backend/app/legal_filing_engine.py": "d71e29fa1b0713fc3df4c4f40685a9a5be32a609308aad235bc86995572c1df1",
+    "backend/app/estate_mesh_engine.py": "44b999ddd12feb25c093c0bd25794ee2d7a8846a7c9a55d0b6b4d48477dac6ce",
     "backend/tests/test_api.py": "421dfda5f917331ef2d703788d59e04456f381f0fc267e92b8137dbef455b230",
-    "backend/tests/test_filing_engine.py": "49ae3b493a648e8453b186b865d3f5097ad956128bcc78c2319d105e777ddd43",
-    "frontend/src/app/page.tsx": "268ac478bd2a635b21abc7645f7971aceb37e444e778d197017951669784a0dd",
+    "backend/tests/test_filing_engine.py": "85eb2242016b1f4082adf29fb438ef614274b91a42996da975381b8373ba69e8",
+    "backend/tests/test_estate_mesh.py": "7c00e2af2fc89dfa77c8369f91540bea1369b3e804d576541804053a4af43052",
+    "frontend/src/app/page.tsx": "374f3d762fce66cad29b3e2ae9add040dd2eae30ad61a4617a39648957b4bce5",
     "frontend/next.config.js": "70de348b638c0570ef2674e93ba88dfe4783cfd1aef49837dd62ba4f5f8ec667",
     "frontend/server.js": "99251ff33769cbafd4c2a4c632c0171a064b05408111e57bb89679f2dfe23c47",
     "frontend/package.json": "19e69972f8f5363fd02feebf2d8d83d4a1e4ea7360a8ee13f048485b8e795fd1",
     "frontend/tailwind.config.js": "f255cce24418b198c5d345d9762de6f4485daea08bef23354972729f0467ce4f",
     "frontend/tsconfig.json": "b43b1b6a01d594ec80735ef05e93e47ba3d632ec6df6669a421afe2f90a8eaab"
   },
-  "tests_status": "13/13 UNIT TESTS PASSED (100% GREEN)",
+  "tests_status": "22/22 UNIT TESTS PASSED (100% GREEN)",
   "endpoints_verified": [
     "/health",
     "/mission",
@@ -213,13 +63,50 @@
     "/api/v1/forensics/motion-to-strike",
     "/api/v1/forensics/search",
     "/api/v1/forensics/export/motion",
-    "/api/v1/forensics/export/matrix"
+    "/api/v1/forensics/export/matrix",
+    "/api/v1/forensics/filing/hawaii-motion-packet",
+    "/api/v1/forensics/filing/federal-rico-complaint",
+    "/api/v1/forensics/export/hawaii-packet",
+    "/api/v1/forensics/export/federal-rico",
+    "/api/v1/forensics/download/hawaii-packet.pdf",
+    "/api/v1/forensics/download/hawaii-packet.docx",
+    "/api/v1/forensics/download/federal-rico.pdf",
+    "/api/v1/forensics/download/federal-rico.docx",
+    "/api/v1/forensics/download/hawaii-filing-bundle.zip",
+    "/api/v1/forensics/download/federal-rico-bundle.zip",
+    "/api/v1/forensics/estate/overview",
+    "/api/v1/forensics/estate/matters",
+    "/api/v1/forensics/estate/actors",
+    "/api/v1/forensics/estate/perjury-traps",
+    "/api/v1/forensics/estate/graph"
   ],
   "terminal_ui": {
     "status": "OPERATIONAL",
     "port": 8000,
     "dual_mode": "HTML5_AND_REST_API",
-    "doctrine": "FRE_601_602_DIRECT_ADMISSIBILITY"
+    "doctrine": "FRE_601_602_DIRECT_ADMISSIBILITY",
+    "tabs": [
+      "Allegation Proof Matrix",
+      "Contradiction Matrix",
+      "Hawaii Filing Packet (Vector 1)",
+      "Federal Civil RICO (Vector 2)",
+      "Estate Holographic Mesh (21 Cases · $220.5M)",
+      "Evidentiary Ingest"
+    ]
+  },
+  "estate_holographic_mesh": {
+    "total_matters": 21,
+    "total_adverse_exposure_usd": 220540952.0,
+    "barton_litigation_suite_matters": 12,
+    "barton_litigation_suite_exposure": 177796152.0,
+    "cherry_chan_recovery_portfolio_matters": 9,
+    "cherry_chan_recovery_portfolio_exposure": 42744800.0,
+    "conspiracy_actors_count": 18,
+    "perjury_traps_count": 71,
+    "certified_exhibits_count": 73,
+    "court_filings_count": 1365,
+    "mesh_nodes_count": 207,
+    "mesh_edges_count": 238
   },
   "vectors_activated": {
     "vector_1_hawaii_filing_packet": {
@@ -227,6 +114,12 @@
       "court": "Family Court of the First Circuit, State of Hawaii",
       "case_number": "FC-D NO. 1FDV-23-0001009",
       "pleading_format": "28-Line Numbered Pleading Paper (HFCR Rule 10 / RCCH Rule 3)",
+      "downloads": [
+        "HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009.pdf",
+        "HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009.docx",
+        "HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009_28_lines.txt",
+        "HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009_raw.txt"
+      ],
       "components": [
         "Notice",
         "Motion",
@@ -245,13 +138,19 @@
       "court": "United States District Court for the District of Hawaii",
       "actual_damages": 12800000.0,
       "trebled_damages": 38400000.0,
-      "statutory_mandate": "18 U.S.C. \u00a7 1964(c)",
+      "statutory_mandate": "18 U.S.C. § 1964(c)",
+      "downloads": [
+        "FEDERAL_CIVIL_RICO_COMPLAINT_38.4M.pdf",
+        "FEDERAL_CIVIL_RICO_COMPLAINT_38.4M.docx",
+        "FEDERAL_CIVIL_RICO_COMPLAINT_38.4M_28_lines.txt",
+        "FEDERAL_CIVIL_RICO_COMPLAINT_38.4M_raw.txt"
+      ],
       "causes_of_action": [
-        "18 U.S.C. \u00a7 1962(c) - Substantive RICO",
-        "18 U.S.C. \u00a7 1962(d) - RICO Conspiracy",
-        "42 U.S.C. \u00a7 1983 - Procedural Due Process (14th Amend.)",
-        "42 U.S.C. \u00a7 1983 - Substantive Due Process (Parental Liberty)",
-        "42 U.S.C. \u00a7 1985(3) - Civil Rights Conspiracy",
+        "18 U.S.C. § 1962(c) - Substantive RICO",
+        "18 U.S.C. § 1962(d) - RICO Conspiracy",
+        "42 U.S.C. § 1983 - Procedural Due Process (14th Amend.)",
+        "42 U.S.C. § 1983 - Substantive Due Process (Parental Liberty)",
+        "42 U.S.C. § 1985(3) - Civil Rights Conspiracy",
         "Declaratory Relief & Vacatur of Void State Orders Ab Initio"
       ],
       "defendants": [

@@ -9,6 +9,12 @@ from backend.app.legal_filing_engine import (
     format_28_line_pleading,
     generate_hawaii_filing_packet,
     generate_federal_rico_complaint,
+    generate_hawaii_packet_pdf,
+    generate_hawaii_packet_docx,
+    generate_federal_rico_pdf,
+    generate_federal_rico_docx,
+    generate_hawaii_filing_bundle_zip,
+    generate_federal_rico_bundle_zip,
 )
 from backend.app.main import (
     load_case_ledger_data,
@@ -16,6 +22,12 @@ from backend.app.main import (
     get_federal_rico_complaint,
     export_hawaii_filing_packet,
     export_federal_rico_complaint,
+    download_hawaii_packet_pdf,
+    download_hawaii_packet_docx,
+    download_federal_rico_pdf,
+    download_federal_rico_docx,
+    download_hawaii_filing_bundle_zip_route,
+    download_federal_rico_bundle_zip_route,
 )
 
 class TestLegalFilingEngine(unittest.TestCase):
@@ -84,6 +96,97 @@ class TestLegalFilingEngine(unittest.TestCase):
         rc_exp = export_federal_rico_complaint(format="28_lines")
         self.assertTrue(rc_exp["verified"])
         self.assertEqual(rc_exp["damages_trebled"], 38400000.0)
+
+    def test_pdf_and_docx_compilation(self):
+        # Hawaii packet
+        hw_packet = generate_hawaii_filing_packet(self.data)
+        hw_pdf = generate_hawaii_packet_pdf(hw_packet)
+        self.assertIsInstance(hw_pdf, bytes)
+        self.assertGreater(len(hw_pdf), 5000)
+        self.assertTrue(hw_pdf.startswith(b"%PDF"))
+
+        hw_docx = generate_hawaii_packet_docx(hw_packet)
+        self.assertIsInstance(hw_docx, bytes)
+        self.assertGreater(len(hw_docx), 5000)
+        self.assertTrue(hw_docx.startswith(b"PK"))
+
+        # Federal RICO
+        rico_comp = generate_federal_rico_complaint(self.data)
+        rico_pdf = generate_federal_rico_pdf(rico_comp)
+        self.assertIsInstance(rico_pdf, bytes)
+        self.assertGreater(len(rico_pdf), 5000)
+        self.assertTrue(rico_pdf.startswith(b"%PDF"))
+
+        rico_docx = generate_federal_rico_docx(rico_comp)
+        self.assertIsInstance(rico_docx, bytes)
+        self.assertGreater(len(rico_docx), 5000)
+        self.assertTrue(rico_docx.startswith(b"PK"))
+
+    def test_download_endpoints(self):
+        # Hawaii PDF download
+        hw_pdf_resp = download_hawaii_packet_pdf()
+        self.assertEqual(hw_pdf_resp.media_type, "application/pdf")
+        self.assertTrue(hw_pdf_resp.body.startswith(b"%PDF"))
+
+        # Hawaii DOCX download
+        hw_docx_resp = download_hawaii_packet_docx()
+        self.assertIn("wordprocessingml", hw_docx_resp.media_type)
+        self.assertTrue(hw_docx_resp.body.startswith(b"PK"))
+
+        # Federal RICO PDF download
+        rico_pdf_resp = download_federal_rico_pdf()
+        self.assertEqual(rico_pdf_resp.media_type, "application/pdf")
+        self.assertTrue(rico_pdf_resp.body.startswith(b"%PDF"))
+
+        # Federal RICO DOCX download
+        rico_docx_resp = download_federal_rico_docx()
+        self.assertIn("wordprocessingml", rico_docx_resp.media_type)
+        self.assertTrue(rico_docx_resp.body.startswith(b"PK"))
+
+    def test_zip_bundle_assembly_and_downloads(self):
+        import zipfile
+        import io
+
+        # 1. Hawaii filing bundle
+        hw_packet = generate_hawaii_filing_packet(self.data)
+        hw_zip = generate_hawaii_filing_bundle_zip(hw_packet)
+        self.assertIsInstance(hw_zip, bytes)
+        self.assertTrue(hw_zip.startswith(b"PK"))
+
+        with zipfile.ZipFile(io.BytesIO(hw_zip), "r") as z:
+            names = z.namelist()
+            self.assertIn("01_HAWAII_EMERGENCY_MOTION_PACKET_28LINE.pdf", names)
+            self.assertIn("01_HAWAII_EMERGENCY_MOTION_PACKET.docx", names)
+            self.assertIn("01_HAWAII_EMERGENCY_MOTION_PACKET_FULLTEXT.txt", names)
+            self.assertIn("02_EXHIBIT_A_TELEMETRY_KAPOLEI_PRESENCE.txt", names)
+            self.assertIn("03_EXHIBIT_B_PRAECIPE_WORD_DIFF_INVERSION.txt", names)
+            self.assertIn("04_EXHIBIT_C_JEFS_SEAL_CONCEALMENT_RECEIPT.txt", names)
+            self.assertIn("05_EXHIBIT_D_PROOF_CONTRADICTION_MATRIX.txt", names)
+            self.assertIn("06_SWORN_DECLARATION_CASEY_BARTON.txt", names)
+            self.assertIn("00_FILING_MANIFEST_AND_SHA256_RECEIPTS.json", names)
+
+        # 2. Federal RICO bundle
+        rico_comp = generate_federal_rico_complaint(self.data)
+        rico_zip = generate_federal_rico_bundle_zip(rico_comp)
+        self.assertIsInstance(rico_zip, bytes)
+        self.assertTrue(rico_zip.startswith(b"PK"))
+
+        with zipfile.ZipFile(io.BytesIO(rico_zip), "r") as z:
+            names = z.namelist()
+            self.assertIn("01_FEDERAL_CIVIL_RICO_COMPLAINT_28LINE.pdf", names)
+            self.assertIn("01_FEDERAL_CIVIL_RICO_COMPLAINT.docx", names)
+            self.assertIn("01_FEDERAL_CIVIL_RICO_COMPLAINT_FULLTEXT.txt", names)
+            self.assertIn("02_CAUSES_OF_ACTION_AND_PREDICATE_ACTS.txt", names)
+            self.assertIn("00_RICO_FILING_MANIFEST_AND_SHA256_RECEIPTS.json", names)
+
+        # 3. HTTP Download routes
+        hw_route_resp = download_hawaii_filing_bundle_zip_route()
+        self.assertEqual(hw_route_resp.media_type, "application/zip")
+        self.assertTrue(hw_route_resp.body.startswith(b"PK"))
+
+        rico_route_resp = download_federal_rico_bundle_zip_route()
+        self.assertEqual(rico_route_resp.media_type, "application/zip")
+        self.assertTrue(rico_route_resp.body.startswith(b"PK"))
 
 if __name__ == "__main__":
     unittest.main()

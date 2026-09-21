@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'ingest'>('allegations');
+  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'mesh' | 'ingest'>('allegations');
   const [allegations, setAllegations] = useState<any[]>([]);
   const [contradictions, setContradictions] = useState<any[]>([]);
   const [motion, setMotion] = useState<any>(null);
@@ -13,6 +13,13 @@ export default function Home() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
+
+  // Estate Holographic Mesh state
+  const [estateOverview, setEstateOverview] = useState<any>(null);
+  const [estateMatters, setEstateMatters] = useState<any[]>([]);
+  const [estateActors, setEstateActors] = useState<any[]>([]);
+  const [estateTraps, setEstateTraps] = useState<any[]>([]);
+  const [estateFilter, setEstateFilter] = useState<'ALL' | 'BARTON' | 'CHERRY' | 'ACTORS' | 'TRAPS' | 'TRIAD'>('ALL');
 
   // Search & Export state
   const [searchQuery, setSearchQuery] = useState('');
@@ -107,13 +114,17 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [ovRes, allegRes, contraRes, motionRes, hwRes, rcRes] = await Promise.all([
+        const [ovRes, allegRes, contraRes, motionRes, hwRes, rcRes, emOvRes, emMattersRes, emActorsRes, emTrapsRes] = await Promise.all([
           fetch('/api/v1/forensics/overview').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/allegations').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/motion-to-strike').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/filing/federal-rico-complaint').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/overview').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/matters').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/actors').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()).catch(() => null),
         ]);
         if (ovRes) setOverview(ovRes);
         if (allegRes?.allegations) setAllegations(allegRes.allegations);
@@ -121,6 +132,10 @@ export default function Home() {
         if (motionRes) setMotion(motionRes);
         if (hwRes) setHawaiiPacket(hwRes);
         if (rcRes) setRicoComplaint(rcRes);
+        if (emOvRes) setEstateOverview(emOvRes);
+        if (emMattersRes?.matters) setEstateMatters(emMattersRes.matters);
+        if (emActorsRes?.actors) setEstateActors(emActorsRes.actors);
+        if (emTrapsRes?.traps) setEstateTraps(emTrapsRes.traps);
       } catch (err) {
         console.error('Data fetch error:', err);
       } finally {
@@ -150,6 +165,11 @@ export default function Home() {
         </div>
 
         <div className="flex items-center gap-6 bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 shadow-lg">
+          <div>
+            <div className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Estate Exposure</div>
+            <div className="text-lg font-black text-cyan-400 font-mono">$220.5M <span className="text-xs text-gray-500">21 Cases</span></div>
+          </div>
+          <div className="w-px h-8 bg-gray-800"></div>
           <div>
             <div className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Solidified Claims</div>
             <div className="text-lg font-black text-blue-400 font-mono">{overview?.counts?.allegations || 11} <span className="text-xs text-gray-500">Tier 1</span></div>
@@ -297,6 +317,18 @@ export default function Home() {
         </button>
 
         <button
+          onClick={() => setActiveTab('mesh')}
+          className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
+            activeTab === 'mesh'
+              ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30'
+              : 'bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+          }`}
+        >
+          <span>🌐 Estate Holographic Mesh</span>
+          <span className="bg-cyan-400/20 text-cyan-300 text-xs px-2 py-0.5 rounded font-mono">21 Matters · $220.5M</span>
+        </button>
+
+        <button
           onClick={() => setActiveTab('ingest')}
           className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
             activeTab === 'ingest'
@@ -412,6 +444,30 @@ export default function Home() {
               <p className="text-xs text-gray-400 mt-0.5">FC-D NO. 1FDV-23-0001009 | FIRST CIRCUIT COURT OF HAWAII</p>
             </div>
             <div className="flex flex-wrap gap-2 items-center">
+              <a
+                href="/api/v1/forensics/download/hawaii-packet.pdf"
+                download
+                className="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-red-700/20 flex items-center gap-1.5"
+              >
+                <span>📄</span>
+                <span>Download Court-Ready PDF</span>
+              </a>
+              <a
+                href="/api/v1/forensics/download/hawaii-packet.docx"
+                download
+                className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-blue-700/20 flex items-center gap-1.5"
+              >
+                <span>📝</span>
+                <span>Download Word DOCX</span>
+              </a>
+              <a
+                href="/api/v1/forensics/download/hawaii-filing-bundle.zip"
+                download
+                className="bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-emerald-700/20 flex items-center gap-1.5"
+              >
+                <span>📦</span>
+                <span>Download JEFS Bundle (.zip)</span>
+              </a>
               <button
                 onClick={handleCopyHawaii}
                 className="bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-amber-600/20 flex items-center gap-1.5"
@@ -424,7 +480,7 @@ export default function Home() {
                 className="bg-gray-800 hover:bg-gray-700 text-amber-400 border border-amber-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5"
               >
                 <span>📥</span>
-                <span>Download 28-Line Pleading (.txt)</span>
+                <span>28-Line (.txt)</span>
               </button>
               <button
                 onClick={() => handleDownloadHawaii('raw')}
@@ -514,6 +570,30 @@ export default function Home() {
               <p className="text-xs text-gray-400 mt-0.5">CASEY BARTON v. SCOT BROWER, GREG RYAN, NATASHA SHAW, CSEA, ET AL. | CIVIL NO. 1:26-cv-00...</p>
             </div>
             <div className="flex flex-wrap gap-2 items-center">
+              <a
+                href="/api/v1/forensics/download/federal-rico.pdf"
+                download
+                className="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-red-700/20 flex items-center gap-1.5"
+              >
+                <span>📄</span>
+                <span>Download Court-Ready PDF</span>
+              </a>
+              <a
+                href="/api/v1/forensics/download/federal-rico.docx"
+                download
+                className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-blue-700/20 flex items-center gap-1.5"
+              >
+                <span>📝</span>
+                <span>Download Word DOCX</span>
+              </a>
+              <a
+                href="/api/v1/forensics/download/federal-rico-bundle.zip"
+                download
+                className="bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-emerald-700/20 flex items-center gap-1.5"
+              >
+                <span>📦</span>
+                <span>Download Filing Bundle (.zip)</span>
+              </a>
               <button
                 onClick={handleCopyRico}
                 className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-3 rounded-lg transition text-xs shadow-lg shadow-rose-600/20 flex items-center gap-1.5"
@@ -526,14 +606,14 @@ export default function Home() {
                 className="bg-gray-800 hover:bg-gray-700 text-rose-400 border border-rose-500/30 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5"
               >
                 <span>📥</span>
-                <span>Download 28-Line Complaint (.txt)</span>
+                <span>28-Line (.txt)</span>
               </button>
               <button
                 onClick={() => handleDownloadRico('raw')}
                 className="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 font-semibold py-2 px-3 rounded-lg transition text-xs flex items-center gap-1.5"
               >
                 <span>📄</span>
-                <span>Raw Complaint (.txt)</span>
+                <span>Raw (.txt)</span>
               </button>
             </div>
           </div>
@@ -632,7 +712,260 @@ export default function Home() {
         </section>
       )}
 
-      {/* TAB 5: LIVE INGESTION */}
+      {/* TAB 5: ESTATE HOLOGRAPHIC MESH (21 CASES · $220.5M) */}
+      {activeTab === 'mesh' && (
+        <section className="space-y-6">
+          {/* High-Power Metrics Header */}
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+              <div className="text-[10px] uppercase font-bold text-gray-500">Total Estate Exposure</div>
+              <div className="text-xl font-black text-amber-400 font-mono mt-1">$220.5M</div>
+              <div className="text-[10px] text-gray-500">21 Active Matters</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+              <div className="text-[10px] uppercase font-bold text-gray-500">Barton Litigation</div>
+              <div className="text-xl font-black text-blue-400 font-mono mt-1">12 <span className="text-xs text-gray-400">Cases</span></div>
+              <div className="text-[10px] text-gray-500">$177.8M Exposure</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+              <div className="text-[10px] uppercase font-bold text-gray-500">Cherry Recovery</div>
+              <div className="text-xl font-black text-purple-400 font-mono mt-1">9 <span className="text-xs text-gray-400">Cases</span></div>
+              <div className="text-[10px] text-gray-500">$42.7M Exposure</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+              <div className="text-[10px] uppercase font-bold text-gray-500">Enterprise Actors</div>
+              <div className="text-xl font-black text-rose-400 font-mono mt-1">18 <span className="text-xs text-gray-400">Entities</span></div>
+              <div className="text-[10px] text-gray-500">Conspiracy Grid</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+              <div className="text-[10px] uppercase font-bold text-gray-500">Perjury Dilemma Traps</div>
+              <div className="text-xl font-black text-emerald-400 font-mono mt-1">71 <span className="text-xs text-gray-400">Traps</span></div>
+              <div className="text-[10px] text-gray-500">Statutory Penalties</div>
+            </div>
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+              <div className="text-[10px] uppercase font-bold text-gray-500">Court Filings & Exhibits</div>
+              <div className="text-xl font-black text-cyan-400 font-mono mt-1">1,438</div>
+              <div className="text-[10px] text-gray-500">1,365 Filings · 73 Exhibits</div>
+            </div>
+          </div>
+
+          {/* Filter Controls */}
+          <div className="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setEstateFilter('ALL')}
+                className={`px-3 py-1 text-xs font-bold rounded ${estateFilter === 'ALL' ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                All 21 Matters
+              </button>
+              <button
+                onClick={() => setEstateFilter('BARTON')}
+                className={`px-3 py-1 text-xs font-bold rounded ${estateFilter === 'BARTON' ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                Casey Barton Suite (12)
+              </button>
+              <button
+                onClick={() => setEstateFilter('CHERRY')}
+                className={`px-3 py-1 text-xs font-bold rounded ${estateFilter === 'CHERRY' ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                Cherry Chan Portfolio (9)
+              </button>
+              <button
+                onClick={() => setEstateFilter('ACTORS')}
+                className={`px-3 py-1 text-xs font-bold rounded ${estateFilter === 'ACTORS' ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                18 Enterprise Actors
+              </button>
+              <button
+                onClick={() => setEstateFilter('TRAPS')}
+                className={`px-3 py-1 text-xs font-bold rounded ${estateFilter === 'TRAPS' ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+              >
+                71 Perjury Traps
+              </button>
+              <button
+                onClick={() => setEstateFilter('TRIAD')}
+                className={`px-3 py-1 text-xs font-bold rounded ${estateFilter === 'TRIAD' ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30' : 'bg-gray-800 text-rose-300 hover:text-white'}`}
+              >
+                🔥 Conspiracy Triad (Cases 01 · 02 · 07)
+              </button>
+            </div>
+            <span className="text-xs font-mono text-gray-400">L5 Holographic Mesh · 207 Nodes · 238 Edges</span>
+          </div>
+
+          {/* Matters Grid */}
+          {(estateFilter === 'ALL' || estateFilter === 'BARTON' || estateFilter === 'CHERRY') && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {estateMatters
+                .filter(m => {
+                  if (estateFilter === 'BARTON') return m.portfolio.includes('01_CASEY_BARTON');
+                  if (estateFilter === 'CHERRY') return m.portfolio.includes('02_CHERRY_CHAN');
+                  return true;
+                })
+                .map((m, idx) => (
+                  <div key={idx} className="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-cyan-800/60 transition flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start gap-2 mb-2">
+                        <span className="text-[10px] font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-800/50 px-2 py-0.5 rounded">
+                          {m.case_id}
+                        </span>
+                        <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
+                          m.status === 'ACTIVE_COURT_READY' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800/40' : 'bg-gray-800 text-gray-400'
+                        }`}>
+                          {m.status}
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-bold text-gray-100 line-clamp-2">{m.title}</h4>
+                      <div className="text-[11px] text-gray-400 font-mono mt-1">{m.court}</div>
+                      {m.case_num && <div className="text-[10px] text-gray-500 font-mono">Docket: {m.case_num}</div>}
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-gray-800/80 flex justify-between items-end">
+                      <div>
+                        <div className="text-[9px] uppercase font-bold text-gray-500">Adverse Exposure</div>
+                        <div className="text-base font-black text-amber-400 font-mono">
+                          ${m.total_damages.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-[9px] uppercase font-bold text-gray-500">Win Prob</div>
+                        <div className="text-xs font-bold text-emerald-400 font-mono">
+                          {(m.win_prob * 100).toFixed(1)}%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* Actors Grid */}
+          {estateFilter === 'ACTORS' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {estateActors.map((a, idx) => (
+                <div key={idx} className="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-rose-800/60 transition">
+                  <div className="flex justify-between items-start gap-2 mb-2">
+                    <div>
+                      <span className="text-xs font-mono font-bold text-rose-400 bg-rose-950/80 border border-rose-800/60 px-2 py-0.5 rounded">
+                        ACTOR #{a.id}
+                      </span>
+                      <h4 className="text-base font-bold text-white mt-1">{a.actor_name}</h4>
+                      <div className="text-xs text-amber-400 font-mono">{a.role}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-[10px] uppercase font-bold text-gray-500">Adverse Exposure</div>
+                      <div className="text-base font-black text-rose-400 font-mono">
+                        ${a.exposure_usd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-950 p-3 rounded-lg border border-gray-800/80 text-xs font-mono space-y-1 mt-3">
+                    <div><strong className="text-gray-400">Affiliated Cases:</strong> <span className="text-cyan-300">{a.affiliated_cases}</span></div>
+                    <div><strong className="text-gray-400">Predicate Acts:</strong> <span className="text-rose-300">{a.predicate_acts}</span></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Perjury Traps Grid */}
+          {estateFilter === 'TRAPS' && (
+            <div className="space-y-3">
+              {estateTraps.map((t, idx) => (
+                <div key={idx} className="bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-emerald-800/60 transition">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 border border-emerald-800/50 px-2 py-0.5 rounded">
+                      {t.case_id} · TRAP #{t.trap_num}
+                    </span>
+                    <span className="text-xs font-bold text-gray-300 font-mono">{t.topic}</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-gray-950 p-3 rounded border border-gray-800 text-xs">
+                    <div>
+                      <div className="text-[10px] uppercase font-bold text-gray-500 mb-1">Cross-Examination Dilemma Question</div>
+                      <div className="text-gray-200 font-serif italic border-l-2 border-emerald-500 pl-2 py-0.5">
+                        "{t.foundation_question}"
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold text-gray-500 mb-1">Impeachment Dilemma</div>
+                      <div className="text-rose-300 font-mono border-l-2 border-rose-500 pl-2 py-0.5">
+                        {t.impeachment_dilemma}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-2 text-[11px] font-mono text-amber-400">
+                    <strong>Statutory Penalty:</strong> {t.statutory_penalty}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Conspiracy Triad Grid */}
+          {estateFilter === 'TRIAD' && (
+            <div className="space-y-6">
+              <div className="bg-gradient-to-r from-rose-950/60 to-purple-950/60 border border-rose-800/80 p-6 rounded-2xl">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b border-rose-900/60 pb-3 mb-4">
+                  <div>
+                    <span className="text-xs font-mono font-bold text-rose-400 uppercase tracking-widest">Cross-Case Racketeering Nexus</span>
+                    <h3 className="text-lg font-bold text-white mt-1">The 3-Matter Enterprise Conduit ($125,066,152.00 Combined Exposure)</h3>
+                  </div>
+                  <div className="text-xs font-mono bg-black/40 border border-rose-700/60 px-3 py-1 rounded text-rose-300">
+                    Nexus: Brower · Shaw · Martin
+                  </div>
+                </div>
+                <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                  The estate holographic mesh confirms that <strong>Case 01</strong> (Family Court Fraud), <strong>Case 02</strong> (Federal Civil RICO), and <strong>Case 07</strong> (Brower-Martin Conspiracy) are not separate disputes, but an indivisible, continuing course of racketeering conduct under 18 U.S.C. § 1961(5) and 42 U.S.C. § 1983.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-gray-950 border border-gray-800 p-4 rounded-xl">
+                    <div className="flex justify-between items-center text-xs font-mono text-cyan-400 mb-2">
+                      <span>CASE 01</span>
+                      <span>$53.7M Exposure</span>
+                    </div>
+                    <h4 className="text-sm font-bold text-white mb-1">1FDV-23-0001009</h4>
+                    <p className="text-[11px] text-gray-400 mb-2">First Circuit Family Court</p>
+                    <div className="text-xs text-gray-300 space-y-1">
+                      <div>• Ex parte sealing of 235 exhibits</div>
+                      <div>• False default finding (Kapolei presence)</div>
+                      <div>• Praecipe custody inversion (Dkt 201)</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-950 border border-rose-900/60 p-4 rounded-xl">
+                    <div className="flex justify-between items-center text-xs font-mono text-rose-400 mb-2">
+                      <span>CASE 02</span>
+                      <span>$66.4M Exposure</span>
+                    </div>
+                    <h4 className="text-sm font-bold text-white mb-1">1:26-cv-001009-RICO</h4>
+                    <p className="text-[11px] text-gray-400 mb-2">U.S. District Court (Dist. of Hawaii)</p>
+                    <div className="text-xs text-gray-300 space-y-1">
+                      <div>• 18 U.S.C. §§ 1962(c), (d) Trebled ($38.4M)</div>
+                      <div>• 42 U.S.C. §§ 1983, 1985(3) Due Process</div>
+                      <div>• Extrinsic fraud void order vacatur</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-950 border border-purple-900/60 p-4 rounded-xl">
+                    <div className="flex justify-between items-center text-xs font-mono text-purple-400 mb-2">
+                      <span>CASE 07</span>
+                      <span>$5.0M Exposure</span>
+                    </div>
+                    <h4 className="text-sm font-bold text-white mb-1">26-1-0525-TORT</h4>
+                    <p className="text-[11px] text-gray-400 mb-2">First Circuit Court of Hawaii</p>
+                    <div className="text-xs text-gray-300 space-y-1">
+                      <div>• Tortious conspiracy & champerty</div>
+                      <div>• Fictitious default procurement</div>
+                      <div>• Coordinated abuse of legal process</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* TAB 6: LIVE INGESTION */}
       {activeTab === 'ingest' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <section className="md:col-span-1 bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-xl">

@@ -15,16 +15,64 @@ except ImportError:
         get_terminal_html = None
 
 try:
-    from backend.app.legal_filing_engine import generate_hawaii_filing_packet, generate_federal_rico_complaint
+    from backend.app.legal_filing_engine import (
+        generate_hawaii_filing_packet,
+        generate_federal_rico_complaint,
+        generate_hawaii_packet_pdf,
+        generate_hawaii_packet_docx,
+        generate_federal_rico_pdf,
+        generate_federal_rico_docx,
+        generate_hawaii_filing_bundle_zip,
+        generate_federal_rico_bundle_zip
+    )
 except ImportError:
     try:
-        from legal_filing_engine import generate_hawaii_filing_packet, generate_federal_rico_complaint
+        from legal_filing_engine import (
+            generate_hawaii_filing_packet,
+            generate_federal_rico_complaint,
+            generate_hawaii_packet_pdf,
+            generate_hawaii_packet_docx,
+            generate_federal_rico_pdf,
+            generate_federal_rico_docx,
+            generate_hawaii_filing_bundle_zip,
+            generate_federal_rico_bundle_zip
+        )
     except ImportError:
         generate_hawaii_filing_packet = None
         generate_federal_rico_complaint = None
+        generate_hawaii_packet_pdf = None
+        generate_hawaii_packet_docx = None
+        generate_federal_rico_pdf = None
+        generate_federal_rico_docx = None
+        generate_hawaii_filing_bundle_zip = None
+        generate_federal_rico_bundle_zip = None
 
 try:
-    from fastapi import FastAPI, HTTPException, Depends
+    from backend.app.estate_mesh_engine import (
+        get_estate_overview,
+        get_estate_matters,
+        get_estate_actors,
+        get_estate_perjury_traps,
+        get_estate_graph
+    )
+except ImportError:
+    try:
+        from estate_mesh_engine import (
+            get_estate_overview,
+            get_estate_matters,
+            get_estate_actors,
+            get_estate_perjury_traps,
+            get_estate_graph
+        )
+    except ImportError:
+        get_estate_overview = None
+        get_estate_matters = None
+        get_estate_actors = None
+        get_estate_perjury_traps = None
+        get_estate_graph = None
+
+try:
+    from fastapi import FastAPI, HTTPException, Depends, Response
     from fastapi.middleware.cors import CORSMiddleware
     HAS_FASTAPI = True
 except ImportError:
@@ -50,6 +98,19 @@ else:
         def get(self, *args, **kwargs): return lambda f: f
         def post(self, *args, **kwargs): return lambda f: f
     app = StandaloneApp()
+
+    class Response:
+        def __init__(self, content: bytes, media_type: str = "application/octet-stream", headers: Optional[Dict[str, str]] = None, status_code: int = 200):
+            self.content = content
+            self.body = content
+            self.media_type = media_type
+            self.headers = headers or {}
+            self.status_code = status_code
+
+    class HTTPException(Exception):
+        def __init__(self, status_code: int, detail: str = ""):
+            self.status_code = status_code
+            self.detail = detail
 
 class MissionStatus(BaseModel):
     project: str = "apex-legal-forensics-suite"
@@ -470,6 +531,117 @@ def export_federal_rico_complaint(format: str = "28_lines"):
         "verified": True
     }
 
+@app.get("/api/v1/forensics/download/hawaii-packet.pdf", tags=["Filings"])
+def download_hawaii_packet_pdf():
+    data = load_case_ledger_data()
+    if not generate_hawaii_filing_packet or not generate_hawaii_packet_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    packet = generate_hawaii_filing_packet(data)
+    pdf_bytes = generate_hawaii_packet_pdf(packet)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009.pdf"}
+    )
+
+@app.get("/api/v1/forensics/download/hawaii-packet.docx", tags=["Filings"])
+def download_hawaii_packet_docx():
+    data = load_case_ledger_data()
+    if not generate_hawaii_filing_packet or not generate_hawaii_packet_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    packet = generate_hawaii_filing_packet(data)
+    docx_bytes = generate_hawaii_packet_docx(packet)
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009.docx"}
+    )
+
+@app.get("/api/v1/forensics/download/federal-rico.pdf", tags=["Filings"])
+def download_federal_rico_pdf():
+    data = load_case_ledger_data()
+    if not generate_federal_rico_complaint or not generate_federal_rico_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    complaint = generate_federal_rico_complaint(data)
+    pdf_bytes = generate_federal_rico_pdf(complaint)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=FEDERAL_CIVIL_RICO_COMPLAINT_38.4M.pdf"}
+    )
+
+@app.get("/api/v1/forensics/download/federal-rico.docx", tags=["Filings"])
+def download_federal_rico_docx():
+    data = load_case_ledger_data()
+    if not generate_federal_rico_complaint or not generate_federal_rico_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    complaint = generate_federal_rico_complaint(data)
+    docx_bytes = generate_federal_rico_docx(complaint)
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=FEDERAL_CIVIL_RICO_COMPLAINT_38.4M.docx"}
+    )
+
+@app.get("/api/v1/forensics/download/hawaii-filing-bundle.zip", tags=["Filings"])
+def download_hawaii_filing_bundle_zip_route():
+    data = load_case_ledger_data()
+    if not generate_hawaii_filing_packet or not generate_hawaii_filing_bundle_zip:
+        raise HTTPException(status_code=500, detail="Zip bundle generator unavailable")
+    packet = generate_hawaii_filing_packet(data)
+    zip_bytes = generate_hawaii_filing_bundle_zip(packet)
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=HAWAII_COURT_FILING_PACKET_AND_EXHIBITS_1FDV-23-0001009.zip"}
+    )
+
+@app.get("/api/v1/forensics/download/federal-rico-bundle.zip", tags=["Filings"])
+def download_federal_rico_bundle_zip_route():
+    data = load_case_ledger_data()
+    if not generate_federal_rico_complaint or not generate_federal_rico_bundle_zip:
+        raise HTTPException(status_code=500, detail="Zip bundle generator unavailable")
+    complaint = generate_federal_rico_complaint(data)
+    zip_bytes = generate_federal_rico_bundle_zip(complaint)
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=FEDERAL_CIVIL_RICO_FILING_BUNDLE_38.4M.zip"}
+    )
+
+@app.get("/api/v1/forensics/estate/overview", tags=["Estate Mesh"])
+def get_estate_overview_route():
+    if not get_estate_overview:
+        return {"error": "Estate engine unavailable"}
+    return get_estate_overview()
+
+@app.get("/api/v1/forensics/estate/matters", tags=["Estate Mesh"])
+def get_estate_matters_route(portfolio: Optional[str] = None):
+    if not get_estate_matters:
+        return {"error": "Estate engine unavailable"}
+    matters = get_estate_matters(portfolio)
+    return {"count": len(matters), "matters": matters}
+
+@app.get("/api/v1/forensics/estate/actors", tags=["Estate Mesh"])
+def get_estate_actors_route():
+    if not get_estate_actors:
+        return {"error": "Estate engine unavailable"}
+    actors = get_estate_actors()
+    return {"count": len(actors), "actors": actors}
+
+@app.get("/api/v1/forensics/estate/perjury-traps", tags=["Estate Mesh"])
+def get_estate_perjury_traps_route(case_id: Optional[str] = None):
+    if not get_estate_perjury_traps:
+        return {"error": "Estate engine unavailable"}
+    traps = get_estate_perjury_traps(case_id)
+    return {"count": len(traps), "traps": traps}
+
+@app.get("/api/v1/forensics/estate/graph", tags=["Estate Mesh"])
+def get_estate_graph_route():
+    if not get_estate_graph:
+        return {"error": "Estate engine unavailable"}
+    return get_estate_graph()
+
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
@@ -486,12 +658,25 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _send_bytes(self, status_code: int, content_type: str, body: bytes, filename: str = None):
+        self.send_response(status_code)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        if filename:
+            self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_OPTIONS(self):
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
+
+    def do_HEAD(self):
+        self.do_GET()
 
     def _send_html(self, status_code: int, html_body: str):
         body = html_body.encode("utf-8")
@@ -557,6 +742,51 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
         elif path == "/api/v1/forensics/export/federal-rico":
             fmt = query.get("format", ["28_lines"])[0]
             self._send_json(200, export_federal_rico_complaint(format=fmt))
+        elif path == "/api/v1/forensics/download/hawaii-packet.pdf":
+            data = load_case_ledger_data()
+            packet = generate_hawaii_filing_packet(data)
+            pdf_bytes = generate_hawaii_packet_pdf(packet)
+            self._send_bytes(200, "application/pdf", pdf_bytes, "HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009.pdf")
+        elif path == "/api/v1/forensics/download/hawaii-packet.docx":
+            data = load_case_ledger_data()
+            packet = generate_hawaii_filing_packet(data)
+            docx_bytes = generate_hawaii_packet_docx(packet)
+            self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", docx_bytes, "HAWAII_FAMILY_COURT_MOTION_PACKET_1FDV-23-0001009.docx")
+        elif path == "/api/v1/forensics/download/federal-rico.pdf":
+            data = load_case_ledger_data()
+            complaint = generate_federal_rico_complaint(data)
+            pdf_bytes = generate_federal_rico_pdf(complaint)
+            self._send_bytes(200, "application/pdf", pdf_bytes, "FEDERAL_CIVIL_RICO_COMPLAINT_38.4M.pdf")
+        elif path == "/api/v1/forensics/download/federal-rico.docx":
+            data = load_case_ledger_data()
+            complaint = generate_federal_rico_complaint(data)
+            docx_bytes = generate_federal_rico_docx(complaint)
+            self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", docx_bytes, "FEDERAL_CIVIL_RICO_COMPLAINT_38.4M.docx")
+        elif path == "/api/v1/forensics/download/hawaii-filing-bundle.zip":
+            data = load_case_ledger_data()
+            packet = generate_hawaii_filing_packet(data)
+            zip_bytes = generate_hawaii_filing_bundle_zip(packet)
+            self._send_bytes(200, "application/zip", zip_bytes, "HAWAII_COURT_FILING_PACKET_AND_EXHIBITS_1FDV-23-0001009.zip")
+        elif path == "/api/v1/forensics/download/federal-rico-bundle.zip":
+            data = load_case_ledger_data()
+            complaint = generate_federal_rico_complaint(data)
+            zip_bytes = generate_federal_rico_bundle_zip(complaint)
+            self._send_bytes(200, "application/zip", zip_bytes, "FEDERAL_CIVIL_RICO_FILING_BUNDLE_38.4M.zip")
+        elif path == "/api/v1/forensics/estate/overview":
+            self._send_json(200, get_estate_overview() if get_estate_overview else {})
+        elif path == "/api/v1/forensics/estate/matters":
+            port = query.get("portfolio", [None])[0]
+            matters = get_estate_matters(port) if get_estate_matters else []
+            self._send_json(200, {"count": len(matters), "matters": matters})
+        elif path == "/api/v1/forensics/estate/actors":
+            actors = get_estate_actors() if get_estate_actors else []
+            self._send_json(200, {"count": len(actors), "actors": actors})
+        elif path == "/api/v1/forensics/estate/perjury-traps":
+            cid = query.get("case_id", [None])[0]
+            traps = get_estate_perjury_traps(cid) if get_estate_perjury_traps else []
+            self._send_json(200, {"count": len(traps), "traps": traps})
+        elif path == "/api/v1/forensics/estate/graph":
+            self._send_json(200, get_estate_graph() if get_estate_graph else {"nodes": [], "edges": []})
         else:
             self._send_json(404, {"error": f"Not Found: {path}"})
 
