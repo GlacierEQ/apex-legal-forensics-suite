@@ -125,6 +125,33 @@ except ImportError:
         get_estate_graph = None
 
 try:
+    from backend.app.persona_engine import (
+        get_estate_personas,
+        get_persona_detail,
+        get_execution_modes,
+        get_composite_presets,
+        get_persona_overview,
+        dispatch_persona_mission
+    )
+except ImportError:
+    try:
+        from persona_engine import (
+            get_estate_personas,
+            get_persona_detail,
+            get_execution_modes,
+            get_composite_presets,
+            get_persona_overview,
+            dispatch_persona_mission
+        )
+    except ImportError:
+        get_estate_personas = None
+        get_persona_detail = None
+        get_execution_modes = None
+        get_composite_presets = None
+        get_persona_overview = None
+        dispatch_persona_mission = None
+
+try:
     from fastapi import FastAPI, HTTPException, Depends, Response
     from fastapi.middleware.cors import CORSMiddleware
     HAS_FASTAPI = True
@@ -973,6 +1000,55 @@ def download_unpacked_file_route(folder: str, filename: str):
         headers={"Content-Disposition": f'attachment; filename="{filename}"'}
     )
 
+@app.get("/api/v1/forensics/estate/personas", tags=["Swarm Personas"])
+def get_personas_route(domain: Optional[str] = None):
+    if not get_estate_personas:
+        return {"error": "Persona engine unavailable"}
+    personas = get_estate_personas(domain)
+    return {"count": len(personas), "personas": personas}
+
+@app.get("/api/v1/forensics/estate/personas/overview", tags=["Swarm Personas"])
+def get_personas_overview_route():
+    if not get_persona_overview:
+        return {"error": "Persona engine unavailable"}
+    return get_persona_overview()
+
+@app.get("/api/v1/forensics/estate/personas/modes", tags=["Swarm Personas"])
+def get_personas_modes_route():
+    if not get_execution_modes:
+        return {"error": "Persona engine unavailable"}
+    return get_execution_modes()
+
+@app.get("/api/v1/forensics/estate/personas/composites", tags=["Swarm Personas"])
+def get_personas_composites_route():
+    if not get_composite_presets:
+        return {"error": "Persona engine unavailable"}
+    return get_composite_presets()
+
+@app.get("/api/v1/forensics/estate/persona/{persona_id}", tags=["Swarm Personas"])
+def get_persona_detail_route(persona_id: str):
+    if not get_persona_detail:
+        return {"error": "Persona engine unavailable"}
+    p = get_persona_detail(persona_id)
+    if not p:
+        raise HTTPException(status_code=404, detail="Persona not found")
+    return p
+
+class PersonaDispatchRequest(BaseModel):
+    persona_id: str
+    mission_objective: str
+    execution_mode: Optional[str] = "pro-elite"
+    parameters: Optional[Dict[str, Any]] = None
+
+@app.post("/api/v1/forensics/estate/personas/dispatch", tags=["Swarm Personas"])
+def dispatch_persona_route(req: PersonaDispatchRequest):
+    if not dispatch_persona_mission:
+        raise HTTPException(status_code=500, detail="Persona engine unavailable")
+    try:
+        return dispatch_persona_mission(req.persona_id, req.mission_objective, req.execution_mode or "pro-elite", req.parameters)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
 
@@ -1236,6 +1312,23 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
                     self._send_json(404, {"error": "File not found"})
             else:
                 self._send_json(400, {"error": "Invalid file path"})
+        elif path == "/api/v1/forensics/estate/personas":
+            dom = query.get("domain", [None])[0]
+            personas = get_estate_personas(dom) if get_estate_personas else []
+            self._send_json(200, {"count": len(personas), "personas": personas})
+        elif path == "/api/v1/forensics/estate/personas/overview":
+            self._send_json(200, get_persona_overview() if get_persona_overview else {})
+        elif path == "/api/v1/forensics/estate/personas/modes":
+            self._send_json(200, get_execution_modes() if get_execution_modes else {})
+        elif path == "/api/v1/forensics/estate/personas/composites":
+            self._send_json(200, get_composite_presets() if get_composite_presets else {})
+        elif path.startswith("/api/v1/forensics/estate/persona/"):
+            pid = path[len("/api/v1/forensics/estate/persona/"):]
+            p = get_persona_detail(pid) if get_persona_detail else None
+            if p:
+                self._send_json(200, p)
+            else:
+                self._send_json(404, {"error": f"Persona {pid} not found"})
         else:
             self._send_json(404, {"error": f"Not Found: {path}"})
 
@@ -1250,6 +1343,22 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
                 rec = IngestRecord(**data)
                 res = ingest_record(rec)
                 self._send_json(200, res.model_dump() if hasattr(res, "model_dump") else res.dict())
+            except Exception as e:
+                self._send_json(400, {"error": str(e)})
+        elif path == "/api/v1/forensics/estate/personas/dispatch":
+            content_len = int(self.headers.get("Content-Length", 0))
+            post_body = self.rfile.read(content_len)
+            try:
+                data = json.loads(post_body.decode("utf-8"))
+                pid = data.get("persona_id")
+                obj = data.get("mission_objective", "Execute task")
+                mode = data.get("execution_mode", "pro-elite")
+                params = data.get("parameters")
+                if not dispatch_persona_mission:
+                    self._send_json(500, {"error": "Persona engine unavailable"})
+                else:
+                    res = dispatch_persona_mission(pid, obj, mode, params)
+                    self._send_json(200, res)
             except Exception as e:
                 self._send_json(400, {"error": str(e)})
         else:

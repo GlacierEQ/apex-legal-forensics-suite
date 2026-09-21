@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'ethics' | 'mesh' | 'ingest' | 'capabilities' | 'vault'>('allegations');
+  const [activeTab, setActiveTab] = useState<'allegations' | 'contradictions' | 'motion' | 'rico' | 'ethics' | 'mesh' | 'ingest' | 'capabilities' | 'vault' | 'personas'>('allegations');
   const [allegations, setAllegations] = useState<any[]>([]);
   const [contradictions, setContradictions] = useState<any[]>([]);
   const [motion, setMotion] = useState<any>(null);
@@ -13,6 +13,16 @@ export default function Home() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
+
+  // Swarm Personas state
+  const [personas, setPersonas] = useState<any[]>([]);
+  const [personaFilter, setPersonaFilter] = useState<string>('ALL');
+  const [personaOverview, setPersonaOverview] = useState<any>(null);
+  const [dispatchPersona, setDispatchPersona] = useState<string>('adversarial_counsel');
+  const [dispatchMode, setDispatchMode] = useState<string>('pro-elite');
+  const [dispatchObjective, setDispatchObjective] = useState<string>('Execute verified forensic sweep and stress-test legal strike package');
+  const [dispatchResult, setDispatchResult] = useState<any>(null);
+  const [dispatchLoading, setDispatchLoading] = useState<boolean>(false);
 
   // Estate Capabilities & Vault state
   const [capabilities, setCapabilities] = useState<any[]>([]);
@@ -120,7 +130,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [ovRes, allegRes, contraRes, motionRes, hwRes, rcRes, emOvRes, emMattersRes, emActorsRes, emTrapsRes, capRes, strikeRes] = await Promise.all([
+        const [ovRes, allegRes, contraRes, motionRes, hwRes, rcRes, emOvRes, emMattersRes, emActorsRes, emTrapsRes, capRes, strikeRes, persRes, persOvRes] = await Promise.all([
           fetch('/api/v1/forensics/overview').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/allegations').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()).catch(() => null),
@@ -133,6 +143,8 @@ export default function Home() {
           fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()).catch(() => null),
           fetch('/api/v1/forensics/strikes/manifest').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/personas').then(r => r.json()).catch(() => null),
+          fetch('/api/v1/forensics/estate/personas/overview').then(r => r.json()).catch(() => null),
         ]);
         if (ovRes) setOverview(ovRes);
         if (allegRes?.allegations) setAllegations(allegRes.allegations);
@@ -146,6 +158,8 @@ export default function Home() {
         if (emTrapsRes?.traps) setEstateTraps(emTrapsRes.traps);
         if (capRes?.capabilities) setCapabilities(capRes.capabilities);
         if (strikeRes) setStrikeManifest(strikeRes);
+        if (persRes?.personas) setPersonas(persRes.personas);
+        if (persOvRes) setPersonaOverview(persOvRes);
       } catch (err) {
         console.error('Data fetch error:', err);
       } finally {
@@ -154,6 +168,29 @@ export default function Home() {
     };
     fetchData();
   }, []);
+
+  const handleDispatchPersona = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!dispatchObjective.trim()) return;
+    setDispatchLoading(true);
+    try {
+      const res = await fetch('/api/v1/forensics/estate/personas/dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          persona_id: dispatchPersona,
+          mission_objective: dispatchObjective,
+          execution_mode: dispatchMode
+        })
+      });
+      const data = await res.json();
+      setDispatchResult(data);
+    } catch (err) {
+      console.error('Dispatch error:', err);
+    } finally {
+      setDispatchLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10 font-sans text-gray-200">
@@ -384,6 +421,18 @@ export default function Home() {
         >
           <span>📁 Master Strike Vault</span>
           <span className="bg-emerald-400/20 text-emerald-300 text-xs px-2 py-0.5 rounded font-mono">26 Packets · 155 Files</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('personas')}
+          className={`px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
+            activeTab === 'personas'
+              ? 'bg-fuchsia-600 text-white shadow-lg shadow-fuchsia-600/30'
+              : 'bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+          }`}
+        >
+          <span>🎭 Swarm Personas</span>
+          <span className="bg-fuchsia-400/20 text-fuchsia-300 text-xs px-2 py-0.5 rounded font-mono">18 Elite Roles</span>
         </button>
       </nav>
 
@@ -1468,6 +1517,229 @@ export default function Home() {
                               <span className="text-[10px] text-gray-500">{(f.size_bytes / 1024).toFixed(1)} KB</span>
                             </div>
                           ))}
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </section>
+      )}
+
+      {/* TAB 10: SWARM PERSONAS */}
+      {activeTab === 'personas' && (
+        <section className="space-y-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-lg">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-mono font-bold bg-fuchsia-950 text-fuchsia-400 border border-fuchsia-800/50 px-2 py-0.5 rounded">
+                  HOLOGRAPHIC MESH DOCTRINE
+                </span>
+                <span className="text-xs font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800/50 px-2 py-0.5 rounded">
+                  L0-L5 ZERO FAKE TRUTH
+                </span>
+                <span className="text-xs font-mono font-bold bg-blue-950 text-blue-400 border border-blue-800/50 px-2 py-0.5 rounded">
+                  FRE/HRE 601/602 PRIMACY
+                </span>
+              </div>
+              <h2 className="text-xl font-black text-white tracking-tight">APEX Holographic Mesh Swarm Personas</h2>
+              <p className="text-xs text-gray-400 mt-1">
+                18 Hardened, autonomous specialist worker personas operationalizing AGENTS.md §6.2, apex-execution-modes, and subagent orchestration contracts.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-4 bg-gray-950 border border-gray-800 rounded-lg px-4 py-2 font-mono text-xs">
+              <div>
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Consensus</div>
+                <div className="text-emerald-400 font-bold">{personas.length || 18} Active Roles</div>
+              </div>
+              <div className="w-px h-6 bg-gray-800"></div>
+              <div>
+                <div className="text-[10px] text-gray-500 uppercase font-bold">Vocabulary</div>
+                <div className="text-amber-400 font-bold">elite · pro · Hard · G</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Domain Filter Pills */}
+          <div className="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+            <div className="flex flex-wrap gap-2">
+              {['ALL', 'Legal Warfare', 'Evidentiary Forensics', 'Technical Architecture', 'Verification & Integrity', 'Mesh Swarm'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setPersonaFilter(cat)}
+                  className={`px-3 py-1 text-xs font-bold rounded transition ${
+                    personaFilter === cat
+                      ? 'bg-fuchsia-600 text-white'
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {cat === 'ALL' ? `All (${personas.length || 18})` : cat}
+                </button>
+              ))}
+            </div>
+            <div className="text-xs font-mono text-gray-400 flex items-center gap-2">
+              <span className="text-fuchsia-400 font-bold">Subagent:</span>
+              <code className="bg-black/40 px-2 py-0.5 rounded text-gray-300">invoke_subagent(persona_id)</code>
+            </div>
+          </div>
+
+          {/* Autonomous Persona Mission Dispatcher Console */}
+          <div className="bg-gray-900 border border-fuchsia-900/40 rounded-xl p-5 shadow-xl">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-bold text-white font-mono flex items-center gap-2">
+                <span>⚡ Autonomous Persona Mission Dispatcher</span>
+                <span className="text-[10px] bg-fuchsia-950 text-fuchsia-300 border border-fuchsia-800 px-2 py-0.5 rounded">DIRECT DELEGATION</span>
+              </h3>
+              <span className="text-xs text-gray-400 font-mono">POST /api/v1/forensics/estate/personas/dispatch</span>
+            </div>
+
+            <form onSubmit={handleDispatchPersona} className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+              <div>
+                <label className="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Target Specialist</label>
+                <select
+                  value={dispatchPersona}
+                  onChange={(e) => setDispatchPersona(e.target.value)}
+                  className="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-fuchsia-500"
+                >
+                  {(personas.length ? personas : [
+                    { id: 'adversarial_counsel', name: 'Adversarial Legal Counsel', callsign: 'REDTEAM-LEGAL-VIPER' },
+                    { id: 'case_forensics_specialist', name: 'Case Forensics Specialist', callsign: 'CHRONO-FORENSIC-HAWK' },
+                    { id: 'evidence_authenticator', name: 'Evidence Authenticator', callsign: 'CHAIN-OF-CUSTODY-SHIELD' },
+                    { id: 'brief_architect', name: 'Brief Architect', callsign: 'TITAN-PLEADING-ENGINE' },
+                    { id: 'legal_research_agent', name: 'Legal Research Agent', callsign: 'LEX-QUANTUM-CODEX' },
+                    { id: 'contradiction_hunter', name: 'Contradiction Hunter', callsign: 'PERJURY-TRAP-INTERCEPTOR' },
+                    { id: 'citation_verifier', name: 'Citation Verifier', callsign: 'SHEPARD-INTEGRITY-GATE' },
+                    { id: 'procedural_strategist', name: 'Procedural Strategist', callsign: 'GRANDMASTER-TACTICIAN' },
+                    { id: 'systems_architect', name: 'Systems Architect', callsign: 'HOLOGRAPHIC-MESH-ARCHITECT' },
+                    { id: 'implementation_engineer', name: 'Implementation Engineer', callsign: 'PRO-CODE-FOUNDRY' },
+                    { id: 'reliability_engineer', name: 'Reliability Engineer', callsign: 'AEGIS-RESILIENCE-SENTRY' },
+                    { id: 'performance_engineer', name: 'Performance Engineer', callsign: 'TURBO-LATENCY-STRIKER' },
+                    { id: 'repository_cartographer', name: 'Repository Cartographer', callsign: 'TERRA-ESTATE-EXPLORER' },
+                    { id: 'capability_miner', name: 'Capability Miner', callsign: 'FORGE-MECHANISM-HARVESTER' },
+                    { id: 'connector_broker', name: 'Connector Broker', callsign: 'SMITHERY-NEXUS-GATEWAY' },
+                    { id: 'red_team_auditor', name: 'Red Team Auditor', callsign: 'CYBER-INTEGRITY-INQUISITOR' },
+                    { id: 'holographic_mesh_coordinator', name: 'Holographic Mesh Coordinator', callsign: 'SWARM-ORCHESTRATION-NEXUS' },
+                    { id: 'zero_hallucination_gate', name: 'Zero-Hallucination Gate', callsign: 'EPISTEMIC-TRUTH-ENFORCER' }
+                  ]).map((p: any) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name} ({p.callsign})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Execution Posture</label>
+                <select
+                  value={dispatchMode}
+                  onChange={(e) => setDispatchMode(e.target.value)}
+                  className="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-fuchsia-500"
+                >
+                  <option value="pro-elite">Pro-Elite (Strongest Composition + Zero-Hallucination Gate)</option>
+                  <option value="deep-swarm">Deep-Swarm (Diamond Topography + Spiral Engine)</option>
+                  <option value="omni-swarm-lifetime">Omni-Swarm Lifetime (Dynamic Parallel DAG)</option>
+                  <option value="conservative">Conservative (Per-Step Verification, Rollback-Safe)</option>
+                  <option value="aggressive">Aggressive (Maximum Parallel Throughput)</option>
+                  <option value="autonomous">Autonomous (Self-Directed with Checkpoints)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Mission Directive</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={dispatchObjective}
+                    onChange={(e) => setDispatchObjective(e.target.value)}
+                    placeholder="Enter mission objective..."
+                    className="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-fuchsia-500"
+                  />
+                  <button
+                    type="submit"
+                    disabled={dispatchLoading}
+                    className="bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold px-4 py-2 rounded-lg text-xs font-mono transition flex items-center gap-1 shadow-lg shadow-fuchsia-600/30 whitespace-nowrap disabled:opacity-50"
+                  >
+                    {dispatchLoading ? <span>⏳ Dispatching...</span> : <span>⚡ Dispatch</span>}
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            {dispatchResult && (
+              <div className="bg-gray-950 border border-emerald-900/60 rounded-lg p-4 font-mono text-xs mt-3">
+                <div className="flex justify-between items-center text-emerald-400 font-bold border-b border-gray-800 pb-1 mb-2">
+                  <span>DISPATCH CONFIRMED: {dispatchResult.dispatch_id}</span>
+                  <span className="bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded text-[10px]">
+                    {dispatchResult.receipt?.verification_status}
+                  </span>
+                </div>
+                <div className="text-white font-bold mb-1">
+                  {dispatchResult.persona?.name} ({dispatchResult.persona?.callsign}) · Mode: {dispatchResult.execution_mode?.mode}
+                </div>
+                <div className="text-gray-300 mb-2 font-mono text-[11px]">{dispatchResult.mission_objective}</div>
+                <div className="text-gray-400 space-y-0.5 text-[10px]">
+                  {dispatchResult.directives?.map((d: string, i: number) => (
+                    <div key={i}>✓ {d}</div>
+                  ))}
+                </div>
+                <div className="mt-2 text-[9px] text-gray-500 truncate">RECEIPT SHA: {dispatchResult.receipt?.sha256}</div>
+              </div>
+            )}
+          </div>
+
+          {/* Persona Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {personas
+              .filter((p: any) => personaFilter === 'ALL' || (p.category || '').toLowerCase() === personaFilter.toLowerCase())
+              .map((p: any) => {
+                const cat = p.category || 'Swarm';
+                const isLegal = cat === 'Legal Warfare';
+                const isForensics = cat === 'Evidentiary Forensics';
+                const isArch = cat === 'Technical Architecture';
+                const isVerify = cat === 'Verification & Integrity';
+                const badgeClass =
+                  isLegal ? 'bg-rose-950 text-rose-300 border-rose-800/60' :
+                  isForensics ? 'bg-amber-950 text-amber-300 border-amber-800/60' :
+                  isArch ? 'bg-cyan-950 text-cyan-300 border-cyan-800/60' :
+                  isVerify ? 'bg-emerald-950 text-emerald-300 border-emerald-800/60' :
+                  'bg-fuchsia-950 text-fuchsia-300 border-fuchsia-800/60';
+
+                return (
+                  <div key={p.id} className="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-fuchsia-800/60 transition flex flex-col justify-between shadow-md">
+                    <div>
+                      <div className="flex justify-between items-start gap-2 mb-2">
+                        <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${badgeClass}`}>
+                          {cat}
+                        </span>
+                        <span className="text-[10px] font-mono font-bold bg-fuchsia-950 text-fuchsia-300 border border-fuchsia-800/40 px-2 py-0.5 rounded">
+                          {p.tier}
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-black text-gray-100">{p.name}</h4>
+                      <div className="text-[11px] text-fuchsia-400 font-mono mt-0.5 truncate">{p.callsign}</div>
+                      <p className="text-xs text-gray-300 mt-2 line-clamp-3">{p.description}</p>
+
+                      <div className="mt-3 pt-2 border-t border-gray-800">
+                        <div className="text-[9px] uppercase font-bold text-gray-500 mb-1">Key Weapons & Tactics:</div>
+                        <ul className="text-[11px] font-mono text-gray-400 space-y-0.5">
+                          {p.key_weapons?.slice(0, 3).map((w: string, wi: number) => (
+                            <li key={wi} className="truncate">• {w}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mt-2 text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/30 px-2 py-1 rounded">
+                        <strong>Gate:</strong> {p.verification_gate}
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-gray-800/80">
+                      <details className="text-[11px] font-mono text-gray-400">
+                        <summary className="cursor-pointer text-fuchsia-400 hover:text-fuchsia-200 py-1">View Full System Prompt</summary>
+                        <div className="mt-2 bg-gray-950 border border-gray-800 p-2.5 rounded text-[10px] text-gray-300 whitespace-pre-wrap max-h-48 overflow-y-auto">
+                          {p.system_prompt}
                         </div>
                       </details>
                     </div>

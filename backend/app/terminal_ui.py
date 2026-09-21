@@ -161,6 +161,11 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         <span>📁 Master Strike Vault</span>
         <span class="bg-emerald-400/20 text-emerald-300 text-xs px-2 py-0.5 rounded font-mono">26 Packets · 155 Files</span>
       </button>
+
+      <button onclick="switchTab('personas')" id="tab-btn-personas" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>🎭 Swarm Personas</span>
+        <span class="bg-fuchsia-400/20 text-fuchsia-300 text-xs px-2 py-0.5 rounded font-mono">18 Elite Roles</span>
+      </button>
     </nav>
 
     <!-- TAB 1: ALLEGATIONS -->
@@ -753,6 +758,120 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       <!-- Strike Packages Grid -->
       <div id="strikeVaultContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
+
+    <!-- TAB 10: SWARM PERSONAS -->
+    <div id="tab-personas" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-lg">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-mono font-bold bg-fuchsia-950 text-fuchsia-400 border border-fuchsia-800/50 px-2 py-0.5 rounded">
+              HOLOGRAPHIC MESH DOCTRINE
+            </span>
+            <span class="text-xs font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800/50 px-2 py-0.5 rounded">
+              L0-L5 ZERO FAKE TRUTH
+            </span>
+            <span class="text-xs font-mono font-bold bg-blue-950 text-blue-400 border border-blue-800/50 px-2 py-0.5 rounded">
+              FRE/HRE 601/602 PRIMACY
+            </span>
+          </div>
+          <h2 class="text-xl font-black text-white tracking-tight">APEX Holographic Mesh Swarm Personas</h2>
+          <p class="text-xs text-gray-400 mt-1">
+            18 Hardened, autonomous specialist worker personas operationalizing AGENTS.md §6.2, apex-execution-modes, and subagent orchestration contracts.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-4 bg-gray-950 border border-gray-800 rounded-lg px-4 py-2 font-mono text-xs">
+          <div>
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Consensus</div>
+            <div class="text-emerald-400 font-bold">18/18 Active</div>
+          </div>
+          <div class="w-px h-6 bg-gray-800"></div>
+          <div>
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Vocabulary</div>
+            <div class="text-amber-400 font-bold">elite · pro · Hard · G</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain Filters & Dispatch Launcher -->
+      <div class="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterPersonas('ALL')" id="persona-btn-all" class="px-3 py-1 text-xs font-bold rounded bg-fuchsia-600 text-white">All 18 Personas</button>
+          <button onclick="filterPersonas('Legal Warfare')" id="persona-btn-legal" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Legal Warfare (5)</button>
+          <button onclick="filterPersonas('Evidentiary Forensics')" id="persona-btn-forensics" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Evidentiary Forensics (3)</button>
+          <button onclick="filterPersonas('Technical Architecture')" id="persona-btn-arch" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Technical Architecture (4)</button>
+          <button onclick="filterPersonas('Verification & Integrity')" id="persona-btn-verify" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Verification & Integrity (2)</button>
+          <button onclick="filterPersonas('Mesh Swarm')" id="persona-btn-swarm" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mesh Swarm (4)</button>
+        </div>
+        <div class="text-xs font-mono text-gray-400 flex items-center gap-2">
+          <span class="text-fuchsia-400 font-bold">Subagent:</span>
+          <code class="bg-black/40 px-2 py-0.5 rounded text-gray-300">invoke_subagent(persona_id)</code>
+        </div>
+      </div>
+
+      <!-- Live Mission Dispatch Console -->
+      <div class="bg-gray-900 border border-fuchsia-900/40 rounded-xl p-5 shadow-xl">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-sm font-bold text-white font-mono flex items-center gap-2">
+            <span>⚡ Autonomous Persona Mission Dispatcher</span>
+            <span class="text-[10px] bg-fuchsia-950 text-fuchsia-300 border border-fuchsia-800 px-2 py-0.5 rounded">DIRECT DELEGATION</span>
+          </h3>
+          <span class="text-xs text-gray-400 font-mono">POST /api/v1/forensics/estate/personas/dispatch</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Target Specialist</label>
+            <select id="dispatchPersonaSelect" class="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-fuchsia-500">
+              <option value="adversarial_counsel">Adversarial Legal Counsel (REDTEAM-LEGAL-VIPER)</option>
+              <option value="case_forensics_specialist">Case Forensics Specialist (CHRONO-FORENSIC-HAWK)</option>
+              <option value="evidence_authenticator">Evidence Authenticator (CHAIN-OF-CUSTODY-SHIELD)</option>
+              <option value="brief_architect">Brief Architect (TITAN-PLEADING-ENGINE)</option>
+              <option value="legal_research_agent">Legal Research Agent (LEX-QUANTUM-CODEX)</option>
+              <option value="contradiction_hunter">Contradiction Hunter (PERJURY-TRAP-INTERCEPTOR)</option>
+              <option value="citation_verifier">Citation Verifier (SHEPARD-INTEGRITY-GATE)</option>
+              <option value="procedural_strategist">Procedural Strategist (GRANDMASTER-TACTICIAN)</option>
+              <option value="systems_architect">Systems Architect (HOLOGRAPHIC-MESH-ARCHITECT)</option>
+              <option value="implementation_engineer">Implementation Engineer (PRO-CODE-FOUNDRY)</option>
+              <option value="reliability_engineer">Reliability Engineer (AEGIS-RESILIENCE-SENTRY)</option>
+              <option value="performance_engineer">Performance Engineer (TURBO-LATENCY-STRIKER)</option>
+              <option value="repository_cartographer">Repository Cartographer (TERRA-ESTATE-EXPLORER)</option>
+              <option value="capability_miner">Capability Miner (FORGE-MECHANISM-HARVESTER)</option>
+              <option value="connector_broker">Connector Broker (SMITHERY-NEXUS-GATEWAY)</option>
+              <option value="red_team_auditor">Red Team Auditor (CYBER-INTEGRITY-INQUISITOR)</option>
+              <option value="holographic_mesh_coordinator">Holographic Mesh Coordinator (SWARM-ORCHESTRATION-NEXUS)</option>
+              <option value="zero_hallucination_gate">Zero-Hallucination Gate (EPISTEMIC-TRUTH-ENFORCER)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Execution Posture</label>
+            <select id="dispatchModeSelect" class="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-fuchsia-500">
+              <option value="pro-elite">Pro-Elite (Strongest Composition + Zero-Hallucination Gate)</option>
+              <option value="deep-swarm">Deep-Swarm (Diamond Topography + Spiral Engine)</option>
+              <option value="omni-swarm-lifetime">Omni-Swarm Lifetime (Dynamic Parallel DAG)</option>
+              <option value="conservative">Conservative (Per-Step Verification, Rollback-Safe)</option>
+              <option value="aggressive">Aggressive (Maximum Parallel Throughput)</option>
+              <option value="autonomous">Autonomous (Self-Directed with Checkpoints)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Mission Directive</label>
+            <div class="flex gap-2">
+              <input id="dispatchObjectiveInput" type="text" placeholder="e.g. 'Audit 28-line RICO complaint for Brower perjury traps'" class="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-fuchsia-500" value="Execute verified forensic sweep and stress-test legal strike package" />
+              <button onclick="dispatchPersonaMissionTerminal()" id="dispatchSubmitBtn" class="bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold px-4 py-2 rounded-lg text-xs font-mono transition flex items-center gap-1 shadow-lg shadow-fuchsia-600/30 whitespace-nowrap">
+                <span>⚡ Dispatch</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="dispatchReceiptPanel" class="hidden bg-gray-950 border border-emerald-900/60 rounded-lg p-4 font-mono text-xs">
+          <!-- Populated by JS on dispatch -->
+        </div>
+      </div>
+
+      <!-- Personas Grid -->
+      <div id="personasGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
   </div>
 
   <script>
@@ -765,10 +884,11 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     let ESTATE_TRAPS = [];
     let CAPABILITIES = [];
     let STRIKE_MANIFEST = null;
+    let PERSONAS = [];
 
     async function init() {{
       try {{
-        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes] = await Promise.all([
+        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes, persRes] = await Promise.all([
           fetch('/api/v1/forensics/allegations').then(r => r.json()),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()),
           fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()),
@@ -777,7 +897,8 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           fetch('/api/v1/forensics/estate/actors').then(r => r.json()),
           fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()),
           fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()),
-          fetch('/api/v1/forensics/strikes/manifest').then(r => r.json())
+          fetch('/api/v1/forensics/strikes/manifest').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/personas').then(r => r.json())
         ]);
         ALLEGATIONS = alRes.allegations || [];
         CONTRADICTIONS = coRes.contradictions || [];
@@ -788,6 +909,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         ESTATE_TRAPS = emTraps.traps || [];
         CAPABILITIES = capRes.capabilities || [];
         STRIKE_MANIFEST = strikeRes;
+        PERSONAS = persRes.personas || [];
 
         renderAllegations(ALLEGATIONS);
         renderContradictions(CONTRADICTIONS);
@@ -796,6 +918,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         renderEstateTraps(ESTATE_TRAPS);
         renderCapabilities(CAPABILITIES);
         renderStrikeVault(STRIKE_MANIFEST);
+        renderPersonas(PERSONAS);
 
         if (HAWAII_PACKET?.formatted_28_lines) {{
           document.getElementById('hawaiiPleadingPaperPre').textContent = HAWAII_PACKET.formatted_28_lines;
@@ -961,7 +1084,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     }}
 
     function switchTab(tab) {{
-      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault'].forEach(t => {{
+      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault', 'personas'].forEach(t => {{
         const btn = document.getElementById('tab-btn-' + t);
         const panel = document.getElementById('tab-' + t);
         if (t === tab) {{
@@ -972,6 +1095,135 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           panel.classList.add('hidden');
         }}
       }});
+    }}
+
+    function renderPersonas(items) {{
+      const container = document.getElementById('personasGridContainer');
+      if (!container) return;
+      if (!items || items.length === 0) {{
+        container.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500 font-mono text-xs">No personas match selected domain filter.</div>';
+        return;
+      }}
+      container.innerHTML = items.map(p => {{
+        const cat = p.category || 'Swarm';
+        const isLegal = cat === 'Legal Warfare';
+        const isForensics = cat === 'Evidentiary Forensics';
+        const isArch = cat === 'Technical Architecture';
+        const isVerify = cat === 'Verification & Integrity';
+        const badgeClass = 
+          isLegal ? 'bg-rose-950 text-rose-300 border-rose-800/60' :
+          isForensics ? 'bg-amber-950 text-amber-300 border-amber-800/60' :
+          isArch ? 'bg-cyan-950 text-cyan-300 border-cyan-800/60' :
+          isVerify ? 'bg-emerald-950 text-emerald-300 border-emerald-800/60' :
+          'bg-fuchsia-950 text-fuchsia-300 border-fuchsia-800/60';
+
+        return `
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-fuchsia-800/60 transition flex flex-col justify-between shadow-md">
+            <div>
+              <div class="flex justify-between items-start gap-2 mb-2">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${{badgeClass}}">
+                  ${{cat}}
+                </span>
+                <span class="text-[10px] font-mono font-bold bg-fuchsia-950 text-fuchsia-300 border border-fuchsia-800/40 px-2 py-0.5 rounded">
+                  ${{p.tier}}
+                </span>
+              </div>
+              <h4 class="text-sm font-black text-gray-100">${{p.name}}</h4>
+              <div class="text-[11px] text-fuchsia-400 font-mono mt-0.5 truncate">${{p.callsign}}</div>
+              <p class="text-xs text-gray-300 mt-2 line-clamp-3">${{p.description}}</p>
+
+              <!-- Key Weapons -->
+              <div class="mt-3 pt-2 border-t border-gray-800">
+                <div class="text-[9px] uppercase font-bold text-gray-500 mb-1">Key Weapons & Tactics:</div>
+                <ul class="text-[11px] font-mono text-gray-400 space-y-0.5">
+                  ${{p.key_weapons.slice(0, 3).map(w => `<li class="truncate">• ${{w}}</li>`).join('')}}
+                </ul>
+              </div>
+
+              <!-- Verification Gate -->
+              <div class="mt-2 text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/30 px-2 py-1 rounded">
+                <strong>Gate:</strong> ${{p.verification_gate}}
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-gray-800/80">
+              <details class="text-[11px] font-mono text-gray-400">
+                <summary class="cursor-pointer text-fuchsia-400 hover:text-fuchsia-200 py-1">View Full System Prompt</summary>
+                <div class="mt-2 bg-gray-950 border border-gray-800 p-2.5 rounded text-[10px] text-gray-300 whitespace-pre-wrap max-h-48 overflow-y-auto">
+                  ${{p.system_prompt}}
+                </div>
+              </details>
+            </div>
+          </div>
+        `;
+      }}).join('');
+    }}
+
+    function filterPersonas(category) {{
+      ['all', 'legal', 'forensics', 'arch', 'verify', 'swarm'].forEach(b => {{
+        const btn = document.getElementById('persona-btn-' + b);
+        if (btn) btn.className = 'px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white';
+      }});
+
+      const keyMap = {{
+        'ALL': 'all',
+        'Legal Warfare': 'legal',
+        'Evidentiary Forensics': 'forensics',
+        'Technical Architecture': 'arch',
+        'Verification & Integrity': 'verify',
+        'Mesh Swarm': 'swarm'
+      }};
+      const activeBtn = document.getElementById('persona-btn-' + (keyMap[category] || 'all'));
+      if (activeBtn) activeBtn.className = 'px-3 py-1 text-xs font-bold rounded bg-fuchsia-600 text-white';
+
+      if (category === 'ALL') {{
+        renderPersonas(PERSONAS);
+      }} else {{
+        renderPersonas(PERSONAS.filter(p => (p.category || '').toLowerCase() === category.toLowerCase()));
+      }}
+    }}
+
+    async function dispatchPersonaMissionTerminal() {{
+      const personaId = document.getElementById('dispatchPersonaSelect').value;
+      const executionMode = document.getElementById('dispatchModeSelect').value;
+      const objective = document.getElementById('dispatchObjectiveInput').value.trim();
+      if (!objective) return;
+
+      const btn = document.getElementById('dispatchSubmitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Dispatching...</span>';
+
+      const panel = document.getElementById('dispatchReceiptPanel');
+      try {{
+        const res = await fetch('/api/v1/forensics/estate/personas/dispatch', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify({{
+            persona_id: personaId,
+            mission_objective: objective,
+            execution_mode: executionMode
+          }})
+        }});
+        const data = await res.json();
+        panel.classList.remove('hidden');
+        panel.innerHTML = `
+          <div class="flex justify-between items-center text-emerald-400 font-bold border-b border-gray-800 pb-1 mb-2">
+            <span>DISPATCH CONFIRMED: ${{data.dispatch_id}}</span>
+            <span class="bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded text-[10px]">${{data.receipt.verification_status}}</span>
+          </div>
+          <div class="text-white font-bold mb-1">${{data.persona.name}} (${{data.persona.callsign}}) · Mode: ${{data.execution_mode.mode}}</div>
+          <div class="text-gray-300 mb-2 font-mono text-[11px]">${{data.mission_objective}}</div>
+          <div class="text-gray-400 space-y-0.5 text-[10px]">
+            ${{data.directives.map(d => `<div>✓ ${{d}}</div>`).join('')}}
+          </div>
+          <div class="mt-2 text-[9px] text-gray-500 truncate">RECEIPT SHA: ${{data.receipt.sha256}}</div>
+        `;
+      }} catch (err) {{
+        alert('Mission dispatch error');
+      }} finally {{
+        btn.disabled = false;
+        btn.innerHTML = '<span>⚡ Dispatch</span>';
+      }}
     }}
 
     function renderCapabilities(items) {{
