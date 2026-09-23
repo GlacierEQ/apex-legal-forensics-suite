@@ -152,6 +152,39 @@ except ImportError:
         dispatch_persona_mission = None
 
 try:
+    from backend.app.deposition_crucible_engine import (
+        get_deposition_crucible_overview,
+        get_target_crucible_plan,
+        simulate_interrogation_turn,
+        generate_master_crucible_text,
+        generate_master_crucible_pdf,
+        generate_master_crucible_docx,
+        generate_master_crucible_bundle_zip,
+        TARGET_CRUCIBLE_PROFILES
+    )
+except ImportError:
+    try:
+        from deposition_crucible_engine import (
+            get_deposition_crucible_overview,
+            get_target_crucible_plan,
+            simulate_interrogation_turn,
+            generate_master_crucible_text,
+            generate_master_crucible_pdf,
+            generate_master_crucible_docx,
+            generate_master_crucible_bundle_zip,
+            TARGET_CRUCIBLE_PROFILES
+        )
+    except ImportError:
+        get_deposition_crucible_overview = None
+        get_target_crucible_plan = None
+        simulate_interrogation_turn = None
+        generate_master_crucible_text = None
+        generate_master_crucible_pdf = None
+        generate_master_crucible_docx = None
+        generate_master_crucible_bundle_zip = None
+        TARGET_CRUCIBLE_PROFILES = {}
+
+try:
     from fastapi import FastAPI, HTTPException, Depends, Response
     from fastapi.middleware.cors import CORSMiddleware
     HAS_FASTAPI = True
@@ -1049,6 +1082,81 @@ def dispatch_persona_route(req: PersonaDispatchRequest):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+# ==============================================================================
+# DEPOSITION PERJURY CRUCIBLE ROUTES (DRILL ALPHA)
+# ==============================================================================
+
+@app.get("/api/v1/forensics/estate/deposition-crucible", tags=["Deposition Crucible"])
+def get_deposition_crucible_route():
+    if not get_deposition_crucible_overview:
+        return {"error": "Crucible engine unavailable"}
+    return get_deposition_crucible_overview()
+
+@app.get("/api/v1/forensics/estate/deposition-crucible/targets", tags=["Deposition Crucible"])
+def get_deposition_targets_route():
+    if not TARGET_CRUCIBLE_PROFILES:
+        return {"targets": []}
+    return {
+        "count": len(TARGET_CRUCIBLE_PROFILES),
+        "targets": list(TARGET_CRUCIBLE_PROFILES.values())
+    }
+
+@app.get("/api/v1/forensics/estate/deposition-crucible/target/{target_id}", tags=["Deposition Crucible"])
+def get_deposition_target_plan_route(target_id: str):
+    if not get_target_crucible_plan:
+        raise HTTPException(status_code=500, detail="Crucible engine unavailable")
+    res = get_target_crucible_plan(target_id)
+    if not res:
+        raise HTTPException(status_code=404, detail=f"Target {target_id} not found")
+    return res
+
+@app.get("/api/v1/forensics/estate/deposition-crucible/download/pdf", tags=["Deposition Crucible"])
+def download_deposition_crucible_pdf():
+    if not generate_master_crucible_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    pdf_bytes = generate_master_crucible_pdf()
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=MASTER_DEPOSITION_PERJURY_CRUCIBLE_28LINE.pdf"}
+    )
+
+@app.get("/api/v1/forensics/estate/deposition-crucible/download/docx", tags=["Deposition Crucible"])
+def download_deposition_crucible_docx():
+    if not generate_master_crucible_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    docx_bytes = generate_master_crucible_docx()
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=MASTER_DEPOSITION_PERJURY_CRUCIBLE.docx"}
+    )
+
+@app.get("/api/v1/forensics/estate/deposition-crucible/download/zip", tags=["Deposition Crucible"])
+def download_deposition_crucible_zip():
+    if not generate_master_crucible_bundle_zip:
+        raise HTTPException(status_code=500, detail="ZIP generator unavailable")
+    zip_bytes = generate_master_crucible_bundle_zip()
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=MASTER_DEPOSITION_PERJURY_CRUCIBLE_BUNDLE.zip"}
+    )
+
+class CrucibleSimulateRequest(BaseModel):
+    target_id: str
+    question_id: str
+    witness_statement: str
+
+@app.post("/api/v1/forensics/estate/deposition-crucible/simulate", tags=["Deposition Crucible"])
+def simulate_crucible_route(req: CrucibleSimulateRequest):
+    if not simulate_interrogation_turn:
+        raise HTTPException(status_code=500, detail="Crucible simulator unavailable")
+    res = simulate_interrogation_turn(req.target_id, req.question_id, req.witness_statement)
+    if "error" in res:
+        raise HTTPException(status_code=400, detail=res["error"])
+    return res
+
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
 
@@ -1329,6 +1437,35 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
                 self._send_json(200, p)
             else:
                 self._send_json(404, {"error": f"Persona {pid} not found"})
+        elif path == "/api/v1/forensics/estate/deposition-crucible":
+            self._send_json(200, get_deposition_crucible_overview() if get_deposition_crucible_overview else {})
+        elif path == "/api/v1/forensics/estate/deposition-crucible/targets":
+            self._send_json(200, {
+                "count": len(TARGET_CRUCIBLE_PROFILES) if TARGET_CRUCIBLE_PROFILES else 0,
+                "targets": list(TARGET_CRUCIBLE_PROFILES.values()) if TARGET_CRUCIBLE_PROFILES else []
+            })
+        elif path.startswith("/api/v1/forensics/estate/deposition-crucible/target/"):
+            tid = path[len("/api/v1/forensics/estate/deposition-crucible/target/"):]
+            plan = get_target_crucible_plan(tid) if get_target_crucible_plan else None
+            if plan:
+                self._send_json(200, plan)
+            else:
+                self._send_json(404, {"error": f"Target {tid} not found"})
+        elif path == "/api/v1/forensics/estate/deposition-crucible/download/pdf":
+            if not generate_master_crucible_pdf:
+                self._send_json(500, {"error": "PDF generator unavailable"})
+            else:
+                self._send_bytes(200, "application/pdf", generate_master_crucible_pdf(), "MASTER_DEPOSITION_PERJURY_CRUCIBLE_28LINE.pdf")
+        elif path == "/api/v1/forensics/estate/deposition-crucible/download/docx":
+            if not generate_master_crucible_docx:
+                self._send_json(500, {"error": "DOCX generator unavailable"})
+            else:
+                self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", generate_master_crucible_docx(), "MASTER_DEPOSITION_PERJURY_CRUCIBLE.docx")
+        elif path == "/api/v1/forensics/estate/deposition-crucible/download/zip":
+            if not generate_master_crucible_bundle_zip:
+                self._send_json(500, {"error": "ZIP generator unavailable"})
+            else:
+                self._send_bytes(200, "application/zip", generate_master_crucible_bundle_zip(), "MASTER_DEPOSITION_PERJURY_CRUCIBLE_BUNDLE.zip")
         else:
             self._send_json(404, {"error": f"Not Found: {path}"})
 
@@ -1359,6 +1496,24 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
                 else:
                     res = dispatch_persona_mission(pid, obj, mode, params)
                     self._send_json(200, res)
+            except Exception as e:
+                self._send_json(400, {"error": str(e)})
+        elif path == "/api/v1/forensics/estate/deposition-crucible/simulate":
+            content_len = int(self.headers.get("Content-Length", 0))
+            post_body = self.rfile.read(content_len)
+            try:
+                data = json.loads(post_body.decode("utf-8"))
+                tid = data.get("target_id")
+                qid = data.get("question_id")
+                stmt = data.get("witness_statement", "")
+                if not simulate_interrogation_turn:
+                    self._send_json(500, {"error": "Simulator unavailable"})
+                else:
+                    res = simulate_interrogation_turn(tid, qid, stmt)
+                    if "error" in res:
+                        self._send_json(400, res)
+                    else:
+                        self._send_json(200, res)
             except Exception as e:
                 self._send_json(400, {"error": str(e)})
         else:

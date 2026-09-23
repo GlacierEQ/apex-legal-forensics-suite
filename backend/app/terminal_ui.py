@@ -166,6 +166,11 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         <span>🎭 Swarm Personas</span>
         <span class="bg-fuchsia-400/20 text-fuchsia-300 text-xs px-2 py-0.5 rounded font-mono">18 Elite Roles</span>
       </button>
+
+      <button onclick="switchTab('crucible')" id="tab-btn-crucible" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>⚔️ Deposition Crucible</span>
+        <span class="bg-red-500/20 text-red-300 text-xs px-2 py-0.5 rounded font-mono">71 Traps · 5 Targets</span>
+      </button>
     </nav>
 
     <!-- TAB 1: ALLEGATIONS -->
@@ -872,6 +877,129 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       <!-- Personas Grid -->
       <div id="personasGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
+
+    <!-- TAB 11: DEPOSITION CRUCIBLE -->
+    <div id="tab-crucible" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>⚔️ Deposition Cross-Examination & Perjury Trap Crucible</span>
+            <span class="bg-red-950 text-red-400 border border-red-800/60 text-xs px-2.5 py-0.5 rounded-full font-mono">L0–L5 Holographic Mesh</span>
+          </h2>
+          <p class="text-xs text-gray-400 mt-1">Inescapable two-pronged perjury traps anchored to immutable byte-verified evidence under FRE 601/602 & HRE 601/602.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <a href="/api/v1/forensics/estate/deposition-crucible/download/pdf" download class="bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-xs font-bold py-2 px-3 rounded-lg flex items-center gap-1.5 transition font-mono">
+            <span>📄 Download PDF Binder</span>
+          </a>
+          <a href="/api/v1/forensics/estate/deposition-crucible/download/docx" download class="bg-blue-950/80 hover:bg-blue-800 text-blue-200 border border-blue-800/60 text-xs font-bold py-2 px-3 rounded-lg flex items-center gap-1.5 transition font-mono">
+            <span>📝 Download DOCX Outline</span>
+          </a>
+          <a href="/api/v1/forensics/estate/deposition-crucible/download/zip" download class="bg-emerald-950/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-800/60 text-xs font-bold py-2 px-3 rounded-lg flex items-center gap-1.5 transition font-mono">
+            <span>📦 Download ZIP Bundle</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Crucible Metrics Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Target Deponents</div>
+          <div class="text-2xl font-black text-rose-400 font-mono mt-1">5 <span class="text-xs text-gray-500 font-normal">Actors</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Examination Phases</div>
+          <div class="text-2xl font-black text-amber-400 font-mono mt-1">10 <span class="text-xs text-gray-500 font-normal">Phases</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Perjury Traps Mapped</div>
+          <div class="text-2xl font-black text-emerald-400 font-mono mt-1">71 <span class="text-xs text-gray-500 font-normal">Traps</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Target Civil Exposure</div>
+          <div class="text-2xl font-black text-cyan-400 font-mono mt-1">$91.3M <span class="text-xs text-gray-500 font-normal">Trebled</span></div>
+        </div>
+      </div>
+
+      <!-- Target Actor Filter Buttons -->
+      <div class="flex flex-wrap gap-2 border-b border-gray-800 pb-3">
+        <button onclick="filterCrucibleTarget('ALL')" id="crucible-filter-all" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-red-600 text-white">
+          ALL TARGETS (5)
+        </button>
+        <button onclick="filterCrucibleTarget('scot_brower')" id="crucible-filter-scot_brower" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">
+          SCOT BROWER, ESQ. ($38.4M)
+        </button>
+        <button onclick="filterCrucibleTarget('greg_ryan')" id="crucible-filter-greg_ryan" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">
+          GREG RYAN, ESQ. ($15.0M)
+        </button>
+        <button onclick="filterCrucibleTarget('csea_officials')" id="crucible-filter-csea_officials" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">
+          CSEA STATE ACTORS ($25.0M)
+        </button>
+        <button onclick="filterCrucibleTarget('hpd_officers')" id="crucible-filter-hpd_officers" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">
+          HONOLULU POLICE / HPD ($12.5M)
+        </button>
+        <button onclick="filterCrucibleTarget('hospital_administrators')" id="crucible-filter-hospital_administrators" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">
+          HOSPITALS ($15.45M)
+        </button>
+      </div>
+
+      <!-- Live Interactive Interrogation Simulator Card -->
+      <div class="bg-gray-900 border border-red-900/60 rounded-xl p-5 shadow-2xl">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+              <span>LIVE ADVERSARIAL CROSS-EXAMINATION SIMULATOR</span>
+            </h3>
+            <p class="text-[11px] text-gray-400">Rehearse trial examination lines against simulated deponent tactics and test instant L0 impeachment delivery.</p>
+          </div>
+          <span class="text-xs font-mono text-emerald-400 bg-emerald-950 border border-emerald-800/40 px-2 py-0.5 rounded">SIMULATOR READY</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Select Deponent Target</label>
+            <select id="simTargetSelect" onchange="onSimTargetChange()" class="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-red-500">
+              <option value="scot_brower">Scot S. Brower, Esq. (Lead Adverse Counsel)</option>
+              <option value="greg_ryan">Greg Ryan, Esq. (Compromised Counsel)</option>
+              <option value="csea_officials">CSEA State Administrative Custodians</option>
+              <option value="hpd_officers">Honolulu Police / HPD Officers</option>
+              <option value="hospital_administrators">Kapiʻolani & Queen's Hospital Staff</option>
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Select Interrogatory Line</label>
+            <select id="simQuestionSelect" class="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-red-500">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[10px] uppercase font-bold text-gray-400 font-mono block mb-1">Simulated Deponent Sworn Statement / Evasion</label>
+          <div class="flex gap-2 mb-2">
+            <input id="simStatementInput" type="text" placeholder="Type witness sworn response..." class="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-xs font-mono text-gray-200 focus:outline-none focus:border-red-500" value="I do not recall the exact minute I left the parking lot." />
+            <button onclick="runCrucibleSimulationTerminal()" id="simSubmitBtn" class="bg-red-600 hover:bg-red-500 text-white font-bold px-5 py-2 rounded-lg text-xs font-mono transition flex items-center gap-1 shadow-lg shadow-red-600/30 whitespace-nowrap">
+              <span>⚔️ Impeach Deponent</span>
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-gray-400">
+            <span class="text-gray-500">Quick Evasions:</span>
+            <button onclick="setSimStatement('I do not recall the exact minute I left the parking lot.')" class="px-2 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">"I don't recall"</button>
+            <button onclick="setSimStatement('Objection, that information is protected by attorney-client privilege and work-product.')" class="px-2 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">"Privileged"</button>
+            <button onclick="setSimStatement('The minute order entered by the court speaks for itself.')" class="px-2 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">"Record speaks for itself"</button>
+            <button onclick="setSimStatement('No, I never received any such notice or document.')" class="px-2 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">"Direct denial"</button>
+          </div>
+        </div>
+
+        <div id="simReceiptPanel" class="hidden mt-4 bg-gray-950 border border-red-900/60 rounded-lg p-4 font-mono text-xs">
+          <!-- Populated by JS on simulation -->
+        </div>
+      </div>
+
+      <!-- Examination Script & Perjury Traps Grid -->
+      <div id="crucibleQuestionsContainer" class="space-y-4"></div>
+    </div>
   </div>
 
   <script>
@@ -885,10 +1013,12 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     let CAPABILITIES = [];
     let STRIKE_MANIFEST = null;
     let PERSONAS = [];
+    let CRUCIBLE_DATA = null;
+    let CURRENT_CRUCIBLE_TARGET = 'ALL';
 
     async function init() {{
       try {{
-        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes, persRes] = await Promise.all([
+        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes, persRes, crucRes] = await Promise.all([
           fetch('/api/v1/forensics/allegations').then(r => r.json()),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()),
           fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()),
@@ -898,7 +1028,8 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()),
           fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()),
           fetch('/api/v1/forensics/strikes/manifest').then(r => r.json()),
-          fetch('/api/v1/forensics/estate/personas').then(r => r.json())
+          fetch('/api/v1/forensics/estate/personas').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/deposition-crucible').then(r => r.json())
         ]);
         ALLEGATIONS = alRes.allegations || [];
         CONTRADICTIONS = coRes.contradictions || [];
@@ -910,6 +1041,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         CAPABILITIES = capRes.capabilities || [];
         STRIKE_MANIFEST = strikeRes;
         PERSONAS = persRes.personas || [];
+        CRUCIBLE_DATA = crucRes;
 
         renderAllegations(ALLEGATIONS);
         renderContradictions(CONTRADICTIONS);
@@ -919,6 +1051,8 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         renderCapabilities(CAPABILITIES);
         renderStrikeVault(STRIKE_MANIFEST);
         renderPersonas(PERSONAS);
+        renderCrucible(CRUCIBLE_DATA);
+        populateSimQuestions();
 
         if (HAWAII_PACKET?.formatted_28_lines) {{
           document.getElementById('hawaiiPleadingPaperPre').textContent = HAWAII_PACKET.formatted_28_lines;
@@ -1084,7 +1218,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     }}
 
     function switchTab(tab) {{
-      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault', 'personas'].forEach(t => {{
+      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault', 'personas', 'crucible'].forEach(t => {{
         const btn = document.getElementById('tab-btn-' + t);
         const panel = document.getElementById('tab-' + t);
         if (t === tab) {{
@@ -1223,6 +1357,233 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       }} finally {{
         btn.disabled = false;
         btn.innerHTML = '<span>⚡ Dispatch</span>';
+      }}
+    }}
+
+    function renderCrucible(crucibleData) {{
+      const container = document.getElementById('crucibleQuestionsContainer');
+      if (!container || !crucibleData) return;
+
+      const targets = crucibleData.targets || [];
+      const filter = CURRENT_CRUCIBLE_TARGET;
+
+      const displayedTargets = (filter === 'ALL') ? targets : targets.filter(t => t.target_id === filter);
+
+      if (displayedTargets.length === 0) {{
+        container.innerHTML = '<div class="text-center py-10 text-gray-500 font-mono text-xs">No targets match filter.</div>';
+        return;
+      }}
+
+      container.innerHTML = displayedTargets.map(t => {{
+        return `
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 mb-4 shadow-xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4 pb-3 border-b border-gray-800">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800/60">
+                    TARGET: ${{t.target_id.toUpperCase()}}
+                  </span>
+                  <span class="text-xs text-gray-400 font-mono">${{t.bar_number}}</span>
+                </div>
+                <h3 class="text-lg font-black text-white mt-1">${{t.actor_name}}</h3>
+                <div class="text-xs text-amber-400 font-mono">${{t.role}}</div>
+              </div>
+              <div class="text-right">
+                <div class="text-[10px] uppercase font-bold text-gray-500">Civil Exposure</div>
+                <div class="text-lg font-black text-rose-400 font-mono">
+                  $${{t.civil_exposure_usd.toLocaleString('en-US', {{ minimumFractionDigits: 2, maximumFractionDigits: 2 }})}}
+                </div>
+                <div class="text-[10px] text-gray-400 font-mono mt-0.5">${{t.phase_count}} Examination Phases · ${{t.question_count}} Questions</div>
+              </div>
+            </div>
+
+            <div class="flex gap-2 mb-4">
+              <button onclick="inspectTargetFullPlan('${{t.target_id}}')" class="bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-cyan-500/30 text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition font-mono">
+                <span>🔍 Load Full Interrogatory Script</span>
+              </button>
+              <button onclick="prepareSimForTarget('${{t.target_id}}')" class="bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition font-mono">
+                <span>⚡ Rehearse Deposition</span>
+              </button>
+            </div>
+
+            <div id="target-detail-${{t.target_id}}" class="space-y-4"></div>
+          </div>
+        `;
+      }}).join('');
+
+      displayedTargets.forEach(t => inspectTargetFullPlan(t.target_id));
+    }}
+
+    async function inspectTargetFullPlan(targetId) {{
+      const slot = document.getElementById(`target-detail-${{targetId}}`);
+      if (!slot) return;
+      slot.innerHTML = '<div class="py-2 text-xs font-mono text-gray-500">Loading interrogatories and L0 exhibits...</div>';
+      try {{
+        const res = await fetch(`/api/v1/forensics/estate/deposition-crucible/target/${{targetId}}`);
+        const plan = await res.json();
+        
+        slot.innerHTML = (plan.phases || []).map(p => `
+          <div class="bg-gray-950 border border-gray-800/80 rounded-lg p-4 space-y-3">
+            <h4 class="text-xs font-bold text-amber-300 font-mono uppercase tracking-wider flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span>${{p.phase_title}}</span>
+            </h4>
+            <div class="space-y-3">
+              ${{(p.questions || []).map(q => `
+                <div class="bg-gray-900 border border-gray-800 rounded-lg p-3 text-xs space-y-2">
+                  <div class="flex justify-between items-center text-[10px] font-mono">
+                    <span class="text-rose-400 font-bold bg-rose-950/80 px-1.5 py-0.5 rounded border border-rose-800/50">${{q.question_id}}</span>
+                    <span class="text-gray-400 font-bold">${{q.topic}}</span>
+                  </div>
+                  <div class="text-gray-100 font-serif italic text-sm pl-3 border-l-2 border-red-500 py-1 bg-red-950/20 rounded-r">
+                    "${{q.interrogatory}}"
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px] font-mono pt-1">
+                    <div class="bg-gray-950 p-2 rounded border border-gray-800/60">
+                      <div class="text-gray-500 uppercase text-[9px] font-bold">Anticipated Evasion</div>
+                      <div class="text-gray-300">"${{q.anticipated_defense}}"</div>
+                    </div>
+                    <div class="bg-gray-950 p-2 rounded border border-gray-800/60">
+                      <div class="text-cyan-400 uppercase text-[9px] font-bold">Speaking Counter-Argument</div>
+                      <div class="text-gray-300">${{q.speaking_counter}}</div>
+                    </div>
+                  </div>
+                  <div class="bg-gray-950 p-2 rounded border border-gray-800/60 text-[11px] font-mono">
+                    <div class="text-emerald-400 uppercase text-[9px] font-bold">L0 Ground-Truth Impeachment Exhibit</div>
+                    <div class="text-gray-200 font-bold">${{q.impeachment_evidence}}</div>
+                  </div>
+                  <div class="bg-gray-950 p-2 rounded border border-gray-800/60 text-[11px] font-mono">
+                    <div class="text-rose-400 uppercase text-[9px] font-bold">Inescapable Perjury Pincer Dilemma</div>
+                    <div class="text-rose-200">${{q.perjury_dilemma}}</div>
+                    <div class="mt-1 text-[10px] text-amber-400"><strong>Statutory Penalties:</strong> ${{q.statutory_penalties}}</div>
+                  </div>
+                </div>
+              `).join('')}}
+            </div>
+          </div>
+        `).join('');
+      }} catch (err) {{
+        slot.innerHTML = '<div class="py-2 text-xs font-mono text-rose-500">Failed to load interrogatory script.</div>';
+      }}
+    }}
+
+    function filterCrucibleTarget(targetId) {{
+      CURRENT_CRUCIBLE_TARGET = targetId;
+      ['all', 'scot_brower', 'greg_ryan', 'csea_officials', 'hpd_officers', 'hospital_administrators'].forEach(t => {{
+        const btn = document.getElementById('crucible-filter-' + t);
+        if (btn) {{
+          btn.className = (t === targetId.toLowerCase())
+            ? 'px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-red-600 text-white'
+            : 'px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800';
+        }}
+      }});
+      if (CRUCIBLE_DATA) renderCrucible(CRUCIBLE_DATA);
+      if (targetId !== 'ALL') {{
+        const sel = document.getElementById('simTargetSelect');
+        if (sel) {{
+          sel.value = targetId;
+          onSimTargetChange();
+        }}
+      }}
+    }}
+
+    function prepareSimForTarget(targetId) {{
+      const sel = document.getElementById('simTargetSelect');
+      if (sel) {{
+        sel.value = targetId;
+        onSimTargetChange();
+      }}
+      document.getElementById('simStatementInput').scrollIntoView({{ behavior: 'smooth' }});
+    }}
+
+    async function populateSimQuestions() {{
+      const targetId = document.getElementById('simTargetSelect')?.value || 'scot_brower';
+      const qSelect = document.getElementById('simQuestionSelect');
+      if (!qSelect) return;
+      try {{
+        const res = await fetch(`/api/v1/forensics/estate/deposition-crucible/target/${{targetId}}`);
+        const plan = await res.json();
+        const questions = [];
+        (plan.phases || []).forEach(p => {{
+          (p.questions || []).forEach(q => {{
+            questions.push({{ id: q.question_id, text: `[${{q.question_id}}] ${{q.topic}}: "${{q.interrogatory.substring(0, 75)}}..."` }});
+          }});
+        }});
+        qSelect.innerHTML = questions.map(q => `<option value="${{q.id}}">${{q.text}}</option>`).join('');
+      }} catch (err) {{
+        console.error('Error populating questions:', err);
+      }}
+    }}
+
+    function onSimTargetChange() {{
+      populateSimQuestions();
+    }}
+
+    function setSimStatement(text) {{
+      const input = document.getElementById('simStatementInput');
+      if (input) input.value = text;
+    }}
+
+    async function runCrucibleSimulationTerminal() {{
+      const target_id = document.getElementById('simTargetSelect').value;
+      const question_id = document.getElementById('simQuestionSelect').value;
+      const witness_statement = document.getElementById('simStatementInput').value.trim();
+      if (!witness_statement) return;
+
+      const btn = document.getElementById('simSubmitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Impeaching...</span>';
+
+      try {{
+        const res = await fetch('/api/v1/forensics/estate/deposition-crucible/simulate', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify({{ target_id, question_id, witness_statement }})
+        }});
+        const data = await res.json();
+        const panel = document.getElementById('simReceiptPanel');
+        panel.classList.remove('hidden');
+
+        panel.innerHTML = `
+          <div class="flex justify-between items-center border-b border-red-900/60 pb-2 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono font-bold text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800">
+                IMPEACHMENT DELIVERED
+              </span>
+              <span class="text-xs text-white font-bold">${{data.actor_name}} (${{data.question_id}})</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+              STATUS: ${{data.impeachment_status}}
+            </span>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div><strong class="text-gray-400">Classified Deponent Tactic:</strong> <span class="text-amber-400 font-bold">${{data.classified_tactic}}</span></div>
+            <div><strong class="text-gray-400">Deponent Sworn Statement:</strong> <span class="text-gray-200 font-serif italic">"${{data.witness_statement}}"</span></div>
+            <div class="p-2.5 rounded bg-black/40 border border-cyan-900/60 mt-2">
+              <div class="text-[10px] text-cyan-400 uppercase font-bold">Speaking Counter-Argument on Record</div>
+              <div class="text-cyan-200 mt-0.5">${{data.speaking_counter}}</div>
+            </div>
+            <div class="p-2.5 rounded bg-black/40 border border-emerald-900/60 mt-2">
+              <div class="text-[10px] text-emerald-400 uppercase font-bold">L0 Ground-Truth Exhibit Handed to Witness</div>
+              <div class="text-emerald-200 font-bold mt-0.5">${{data.impeachment_exhibit}}</div>
+            </div>
+            <div class="p-2.5 rounded bg-black/40 border border-red-900/60 mt-2">
+              <div class="text-[10px] text-red-400 uppercase font-bold">Inescapable Perjury Pincer Closing</div>
+              <div class="text-red-200 mt-0.5">${{data.perjury_pincer_closing}}</div>
+              <div class="mt-1 text-[10px] text-amber-400"><strong>Statutory Exposure:</strong> ${{data.statutory_consequence}}</div>
+            </div>
+            <div class="p-2.5 rounded bg-red-950/30 border border-red-800/50 mt-2">
+              <div class="text-[10px] text-amber-300 uppercase font-bold">Immediate Follow-Up Question to Seal Record</div>
+              <div class="text-white font-serif italic mt-0.5 font-bold">"${{data.immediate_follow_up_question}}"</div>
+            </div>
+          </div>
+        `;
+      }} catch (err) {{
+        alert('Simulation error');
+      }} finally {{
+        btn.disabled = false;
+        btn.innerHTML = '<span>⚔️ Impeach Deponent</span>';
       }}
     }}
 
