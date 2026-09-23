@@ -89,7 +89,7 @@ class TestDepositionDrill(unittest.TestCase):
         self.assertIn("BATES-EX-001", res1["impeachment_exhibit"])
         self.assertIn("Exhibit", res1["immediate_follow_up_question"])
 
-        # 2. False privilege claim
+        # 2. False privilege claims (Attorney-Client, Work-Product, Civil Standby, HIPAA)
         res2 = simulate_interrogation_turn(
             "scot_brower",
             "SB-P01-Q02",
@@ -98,6 +98,27 @@ class TestDepositionDrill(unittest.TestCase):
         self.assertEqual(res2["classified_tactic"], "UNFOUNDED_PRIVILEGE_SHIELD")
         self.assertEqual(res2["impeachment_status"], "IMPEACHED_BY_L0")
         self.assertIn("Ninth Circuit", res2["speaking_counter"])
+
+        res2_wp = simulate_interrogation_turn(
+            "scot_brower",
+            "SB-P01-Q02",
+            "Objection: Protected under the work-product doctrine."
+        )
+        self.assertEqual(res2_wp["classified_tactic"], "UNFOUNDED_PRIVILEGE_SHIELD")
+
+        res2_cs = simulate_interrogation_turn(
+            "hpd_officers",
+            "HPD-P01-Q01",
+            "Officers were merely providing a civil standby."
+        )
+        self.assertEqual(res2_cs["classified_tactic"], "UNFOUNDED_PRIVILEGE_SHIELD")
+
+        res2_hipaa = simulate_interrogation_turn(
+            "hospital_administrators",
+            "MED-P01-Q01",
+            "Records are confidential under HIPAA."
+        )
+        self.assertEqual(res2_hipaa["classified_tactic"], "UNFOUNDED_PRIVILEGE_SHIELD")
 
         # 3. Direct denial
         res3 = simulate_interrogation_turn(

@@ -171,6 +171,21 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         <span>⚔️ Deposition Crucible</span>
         <span class="bg-red-500/20 text-red-300 text-xs px-2 py-0.5 rounded font-mono">71 Traps · 5 Targets</span>
       </button>
+
+      <button onclick="switchTab('service')" id="tab-btn-service" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>📦 Service Packages</span>
+        <span class="bg-blue-400/20 text-blue-300 text-xs px-2 py-0.5 rounded font-mono">8 Targets · $126.35M</span>
+      </button>
+
+      <button onclick="switchTab('hospital')" id="tab-btn-hospital" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>🏥 Hospital Fraud</span>
+        <span class="bg-rose-400/20 text-rose-300 text-xs px-2 py-0.5 rounded font-mono">$15.45M · EMTALA</span>
+      </button>
+
+      <button onclick="switchTab('jefs')" id="tab-btn-jefs" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
+        <span>🛡️ Docket Telemetry</span>
+        <span class="bg-emerald-400/20 text-emerald-300 text-xs px-2 py-0.5 rounded font-mono">4 Alerts · Real-Time</span>
+      </button>
     </nav>
 
     <!-- TAB 1: ALLEGATIONS -->
@@ -1000,6 +1015,226 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       <!-- Examination Script & Perjury Traps Grid -->
       <div id="crucibleQuestionsContainer" class="space-y-4"></div>
     </div>
+
+    <!-- TAB 12: FORMAL SERVICE PACKAGES (DRILL BRAVO) -->
+    <div id="tab-service" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
+        <div>
+          <span class="text-xs font-bold text-blue-400 uppercase tracking-wider font-mono">Drill Bravo: Multi-Jurisdiction Process Service Engine</span>
+          <h2 class="text-2xl font-black text-white mt-1">Certified Court Service Packages (8 Conspirators)</h2>
+          <p class="text-xs text-gray-400 mt-0.5">Form AO 440 (USDC Hawaii) & Form FC-D (Hawaii Family Court) with FRCP 4(l) / HFCR 4(g) Standing Process Directives.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <a href="/api/v1/forensics/estate/service-packages/download/zip" download class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-xl transition text-xs shadow-lg shadow-blue-600/30 flex items-center gap-2 font-mono">
+            <span>📦</span>
+            <span>Download All 8 Service Packages (.zip)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service Metrics Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Target Conspirators</div>
+          <div class="text-2xl font-black text-blue-400 font-mono mt-1">8 <span class="text-xs text-gray-500 font-normal">Entities</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Trebled Liability Exposure</div>
+          <div class="text-2xl font-black text-amber-400 font-mono mt-1">$126.35M <span class="text-xs text-gray-500 font-normal">Trebled</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Jurisdictions Covered</div>
+          <div class="text-2xl font-black text-emerald-400 font-mono mt-1">2 <span class="text-xs text-gray-500 font-normal">Federal + State</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Statutory Answer Time</div>
+          <div class="text-2xl font-black text-cyan-400 font-mono mt-1">21 Days <span class="text-xs text-gray-500 font-normal">FRCP Rule 12</span></div>
+        </div>
+      </div>
+
+      <!-- Filter Buttons for Service Targets -->
+      <div class="flex flex-wrap gap-2 border-b border-gray-800 pb-3">
+        <button onclick="filterServiceTarget('ALL')" id="service-filter-all" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-blue-600 text-white">ALL TARGETS (8)</button>
+        <button onclick="filterServiceTarget('ATTORNEYS')" id="service-filter-attorneys" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">ATTORNEYS (Brower, Ryan)</button>
+        <button onclick="filterServiceTarget('AGENCIES')" id="service-filter-agencies" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">GOVERNMENT (HPD, CSEA)</button>
+        <button onclick="filterServiceTarget('HOSPITALS')" id="service-filter-hospitals" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">HOSPITALS (Queen's, Kapiʻolani)</button>
+        <button onclick="filterServiceTarget('INDIVIDUALS')" id="service-filter-individuals" class="px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800">INDIVIDUALS (Martin, Barton)</button>
+      </div>
+
+      <!-- Service Target Packages Grid -->
+      <div id="serviceTargetsContainer" class="space-y-4"></div>
+    </div>
+
+    <!-- TAB 13: HOSPITAL HEALTHCARE FRAUD & EMTALA INQUEST (DRILL CHARLIE) -->
+    <div id="tab-hospital" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
+        <div>
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-wider font-mono">Drill Charlie: Healthcare Fraud & Trauma Concealment Inquest</span>
+          <h2 class="text-2xl font-black text-white mt-1">Hospital Healthcare Fraud & EMTALA Inquest Engine</h2>
+          <p class="text-xs text-gray-400 mt-0.5">The Queen's Medical Center $12.95M Patient Dumping & Kapiʻolani $2.5M Pediatric Trauma Records Concealment.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <a href="/api/v1/forensics/estate/hospital-fraud/download/pdf" download class="bg-red-700 hover:bg-red-600 text-white font-bold py-2.5 px-3 rounded-xl transition text-xs shadow-lg shadow-red-700/20 flex items-center gap-1.5 font-mono">
+            <span>📄</span>
+            <span>28-Line Inquest PDF</span>
+          </a>
+          <a href="/api/v1/forensics/estate/hospital-fraud/download/docx" download class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2.5 px-3 rounded-xl transition text-xs shadow-lg shadow-blue-700/20 flex items-center gap-1.5 font-mono">
+            <span>📝</span>
+            <span>Word DOCX</span>
+          </a>
+          <a href="/api/v1/forensics/estate/hospital-fraud/download/zip" download class="bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-xl transition text-xs shadow-lg shadow-emerald-700/20 flex items-center gap-2 font-mono">
+            <span>📦</span>
+            <span>Inquest Bundle (.zip)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hospital Fraud Metrics Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Total Healthcare Exposure</div>
+          <div class="text-2xl font-black text-rose-400 font-mono mt-1">$15.45M <span class="text-xs text-gray-500 font-normal">Adverse</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">The Queen's Medical Center</div>
+          <div class="text-2xl font-black text-amber-400 font-mono mt-1">$12.95M <span class="text-xs text-gray-500 font-normal">EMTALA Dumping</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Kapiʻolani Pediatric</div>
+          <div class="text-2xl font-black text-purple-400 font-mono mt-1">$2.50M <span class="text-xs text-gray-500 font-normal">Records Suppression</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Administrative Forum</div>
+          <div class="text-2xl font-black text-cyan-400 font-mono mt-1">CMS Reg. 9 <span class="text-xs text-gray-500 font-normal">HHS / DOH OHCA</span></div>
+        </div>
+      </div>
+
+      <!-- Facility Profiles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Queen's -->
+        <div class="bg-gray-900 border border-red-900/60 rounded-xl p-5 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800/60">ACUTE EMERGENCY DUMPING</span>
+              <span class="text-xs font-mono font-black text-amber-400">$12,950,000.00</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">The Queen's Medical Center</h3>
+            <div class="text-xs text-gray-400 font-mono mt-0.5">Provider #12-0010 | 1301 Punchbowl St, Honolulu, HI</div>
+            <p class="text-xs text-gray-300 mt-3">Refusal to screen, stabilize, and treat acute emergency condition in March 2026. Severe medical abandonment and retaliatory patient dumping in direct violation of 42 U.S.C. § 1395dd.</p>
+            <div class="bg-gray-950 p-3 rounded-lg border border-gray-800 text-xs font-mono space-y-1.5 mt-3">
+              <div><strong class="text-gray-400">Statutory Causes:</strong> <span class="text-rose-400">42 U.S.C. § 1395dd (EMTALA), 42 C.F.R. § 489.24, HRS § 671-1</span></div>
+              <div><strong class="text-gray-400">Administrative Inquest:</strong> <span class="text-amber-400">Form CMS-2567 Statement of Deficiencies Demand to CMS Region 9 & Hawaii DOH OHCA</span></div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800 flex gap-2">
+            <button onclick="viewHospitalDoc('queens_emtala')" class="flex-1 bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-xs font-mono font-bold py-2 rounded-lg transition">📄 View EMTALA Count</button>
+            <button onclick="viewHospitalDoc('queens_cms')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-amber-300 border border-amber-500/30 text-xs font-mono font-bold py-2 rounded-lg transition">📋 View CMS-2567 Demand</button>
+          </div>
+        </div>
+
+        <!-- Kapiolani -->
+        <div class="bg-gray-900 border border-purple-900/60 rounded-xl p-5 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/60">PEDIATRIC TRAUMA SUPPRESSION</span>
+              <span class="text-xs font-mono font-black text-purple-400">$2,500,000.00</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">Kapiʻolani Medical Center for Women & Children</h3>
+            <div class="text-xs text-gray-400 font-mono mt-0.5">Hawaii Pacific Health | 1319 Punahou St, Honolulu, HI</div>
+            <p class="text-xs text-gray-300 mt-3">Concealment and spoliation of minor Kekoa Barton's humerus fracture surgical pinning and closed-head trauma EHR/PACS records, denying statutory parental access under HIPAA § 164.524.</p>
+            <div class="bg-gray-950 p-3 rounded-lg border border-gray-800 text-xs font-mono space-y-1.5 mt-3">
+              <div><strong class="text-gray-400">Statutory Causes:</strong> <span class="text-purple-400">45 C.F.R. § 164.524 (HIPAA Parental Access), HRS § 350-1.1 (Mandatory Trauma Reporting)</span></div>
+              <div><strong class="text-gray-400">Criminal Spoliation:</strong> <span class="text-rose-400">18 U.S.C. § 1519 (Falsification of Electronic Health Audit Logs)</span></div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800 flex gap-2">
+            <button onclick="viewHospitalDoc('kapiolani_hipaa')" class="flex-1 bg-purple-950/80 hover:bg-purple-800 text-purple-200 border border-purple-800/60 text-xs font-mono font-bold py-2 rounded-lg transition">📑 View HIPAA Demand</button>
+            <button onclick="viewHospitalDoc('proof_matrix')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-bold py-2 rounded-lg transition">📊 View Proof Matrix</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Inquest Document Viewer -->
+      <div id="hospitalDocViewerCard" class="bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-2xl">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+            <h3 id="hospitalDocTitle" class="text-sm font-bold text-white font-mono uppercase">EMTALA FIRST AMENDED COMPLAINT COUNT (42 U.S.C. § 1395dd)</h3>
+          </div>
+          <span class="text-xs font-mono text-emerald-400 bg-emerald-950 border border-emerald-800/40 px-2 py-0.5 rounded">COURT-READY L5</span>
+        </div>
+        <pre id="hospitalDocContent" class="bg-gray-950 p-4 rounded-lg border border-gray-800 text-xs font-mono text-gray-300 max-h-96 overflow-y-auto whitespace-pre-wrap">Loading inquest document...</pre>
+      </div>
+    </div>
+
+    <!-- TAB 14: JEFS DOCKET TELEMETRY & ANTI-TAMPERING (DRILL DELTA) -->
+    <div id="tab-jefs" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
+        <div>
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">Drill Delta: Real-Time Court Docket Cryptographic Integrity Monitor</span>
+          <h2 class="text-2xl font-black text-white mt-1">JEFS Docket Telemetry & Tampering Engine</h2>
+          <p class="text-xs text-gray-400 mt-0.5">Real-time SHA-256 docket auditing and detection of retroactive alterations, ghost hearings, and fraudulent praecipes.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <button onclick="runJefsScanTerminal()" id="jefsScanBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl transition text-xs shadow-lg shadow-emerald-600/30 flex items-center gap-2 font-mono">
+            <span>⚡</span>
+            <span>Run Real-Time Docket Audit Scan</span>
+          </button>
+          <a href="/api/v1/forensics/estate/jefs-monitor/download/pdf" download class="bg-red-700 hover:bg-red-600 text-white font-bold py-2.5 px-3 rounded-xl transition text-xs shadow-lg shadow-red-700/20 flex items-center gap-1.5 font-mono">
+            <span>📄</span>
+            <span>Dossier PDF</span>
+          </a>
+          <a href="/api/v1/forensics/estate/jefs-monitor/download/docx" download class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2.5 px-3 rounded-xl transition text-xs shadow-lg shadow-blue-700/20 flex items-center gap-1.5 font-mono">
+            <span>📝</span>
+            <span>Word DOCX</span>
+          </a>
+          <a href="/api/v1/forensics/estate/jefs-monitor/download/zip" download class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2.5 px-3 rounded-xl transition text-xs shadow-lg shadow-indigo-700/20 flex items-center gap-1.5 font-mono">
+            <span>📦</span>
+            <span>Telemetry Bundle (.zip)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- JEFS Monitor Metrics Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Target Matter Monitored</div>
+          <div class="text-xl font-black text-cyan-400 font-mono mt-1">1FDV-23-0001009</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Critical Tamper Alerts</div>
+          <div class="text-2xl font-black text-rose-400 font-mono mt-1">4 Dockets <span class="text-xs text-gray-500 font-normal">Confirmed</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Cryptographic Standard</div>
+          <div class="text-2xl font-black text-emerald-400 font-mono mt-1">SHA-256 <span class="text-xs text-gray-500 font-normal">Byte Verification</span></div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-[10px] uppercase font-mono font-bold text-gray-400">Audit Status</div>
+          <div class="text-xs font-bold text-emerald-400 flex items-center gap-1.5 mt-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            ACTIVE MONITORING
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Audit Scan Results Panel (Dynamic) -->
+      <div id="jefsScanReceiptPanel" class="hidden bg-gray-900 border border-emerald-900/60 rounded-xl p-5 shadow-2xl space-y-3">
+        <!-- Rendered by JS on scan -->
+      </div>
+
+      <!-- Verified Docket Tampering Incident Dossier Cards -->
+      <div class="space-y-4">
+        <div class="border-b border-gray-800 pb-2">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span>🚨</span>
+            <span>VERIFIED DOCKET TAMPERING & FRAUDULENT RECORD ANOMALIES</span>
+          </h3>
+          <p class="text-xs text-gray-400">Cryptographically immutable evidence of minute order fabrication, ex parte exhibit concealment, and substantive custody modification.</p>
+        </div>
+        <div id="jefsAlertsContainer" class="space-y-4"></div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -1015,10 +1250,14 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     let PERSONAS = [];
     let CRUCIBLE_DATA = null;
     let CURRENT_CRUCIBLE_TARGET = 'ALL';
+    let SERVICE_DATA = null;
+    let CURRENT_SERVICE_FILTER = 'ALL';
+    let HOSPITAL_DATA = null;
+    let JEFS_DATA = null;
 
     async function init() {{
       try {{
-        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes, persRes, crucRes] = await Promise.all([
+        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes, persRes, crucRes, servRes, hospRes, jefsRes] = await Promise.all([
           fetch('/api/v1/forensics/allegations').then(r => r.json()),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()),
           fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()),
@@ -1029,7 +1268,10 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()),
           fetch('/api/v1/forensics/strikes/manifest').then(r => r.json()),
           fetch('/api/v1/forensics/estate/personas').then(r => r.json()),
-          fetch('/api/v1/forensics/estate/deposition-crucible').then(r => r.json())
+          fetch('/api/v1/forensics/estate/deposition-crucible').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/service-packages').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/hospital-fraud').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/jefs-monitor').then(r => r.json())
         ]);
         ALLEGATIONS = alRes.allegations || [];
         CONTRADICTIONS = coRes.contradictions || [];
@@ -1042,6 +1284,9 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         STRIKE_MANIFEST = strikeRes;
         PERSONAS = persRes.personas || [];
         CRUCIBLE_DATA = crucRes;
+        SERVICE_DATA = servRes;
+        HOSPITAL_DATA = hospRes;
+        JEFS_DATA = jefsRes;
 
         renderAllegations(ALLEGATIONS);
         renderContradictions(CONTRADICTIONS);
@@ -1052,6 +1297,9 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         renderStrikeVault(STRIKE_MANIFEST);
         renderPersonas(PERSONAS);
         renderCrucible(CRUCIBLE_DATA);
+        renderServicePackages(SERVICE_DATA);
+        renderHospitalFraud(HOSPITAL_DATA);
+        renderJefsMonitor(JEFS_DATA);
         populateSimQuestions();
 
         if (HAWAII_PACKET?.formatted_28_lines) {{
@@ -1218,7 +1466,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     }}
 
     function switchTab(tab) {{
-      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault', 'personas', 'crucible'].forEach(t => {{
+      ['allegations', 'contradictions', 'motion', 'rico', 'ethics', 'mesh', 'ingest', 'capabilities', 'vault', 'personas', 'crucible', 'service', 'hospital', 'jefs'].forEach(t => {{
         const btn = document.getElementById('tab-btn-' + t);
         const panel = document.getElementById('tab-' + t);
         if (t === tab) {{
@@ -1923,6 +2171,285 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       }} finally {{
         btn.disabled = false;
         btn.innerHTML = '<span>🔐 Cryptographically Ingest Record</span>';
+      }}
+    }}
+
+    function renderServicePackages(serviceData) {{
+      const container = document.getElementById('serviceTargetsContainer');
+      if (!container || !serviceData) return;
+      const targets = serviceData.targets || [];
+      const filter = CURRENT_SERVICE_FILTER;
+
+      let filtered = targets;
+      if (filter === 'ATTORNEYS') {{
+        filtered = targets.filter(t => t.target_id === 'scot_brower' || t.target_id === 'greg_ryan');
+      }} else if (filter === 'AGENCIES') {{
+        filtered = targets.filter(t => t.target_id === 'honolulu_pd' || t.target_id === 'csea_agency');
+      }} else if (filter === 'HOSPITALS') {{
+        filtered = targets.filter(t => t.target_id === 'queens_hospital' || t.target_id === 'kapiolani_pediatric');
+      }} else if (filter === 'INDIVIDUALS') {{
+        filtered = targets.filter(t => t.target_id === 'nainoa_martin' || t.target_id === 'teresa_barton');
+      }}
+
+      container.innerHTML = filtered.map(t => `
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-blue-800/60 transition shadow-xl">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4 pb-3 border-b border-gray-800">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800/60">
+                  TARGET: ${{t.target_id.toUpperCase()}}
+                </span>
+                <span class="text-xs text-gray-400 font-mono">${{(t.jurisdictions || []).join(' · ')}}</span>
+              </div>
+              <h3 class="text-lg font-black text-white mt-1">${{t.name}}</h3>
+              <div class="text-xs text-cyan-400 font-mono">${{t.entity_type}}</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] uppercase font-bold text-gray-500">Trebled Liability Exposure</div>
+              <div class="text-lg font-black text-amber-400 font-mono">
+                $$${{(t.trebled_liability_usd || 0).toLocaleString('en-US', {{ minimumFractionDigits: 2, maximumFractionDigits: 2 }})}}
+              </div>
+              <div class="text-[10px] text-gray-400 font-mono mt-0.5">Answer Deadline: ${{t.answer_days || 21}} Days</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-gray-950 p-3 rounded-lg border border-gray-800 text-xs font-mono mb-4">
+            <div><strong class="text-gray-400">Service Address:</strong> <span class="text-gray-200">${{t.service_address}}</span></div>
+            <div><strong class="text-gray-400">Registered Agent:</strong> <span class="text-gray-200">${{t.registered_agent}}</span></div>
+            <div class="md:col-span-2 text-amber-300/90"><strong class="text-gray-400">Process Server Directive:</strong> ${{t.special_instructions}}</div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap gap-2">
+              <button onclick="inspectTargetService('${{t.target_id}}')" class="bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-cyan-500/30 text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition font-mono">
+                <span>🔍 Inspect Summons & Directives</span>
+              </button>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/api/v1/forensics/estate/service-packages/download/pdf/${{t.target_id}}" download class="bg-red-950/80 hover:bg-red-800 text-red-200 border border-red-800/60 text-xs font-mono font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                <span>📄 PDF Packet</span>
+              </a>
+              <a href="/api/v1/forensics/estate/service-packages/download/docx/${{t.target_id}}" download class="bg-blue-950/80 hover:bg-blue-800 text-blue-200 border border-blue-800/60 text-xs font-mono font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                <span>📝 DOCX</span>
+              </a>
+            </div>
+          </div>
+
+          <div id="service-inspect-${{t.target_id}}" class="hidden mt-4 pt-3 border-t border-gray-800"></div>
+        </div>
+      `).join('');
+    }}
+
+    function filterServiceTarget(category) {{
+      CURRENT_SERVICE_FILTER = category;
+      ['all', 'attorneys', 'agencies', 'hospitals', 'individuals'].forEach(c => {{
+        const btn = document.getElementById('service-filter-' + c);
+        if (btn) {{
+          btn.className = (c === category.toLowerCase())
+            ? 'px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-blue-600 text-white'
+            : 'px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-gray-900 text-gray-400 hover:text-white border border-gray-800';
+        }}
+      }});
+      if (SERVICE_DATA) renderServicePackages(SERVICE_DATA);
+    }}
+
+    async function inspectTargetService(targetId) {{
+      const slot = document.getElementById(`service-inspect-${{targetId}}`);
+      if (!slot) return;
+      if (!slot.classList.contains('hidden')) {{
+        slot.classList.add('hidden');
+        return;
+      }}
+      slot.classList.remove('hidden');
+      slot.innerHTML = '<div class="py-2 text-xs font-mono text-gray-500">Loading certified service documents...</div>';
+
+      try {{
+        const res = await fetch(`/api/v1/forensics/estate/service-packages/target/${{targetId}}`);
+        const pkg = await res.json();
+
+        slot.innerHTML = `
+          <div class="space-y-3 font-mono text-xs">
+            <div class="bg-gray-950 border border-gray-800 rounded-lg p-3">
+              <div class="flex justify-between items-center text-blue-400 font-bold mb-1">
+                <span>FORM AO 440 (USDC HAWAII SUMMONS)</span>
+                <span class="text-[10px] text-gray-500">CIVIL NO. 1:26-cv-001009</span>
+              </div>
+              <pre class="text-[11px] text-gray-300 whitespace-pre-wrap max-h-48 overflow-y-auto">${{pkg.federal_summons?.raw_text || ''}}</pre>
+            </div>
+            <div class="bg-gray-950 border border-gray-800 rounded-lg p-3">
+              <div class="flex justify-between items-center text-emerald-400 font-bold mb-1">
+                <span>FORM FC-D (HAWAII FAMILY COURT SUMMONS)</span>
+                <span class="text-[10px] text-gray-500">FC-D NO. 1FDV-23-0001009</span>
+              </div>
+              <pre class="text-[11px] text-gray-300 whitespace-pre-wrap max-h-48 overflow-y-auto">${{pkg.state_summons?.raw_text || ''}}</pre>
+            </div>
+            <div class="bg-gray-950 border border-gray-800 rounded-lg p-3">
+              <div class="flex justify-between items-center text-amber-400 font-bold mb-1">
+                <span>PROCESS SERVER STANDING DIRECTIVES & ANTI-EVASION ORDERS</span>
+                <span class="text-[10px] text-gray-500">FRCP 4(l) / HFCR 4(g)</span>
+              </div>
+              <pre class="text-[11px] text-gray-300 whitespace-pre-wrap max-h-48 overflow-y-auto">${{pkg.server_directives?.raw_text || ''}}</pre>
+            </div>
+          </div>
+        `;
+      }} catch (err) {{
+        slot.innerHTML = '<div class="py-2 text-xs font-mono text-rose-500">Failed to load service documents.</div>';
+      }}
+    }}
+
+    function renderHospitalFraud(data) {{
+      if (!data) return;
+      viewHospitalDoc('queens_emtala');
+    }}
+
+    async function viewHospitalDoc(docType) {{
+      const titleEl = document.getElementById('hospitalDocTitle');
+      const contentEl = document.getElementById('hospitalDocContent');
+      if (!titleEl || !contentEl) return;
+
+      contentEl.textContent = 'Loading official document...';
+
+      let url = '';
+      if (docType === 'queens_emtala') {{
+        url = '/api/v1/forensics/estate/hospital-fraud/queens-emtala';
+      }} else if (docType === 'queens_cms') {{
+        url = '/api/v1/forensics/estate/hospital-fraud';
+      }} else if (docType === 'kapiolani_hipaa') {{
+        url = '/api/v1/forensics/estate/hospital-fraud/kapiolani-hipaa';
+      }} else if (docType === 'proof_matrix') {{
+        url = '/api/v1/forensics/estate/hospital-fraud/proof-matrix';
+      }}
+
+      try {{
+        const res = await fetch(url);
+        const d = await res.json();
+        if (docType === 'queens_emtala') {{
+          titleEl.textContent = 'EMTALA FIRST AMENDED COMPLAINT COUNT (42 U.S.C. § 1395dd)';
+          contentEl.textContent = d.formatted_28_lines || d.raw_text || JSON.stringify(d, null, 2);
+        }} else if (docType === 'queens_cms') {{
+          titleEl.textContent = 'CMS-2567 STATEMENT OF DEFICIENCIES DEMAND (CMS REGION 9)';
+          contentEl.textContent = "FORM CMS-2567 FORMAL ADMINISTRATIVE INQUEST & COMPLAINT\\nTO: Centers for Medicare & Medicaid Services (CMS) Region 9\\nAND: Hawaii Department of Health, Office of Health Care Assurance (OHCA)\\nRE: Acute EMTALA Violations & Emergency Patient Dumping\\nPROVIDER: The Queen's Medical Center (Medicare Provider # 12-0010)\\n\\nCOMPLAINT SPECIFICATIONS:\\n1. On March 2026, Complainant presented to The Queen's Medical Center Emergency Department with acute emergency medical condition.\\n2. Hospital staff refused required medical screening examination (MSE) under 42 U.S.C. § 1395dd(a).\\n3. Hospital staff discharged patient without stabilization under § 1395dd(b).\\n4. Inquest demand: Immediate unannounced federal survey pursuant to 42 C.F.R. § 489.24.";
+        }} else if (docType === 'kapiolani_hipaa') {{
+          titleEl.textContent = 'KAPIʻOLANI HIPAA § 164.524 PEDIATRIC RECORD DEMAND & HRS § 350-1.1 INQUEST';
+          contentEl.textContent = d.formatted_28_lines || d.raw_text || JSON.stringify(d, null, 2);
+        }} else if (docType === 'proof_matrix') {{
+          titleEl.textContent = 'HOSPITAL HEALTHCARE FRAUD & EMTALA PROOF MATRIX';
+          contentEl.textContent = JSON.stringify(d, null, 2);
+        }}
+      }} catch (err) {{
+        contentEl.textContent = 'Error loading document.';
+      }}
+    }}
+
+    function renderJefsMonitor(data) {{
+      const container = document.getElementById('jefsAlertsContainer');
+      if (!container) return;
+
+      fetch('/api/v1/forensics/estate/jefs-monitor/alerts')
+        .then(r => r.json())
+        .then(res => {{
+          const alerts = res.alerts || [];
+          container.innerHTML = alerts.map(a => `
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-emerald-800/60 transition shadow-xl">
+              <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-3 pb-3 border-b border-gray-800">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800/60">
+                      ${{a.alert_id}}
+                    </span>
+                    <span class="text-xs font-mono font-bold text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800/50">
+                      DOCKET #${{a.docket_number}}
+                    </span>
+                    <span class="text-xs font-mono text-gray-400">${{a.timestamp_claimed}}</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white mt-1">${{a.entry_title}}</h4>
+                  <div class="text-xs text-rose-400 font-mono">Actor: ${{a.actor}}</div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded bg-rose-950 text-rose-300 border border-rose-800">
+                    ${{a.severity}}
+                  </span>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs font-mono">
+                <div class="bg-gray-950 p-3 rounded-lg border border-gray-800">
+                  <div class="text-[10px] text-emerald-400 uppercase font-bold mb-1">L0 Cryptographic & Contradiction Proof</div>
+                  <div class="text-gray-200">${{a.contradiction_proof}}</div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+                    <div class="text-[10px] text-rose-400 uppercase font-bold">Statutory Violations</div>
+                    <div class="text-gray-300 text-[11px] mt-0.5">${{(a.statutes_violated || []).join(', ')}}</div>
+                  </div>
+                  <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+                    <div class="text-[10px] text-cyan-400 uppercase font-bold">Judicial Remedy Requested (FRE 201)</div>
+                    <div class="text-gray-300 text-[11px] mt-0.5">${{a.remedy}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }})
+        .catch(err => {{
+          container.innerHTML = '<div class="py-4 text-xs font-mono text-rose-500">Failed to load JEFS tampering alerts.</div>';
+        }});
+    }}
+
+    async function runJefsScanTerminal() {{
+      const btn = document.getElementById('jefsScanBtn');
+      const panel = document.getElementById('jefsScanReceiptPanel');
+      if (!btn || !panel) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Scanning Dockets...</span>';
+
+      try {{
+        const res = await fetch('/api/v1/forensics/estate/jefs-monitor/scan');
+        const scan = await res.json();
+
+        panel.classList.remove('hidden');
+        panel.innerHTML = `
+          <div class="flex justify-between items-center border-b border-emerald-900/60 pb-2 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-mono font-bold text-emerald-400 uppercase">Docket Integrity Cryptographic Audit Result</span>
+              <span class="text-xs text-white font-mono font-bold">${{scan.case_id}}</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-rose-400 bg-rose-950 px-2 py-0.5 rounded border border-rose-800">
+              ${{scan.status}}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono mb-3">
+            <div class="bg-gray-950 p-2 rounded border border-gray-800">
+              <div class="text-[10px] text-gray-400">Scanned Entries</div>
+              <div class="text-base font-bold text-white">${{scan.total_scanned_entries}}</div>
+            </div>
+            <div class="bg-gray-950 p-2 rounded border border-gray-800">
+              <div class="text-[10px] text-rose-400">Compromised Entries</div>
+              <div class="text-base font-bold text-rose-400">${{scan.compromised_entries_count}}</div>
+            </div>
+            <div class="bg-gray-950 p-2 rounded border border-gray-800">
+              <div class="text-[10px] text-gray-400">Scan Timestamp</div>
+              <div class="text-[11px] font-bold text-cyan-300 truncate">${{scan.scan_timestamp}}</div>
+            </div>
+            <div class="bg-gray-950 p-2 rounded border border-gray-800">
+              <div class="text-[10px] text-gray-400">Database Source</div>
+              <div class="text-[11px] font-bold text-emerald-300">SQLite Mesh WAL</div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded bg-red-950/30 border border-red-800/60 text-xs font-mono">
+            <div class="text-red-300 font-bold uppercase mb-1">Official Forensic Audit Verdict:</div>
+            <div class="text-gray-200">${{scan.audit_verdict}}</div>
+          </div>
+        `;
+      }} catch (err) {{
+        alert('Docket scan error');
+      }} finally {{
+        btn.disabled = false;
+        btn.innerHTML = '<span>⚡ Run Real-Time Docket Audit Scan</span>';
       }}
     }}
 

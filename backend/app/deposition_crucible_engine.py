@@ -511,12 +511,10 @@ def simulate_interrogation_turn(
         tactic = "FATAL_AFFIRMATIVE_CONCESSION"
     elif any(w in statement_lower for w in ["recall", "remember", "minute", "record speaks"]):
         tactic = "FALSE_LACK_OF_RECOLLECTION"
-    elif any(w in statement_lower for w in ["privilege", "attorney-client", "work product"]):
+    elif any(w in statement_lower for w in ["privilege", "attorney-client", "work product", "work-product", "civil standby", "hipaa", "confidential", "immunity"]):
         tactic = "UNFOUNDED_PRIVILEGE_SHIELD"
     elif any(w in statement_lower for w in ["no", "never", "did not", "false"]):
         tactic = "DIRECT_DENIAL_CONTRADICTED_BY_L0"
-    elif any(w in statement_lower for w in ["yes", "correct", "true", "admit"]):
-        tactic = "FATAL_AFFIRMATIVE_CONCESSION"
 
     impeachment_status = "IMPEACHED_BY_L0" if tactic != "FATAL_AFFIRMATIVE_CONCESSION" else "LIABILITY_ESTABLISHED"
 

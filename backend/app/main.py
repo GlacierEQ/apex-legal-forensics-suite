@@ -184,6 +184,105 @@ except ImportError:
         generate_master_crucible_bundle_zip = None
         TARGET_CRUCIBLE_PROFILES = {}
 
+# Drill Bravo: Service Package Engine
+try:
+    from backend.app.service_package_engine import (
+        get_service_directory_overview,
+        generate_target_service_package,
+        generate_target_service_pdf,
+        generate_target_service_docx,
+        generate_master_service_bundle_zip,
+        SERVICE_TARGET_REGISTRY
+    )
+except ImportError:
+    try:
+        from service_package_engine import (
+            get_service_directory_overview,
+            generate_target_service_package,
+            generate_target_service_pdf,
+            generate_target_service_docx,
+            generate_master_service_bundle_zip,
+            SERVICE_TARGET_REGISTRY
+        )
+    except ImportError:
+        get_service_directory_overview = None
+        generate_target_service_package = None
+        generate_target_service_pdf = None
+        generate_target_service_docx = None
+        generate_master_service_bundle_zip = None
+        SERVICE_TARGET_REGISTRY = {}
+
+# Drill Charlie: Hospital Healthcare Fraud Engine
+try:
+    from backend.app.hospital_fraud_engine import (
+        get_hospital_fraud_overview,
+        generate_queens_emtala_complaint,
+        generate_queens_cms_complaint,
+        generate_kapiolani_hipaa_demand,
+        generate_hospital_proof_matrix,
+        generate_hospital_fraud_pdf,
+        generate_hospital_fraud_docx,
+        generate_hospital_fraud_bundle_zip,
+        HOSPITAL_TARGET_PORTFOLIO
+    )
+except ImportError:
+    try:
+        from hospital_fraud_engine import (
+            get_hospital_fraud_overview,
+            generate_queens_emtala_complaint,
+            generate_queens_cms_complaint,
+            generate_kapiolani_hipaa_demand,
+            generate_hospital_proof_matrix,
+            generate_hospital_fraud_pdf,
+            generate_hospital_fraud_docx,
+            generate_hospital_fraud_bundle_zip,
+            HOSPITAL_TARGET_PORTFOLIO
+        )
+    except ImportError:
+        get_hospital_fraud_overview = None
+        generate_queens_emtala_complaint = None
+        generate_queens_cms_complaint = None
+        generate_kapiolani_hipaa_demand = None
+        generate_hospital_proof_matrix = None
+        generate_hospital_fraud_pdf = None
+        generate_hospital_fraud_docx = None
+        generate_hospital_fraud_bundle_zip = None
+        HOSPITAL_TARGET_PORTFOLIO = {}
+
+# Drill Delta: JEFS Docket Telemetry & Tamper Monitor
+try:
+    from backend.app.jefs_tamper_monitor import (
+        get_jefs_monitor_status,
+        get_tamper_alerts,
+        run_docket_integrity_scan,
+        generate_jefs_audit_dossier_text,
+        generate_jefs_audit_dossier_pdf,
+        generate_jefs_audit_dossier_docx,
+        generate_jefs_monitor_bundle_zip,
+        VERIFIED_TAMPERING_ALERTS
+    )
+except ImportError:
+    try:
+        from jefs_tamper_monitor import (
+            get_jefs_monitor_status,
+            get_tamper_alerts,
+            run_docket_integrity_scan,
+            generate_jefs_audit_dossier_text,
+            generate_jefs_audit_dossier_pdf,
+            generate_jefs_audit_dossier_docx,
+            generate_jefs_monitor_bundle_zip,
+            VERIFIED_TAMPERING_ALERTS
+        )
+    except ImportError:
+        get_jefs_monitor_status = None
+        get_tamper_alerts = None
+        run_docket_integrity_scan = None
+        generate_jefs_audit_dossier_text = None
+        generate_jefs_audit_dossier_pdf = None
+        generate_jefs_audit_dossier_docx = None
+        generate_jefs_monitor_bundle_zip = None
+        VERIFIED_TAMPERING_ALERTS = []
+
 try:
     from fastapi import FastAPI, HTTPException, Depends, Response
     from fastapi.middleware.cors import CORSMiddleware
@@ -1157,6 +1256,181 @@ def simulate_crucible_route(req: CrucibleSimulateRequest):
         raise HTTPException(status_code=400, detail=res["error"])
     return res
 
+# ==============================================================================
+# DRILL BRAVO: MULTI-JURISDICTION FORMAL SERVICE PACKAGE ROUTES
+# ==============================================================================
+
+@app.get("/api/v1/forensics/estate/service-packages", tags=["Service Packages"])
+def get_service_packages_route():
+    if not get_service_directory_overview:
+        return {"error": "Service package engine unavailable"}
+    return get_service_directory_overview()
+
+@app.get("/api/v1/forensics/estate/service-packages/target/{target_id}", tags=["Service Packages"])
+def get_target_service_package_route(target_id: str):
+    if not generate_target_service_package:
+        raise HTTPException(status_code=500, detail="Service package engine unavailable")
+    try:
+        return generate_target_service_package(target_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.get("/api/v1/forensics/estate/service-packages/download/pdf/{target_id}", tags=["Service Packages"])
+def download_target_service_pdf_route(target_id: str):
+    if not generate_target_service_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    try:
+        pdf_bytes = generate_target_service_pdf(target_id)
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename=SERVICE_PACKET_{target_id.upper()}_28LINE.pdf"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/api/v1/forensics/estate/service-packages/download/docx/{target_id}", tags=["Service Packages"])
+def download_target_service_docx_route(target_id: str):
+    if not generate_target_service_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    try:
+        docx_bytes = generate_target_service_docx(target_id)
+        return Response(
+            content=docx_bytes,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            headers={"Content-Disposition": f"attachment; filename=SERVICE_PACKET_{target_id.upper()}.docx"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/api/v1/forensics/estate/service-packages/download/zip", tags=["Service Packages"])
+def download_master_service_bundle_zip_route():
+    if not generate_master_service_bundle_zip:
+        raise HTTPException(status_code=500, detail="ZIP generator unavailable")
+    zip_bytes = generate_master_service_bundle_zip()
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=MASTER_SERVICE_PACKAGE_BUNDLE.zip"}
+    )
+
+# ==============================================================================
+# DRILL CHARLIE: HOSPITAL HEALTHCARE FRAUD & EMTALA INQUEST ROUTES
+# ==============================================================================
+
+@app.get("/api/v1/forensics/estate/hospital-fraud", tags=["Hospital Healthcare Fraud"])
+def get_hospital_fraud_overview_route():
+    if not get_hospital_fraud_overview:
+        return {"error": "Hospital fraud engine unavailable"}
+    return get_hospital_fraud_overview()
+
+@app.get("/api/v1/forensics/estate/hospital-fraud/queens-emtala", tags=["Hospital Healthcare Fraud"])
+def get_queens_emtala_route():
+    if not generate_queens_emtala_complaint:
+        return {"error": "Hospital fraud engine unavailable"}
+    return generate_queens_emtala_complaint()
+
+@app.get("/api/v1/forensics/estate/hospital-fraud/kapiolani-hipaa", tags=["Hospital Healthcare Fraud"])
+def get_kapiolani_hipaa_route():
+    if not generate_kapiolani_hipaa_demand:
+        return {"error": "Hospital fraud engine unavailable"}
+    return generate_kapiolani_hipaa_demand()
+
+@app.get("/api/v1/forensics/estate/hospital-fraud/proof-matrix", tags=["Hospital Healthcare Fraud"])
+def get_hospital_proof_matrix_route():
+    if not generate_hospital_proof_matrix:
+        return {"error": "Hospital fraud engine unavailable"}
+    return generate_hospital_proof_matrix()
+
+@app.get("/api/v1/forensics/estate/hospital-fraud/download/pdf", tags=["Hospital Healthcare Fraud"])
+def download_hospital_fraud_pdf_route():
+    if not generate_hospital_fraud_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    pdf_bytes = generate_hospital_fraud_pdf()
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=HOSPITAL_HEALTHCARE_FRAUD_INQUEST_28LINE.pdf"}
+    )
+
+@app.get("/api/v1/forensics/estate/hospital-fraud/download/docx", tags=["Hospital Healthcare Fraud"])
+def download_hospital_fraud_docx_route():
+    if not generate_hospital_fraud_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    docx_bytes = generate_hospital_fraud_docx()
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=HOSPITAL_HEALTHCARE_FRAUD_INQUEST.docx"}
+    )
+
+@app.get("/api/v1/forensics/estate/hospital-fraud/download/zip", tags=["Hospital Healthcare Fraud"])
+def download_hospital_fraud_zip_route():
+    if not generate_hospital_fraud_bundle_zip:
+        raise HTTPException(status_code=500, detail="ZIP generator unavailable")
+    zip_bytes = generate_hospital_fraud_bundle_zip()
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=HOSPITAL_HEALTHCARE_FRAUD_INQUEST_BUNDLE.zip"}
+    )
+
+# ==============================================================================
+# DRILL DELTA: JEFS DOCKET TELEMETRY & TAMPER MONITOR ROUTES
+# ==============================================================================
+
+@app.get("/api/v1/forensics/estate/jefs-monitor", tags=["JEFS Docket Telemetry"])
+def get_jefs_monitor_status_route():
+    if not get_jefs_monitor_status:
+        return {"error": "JEFS monitor engine unavailable"}
+    return get_jefs_monitor_status()
+
+@app.get("/api/v1/forensics/estate/jefs-monitor/alerts", tags=["JEFS Docket Telemetry"])
+def get_jefs_tamper_alerts_route():
+    if not get_tamper_alerts:
+        return {"alerts": []}
+    alerts = get_tamper_alerts()
+    return {"count": len(alerts), "alerts": alerts}
+
+@app.get("/api/v1/forensics/estate/jefs-monitor/scan", tags=["JEFS Docket Telemetry"])
+def run_jefs_scan_route(case_id: str = "1FDV-23-0001009"):
+    if not run_docket_integrity_scan:
+        raise HTTPException(status_code=500, detail="JEFS monitor engine unavailable")
+    return run_docket_integrity_scan(case_id)
+
+@app.get("/api/v1/forensics/estate/jefs-monitor/download/pdf", tags=["JEFS Docket Telemetry"])
+def download_jefs_dossier_pdf_route():
+    if not generate_jefs_audit_dossier_pdf:
+        raise HTTPException(status_code=500, detail="PDF generator unavailable")
+    pdf_bytes = generate_jefs_audit_dossier_pdf()
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=JEFS_DOCKET_TAMPERING_DOSSIER_28LINE.pdf"}
+    )
+
+@app.get("/api/v1/forensics/estate/jefs-monitor/download/docx", tags=["JEFS Docket Telemetry"])
+def download_jefs_dossier_docx_route():
+    if not generate_jefs_audit_dossier_docx:
+        raise HTTPException(status_code=500, detail="DOCX generator unavailable")
+    docx_bytes = generate_jefs_audit_dossier_docx()
+    return Response(
+        content=docx_bytes,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=JEFS_DOCKET_TAMPERING_DOSSIER.docx"}
+    )
+
+@app.get("/api/v1/forensics/estate/jefs-monitor/download/zip", tags=["JEFS Docket Telemetry"])
+def download_jefs_bundle_zip_route():
+    if not generate_jefs_monitor_bundle_zip:
+        raise HTTPException(status_code=500, detail="ZIP generator unavailable")
+    zip_bytes = generate_jefs_monitor_bundle_zip()
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=JEFS_DOCKET_TAMPERING_BUNDLE.zip"}
+    )
+
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
 
@@ -1466,6 +1740,83 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
                 self._send_json(500, {"error": "ZIP generator unavailable"})
             else:
                 self._send_bytes(200, "application/zip", generate_master_crucible_bundle_zip(), "MASTER_DEPOSITION_PERJURY_CRUCIBLE_BUNDLE.zip")
+
+        # Drill Bravo: Service Packages
+        elif path == "/api/v1/forensics/estate/service-packages":
+            self._send_json(200, get_service_directory_overview() if get_service_directory_overview else {})
+        elif path.startswith("/api/v1/forensics/estate/service-packages/target/"):
+            tid = path[len("/api/v1/forensics/estate/service-packages/target/"):]
+            try:
+                self._send_json(200, generate_target_service_package(tid) if generate_target_service_package else {})
+            except Exception as e:
+                self._send_json(404, {"error": str(e)})
+        elif path.startswith("/api/v1/forensics/estate/service-packages/download/pdf/"):
+            tid = path[len("/api/v1/forensics/estate/service-packages/download/pdf/"):]
+            if not generate_target_service_pdf:
+                self._send_json(500, {"error": "PDF generator unavailable"})
+            else:
+                self._send_bytes(200, "application/pdf", generate_target_service_pdf(tid), f"SERVICE_PACKET_{tid.upper()}_28LINE.pdf")
+        elif path.startswith("/api/v1/forensics/estate/service-packages/download/docx/"):
+            tid = path[len("/api/v1/forensics/estate/service-packages/download/docx/"):]
+            if not generate_target_service_docx:
+                self._send_json(500, {"error": "DOCX generator unavailable"})
+            else:
+                self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", generate_target_service_docx(tid), f"SERVICE_PACKET_{tid.upper()}.docx")
+        elif path == "/api/v1/forensics/estate/service-packages/download/zip":
+            if not generate_master_service_bundle_zip:
+                self._send_json(500, {"error": "ZIP generator unavailable"})
+            else:
+                self._send_bytes(200, "application/zip", generate_master_service_bundle_zip(), "MASTER_SERVICE_PACKAGE_BUNDLE.zip")
+
+        # Drill Charlie: Hospital Fraud & EMTALA
+        elif path == "/api/v1/forensics/estate/hospital-fraud":
+            self._send_json(200, get_hospital_fraud_overview() if get_hospital_fraud_overview else {})
+        elif path == "/api/v1/forensics/estate/hospital-fraud/queens-emtala":
+            self._send_json(200, generate_queens_emtala_complaint() if generate_queens_emtala_complaint else {})
+        elif path == "/api/v1/forensics/estate/hospital-fraud/kapiolani-hipaa":
+            self._send_json(200, generate_kapiolani_hipaa_demand() if generate_kapiolani_hipaa_demand else {})
+        elif path == "/api/v1/forensics/estate/hospital-fraud/proof-matrix":
+            self._send_json(200, generate_hospital_proof_matrix() if generate_hospital_proof_matrix else {})
+        elif path == "/api/v1/forensics/estate/hospital-fraud/download/pdf":
+            if not generate_hospital_fraud_pdf:
+                self._send_json(500, {"error": "PDF generator unavailable"})
+            else:
+                self._send_bytes(200, "application/pdf", generate_hospital_fraud_pdf(), "HOSPITAL_HEALTHCARE_FRAUD_INQUEST_28LINE.pdf")
+        elif path == "/api/v1/forensics/estate/hospital-fraud/download/docx":
+            if not generate_hospital_fraud_docx:
+                self._send_json(500, {"error": "DOCX generator unavailable"})
+            else:
+                self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", generate_hospital_fraud_docx(), "HOSPITAL_HEALTHCARE_FRAUD_INQUEST.docx")
+        elif path == "/api/v1/forensics/estate/hospital-fraud/download/zip":
+            if not generate_hospital_fraud_bundle_zip:
+                self._send_json(500, {"error": "ZIP generator unavailable"})
+            else:
+                self._send_bytes(200, "application/zip", generate_hospital_fraud_bundle_zip(), "HOSPITAL_HEALTHCARE_FRAUD_INQUEST_BUNDLE.zip")
+
+        # Drill Delta: JEFS Docket Telemetry
+        elif path == "/api/v1/forensics/estate/jefs-monitor":
+            self._send_json(200, get_jefs_monitor_status() if get_jefs_monitor_status else {})
+        elif path == "/api/v1/forensics/estate/jefs-monitor/alerts":
+            alerts = get_tamper_alerts() if get_tamper_alerts else []
+            self._send_json(200, {"count": len(alerts), "alerts": alerts})
+        elif path == "/api/v1/forensics/estate/jefs-monitor/scan":
+            cid = query.get("case_id", ["1FDV-23-0001009"])[0]
+            self._send_json(200, run_docket_integrity_scan(cid) if run_docket_integrity_scan else {})
+        elif path == "/api/v1/forensics/estate/jefs-monitor/download/pdf":
+            if not generate_jefs_audit_dossier_pdf:
+                self._send_json(500, {"error": "PDF generator unavailable"})
+            else:
+                self._send_bytes(200, "application/pdf", generate_jefs_audit_dossier_pdf(), "JEFS_DOCKET_TAMPERING_DOSSIER_28LINE.pdf")
+        elif path == "/api/v1/forensics/estate/jefs-monitor/download/docx":
+            if not generate_jefs_audit_dossier_docx:
+                self._send_json(500, {"error": "DOCX generator unavailable"})
+            else:
+                self._send_bytes(200, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", generate_jefs_audit_dossier_docx(), "JEFS_DOCKET_TAMPERING_DOSSIER.docx")
+        elif path == "/api/v1/forensics/estate/jefs-monitor/download/zip":
+            if not generate_jefs_monitor_bundle_zip:
+                self._send_json(500, {"error": "ZIP generator unavailable"})
+            else:
+                self._send_bytes(200, "application/zip", generate_jefs_monitor_bundle_zip(), "JEFS_DOCKET_TAMPERING_BUNDLE.zip")
         else:
             self._send_json(404, {"error": f"Not Found: {path}"})
 
