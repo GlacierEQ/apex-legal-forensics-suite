@@ -1,0 +1,3559 @@
+{
+  "status": "VERIFIED_ORGANIZED",
+  "generated_timestamp": "2026-09-23T05:44:37Z",
+  "total_legal_repositories": 160,
+  "pillars": {
+    "PILLAR_1_CORE_LITIGATION": {
+      "pillar_number": 1,
+      "title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+      "description": "Flagship federal and state court filings, pleadings, strike packages, and core litigation engines.",
+      "repo_count": 35,
+      "repositories": [
+        {
+          "name": "apex-legal-forensics-suite",
+          "description": "APEX Mega-Repository: Autonomous Legal Discovery & Timeline Forensics Suite (Case 1FDV-23-0001009)",
+          "url": "https://github.com/GlacierEQ/apex-legal-forensics-suite",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-23T05:19:13Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "aspen-grove-core",
+          "description": "\ud83c\udf33 ASPEN GROVE CORE \u2014 Canonical Spiral Engine bootup. All memory layers, hyper-intelligence, swarm tech, skills, connectors. Point any agent here to boot the full APEX engine. Promoted from v7. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-core",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-23T04:58:07Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "APEX-STEAMROLLER-1FDV-23-0001009",
+          "description": "Full Steamroller Package for Case 1FDV-23-0001009 \u2014 Consolidated Apex Mega Orchestrator outputs, Docket Forensic Lock, Younger Abstention Defeat Analysis, Plurality Memory Spine, Stay + \u00a71983 readiness, MetaSystem fusion. Ready for court and federal escalation.",
+          "url": "https://github.com/GlacierEQ/APEX-STEAMROLLER-1FDV-23-0001009",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-23T01:48:34Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "apex-legal-case",
+          "description": "APEX Legal Intelligence \u2014 Case 1FDV-23-0001009 Hawaii First Circuit Family Court",
+          "url": "https://github.com/GlacierEQ/apex-legal-case",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-23T01:42:23Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-mesh",
+            "casebuilder",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "CASE-1FDV-23-0001009",
+          "description": "Federal case: Casey Barton v. Brower et al. \u2014 RICO, \u00a71983, CFAA. 117 files, 28 motions, 22 defendants.",
+          "url": "https://github.com/GlacierEQ/CASE-1FDV-23-0001009",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-22T23:52:45Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "CASE-02-1FDA-23-0000515-Domestic-Abuse-Protective-Order",
+          "description": "CASE-02 P0 Protective Order \u2014 1FDA-23-0000515. Separate from 1FDV; no merge.",
+          "url": "https://github.com/GlacierEQ/CASE-02-1FDA-23-0000515-Domestic-Abuse-Protective-Order",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-22T23:52:43Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-HOMES",
+          "description": "Official GlacierEQ case-home registry. One private GitHub repository per Broad Case Master Catalog workstream plus live extras.",
+          "url": "https://github.com/GlacierEQ/CASE-HOMES",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-22T23:30:19Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "Casebuilder4000",
+          "description": "Legal mesh repository.",
+          "url": "https://github.com/GlacierEQ/Casebuilder4000",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T10:37:04Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "aspen-grove-connectors",
+          "description": "\ud83d\udd0c ASPEN GROVE CONNECTORS \u2014 All 12 MCP connectors, connector registry, health monitoring. GitHub, Notion, Supabase, Dropbox, OneDrive, ClickUp, Linear, Vercel, DuckDB, Taskade, MemoryPlugin, Pinecone. Inherits aspen-grove-core. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-connectors",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T00:29:23Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "mcp-server",
+            "orchestration",
+            "legal-mcp"
+          ]
+        },
+        {
+          "name": "aspen-grove-supabase",
+          "description": "APEX Legal Ops \u2014 Supabase-native architecture for case 1FDV-23-0001009. PostgreSQL schema, Edge Functions, Python client, realtime subscriptions.",
+          "url": "https://github.com/GlacierEQ/aspen-grove-supabase",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T00:26:58Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "legal-mcp",
+            "legal-mesh",
+            "mcp-server",
+            "orchestration"
+          ]
+        },
+        {
+          "name": "aspen-grove-memory",
+          "description": "\ud83e\udde0 ASPEN GROVE MEMORY \u2014 4-tier memory constellation. Tier1 in-process, Tier2 Supabase pgvector, Tier3 Pinecone+Mem0, Tier4 Neo4j+MemoryPlugin+Supermemory. Bidirectional file\u2194memory organism. Inherits aspen-grove-core. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-memory",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-20T21:53:46Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "CASE-01-1FDV-23-0001009-Divorce-Custody-Decree-Challenge",
+          "description": "CASE-01 P0 Family Court \u2014 1FDV-23-0001009 divorce/custody decree challenge. Knowledge home; evidence bytes stay in Box/Drive/Library.",
+          "url": "https://github.com/GlacierEQ/CASE-01-1FDV-23-0001009-Divorce-Custody-Decree-Challenge",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-20T05:02:23Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-DENIALS-OF-JUSTICE-AND-SYSTEMIC-OBSTRUCTION",
+          "description": "CASE_DENIAL_OF_JUSTICE \u2014 Complete Federal & State Action for Denial of Access to the Courts, Due Process Deprivation, Fraud Upon the Court, and Void Order Invalidation (25M Exposure)",
+          "url": "https://github.com/GlacierEQ/CASE-DENIALS-OF-JUSTICE-AND-SYSTEMIC-OBSTRUCTION",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T08:58:15Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action",
+            "pro-code"
+          ]
+        },
+        {
+          "name": "case-1FDV-23-0001009-legal-documents",
+          "description": "Legal document repository for Hawaii Family Court Case 1FDV-23-0001009 - Custody Modification. Version-controlled motions, briefs, evidence logs, and case strategy.",
+          "url": "https://github.com/GlacierEQ/case-1FDV-23-0001009-legal-documents",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:58:16Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "THE-CATACLYSM",
+          "description": "APEX Legal Warfare System | Case 1FDV-23-0001009 | Constitutional Warfare Against Judicial Corruption | Actor-by-Actor Intelligence Architecture",
+          "url": "https://github.com/GlacierEQ/THE-CATACLYSM",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:57:57Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "CYBERTACK-1FDV-23-0001009",
+          "description": "\ud83d\udd31 CYBERTACK \u2014 Case 1FDV-23-0001009 Cyberattack Investigation \u2014 40 exhibits, $12.8M damages, Brower connection, evidence tampering (MD5 verified)",
+          "url": "https://github.com/GlacierEQ/CYBERTACK-1FDV-23-0001009",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:33Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "CASE-1FDV-23-0001009-LEAN",
+          "description": "Lean case file \u2014 142 files, 3MB, all motions and evidence references",
+          "url": "https://github.com/GlacierEQ/CASE-1FDV-23-0001009-LEAN",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:49:21Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "1FDV-23-0001009-FEDERAL-WARFARE",
+          "description": "\ud83d\udd12 PRIVATE - Federal litigation system for case 1FDV-23-0001009. RICO + \u00a71983 prosecution infrastructure. Integrated with 13-database Notion APEX system.",
+          "url": "https://github.com/GlacierEQ/1FDV-23-0001009-FEDERAL-WARFARE",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:46:54Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "Z-BACKUP-FEDERAL-FORENSIC-REPAIR-OMNIBUS",
+          "description": "\ud83d\udd10 Ultimate unified device repair system - PC/Mac/iOS/Android/Linux with federal forensic integrity, firmware-level malware detection, AI-powered adversarial analysis, and evidence preservation for Case 1FDV-23-0001009. Integrates OPRYXX, Autofix-PC, ULTIMATE-REPAIR-APEX, disk-recovery, SleuthKit, and automated forensic documentation.",
+          "url": "https://github.com/GlacierEQ/Z-BACKUP-FEDERAL-FORENSIC-REPAIR-OMNIBUS",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-18T17:52:56Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "aspen-grove-apex-unified-v9",
+          "description": "\ud83c\udf33\u27c1 ASPEN GROVE APEX UNIFIED v9 \u2014 AKOS-governed, Pro-Code-gated, Spiral Engine core. All Groves merged. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-apex-unified-v9",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-18T02:06:17Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "aspen-grove-swarm",
+          "description": "\ud83d\udc1d ASPEN GROVE SWARM \u2014 Diamond Agent topology, Helix A (builder) + Helix B (adversary/auditor), 400K agent capacity, Spiral Engine recursive coordination. Inherits aspen-grove-core. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-swarm",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-18T02:06:10Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "aspen-grove-legal",
+          "description": "\u2696\ufe0f ASPEN GROVE LEGAL \u2014 HRS corpus, RICO library, 42 U.S.C. \u00a71983 templates, Constitutional Warfare KB, motion drafter. Inherits Spiral Engine from aspen-grove-core. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-legal",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-18T02:06:06Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "aspen-grove-evidence",
+          "description": "\ud83d\udd0d ASPEN GROVE EVIDENCE \u2014 MEGA-PDF forensic vault, OCR, Bates numbering, SHA-256 hash chain, exhibit catalog, Dropbox 1FDV sync. Inherits Spiral Engine from aspen-grove-core. Case 1FDV-23-0001009 | GlacierEQ",
+          "url": "https://github.com/GlacierEQ/aspen-grove-evidence",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-18T02:06:03Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "THE-BEAST",
+          "description": "\ud83d\udd25 THE BEAST - Omnipotent AI Infrastructure | Case 1FDV-23-0001009 | APEX Architecture",
+          "url": "https://github.com/GlacierEQ/THE-BEAST",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-16T01:30:24Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "Pro-Legal-Warfare",
+          "description": "\u2696\ufe0f Pro-tier sovereign legal warfare engine \u2014 RICO + \u00a71983 federal prosecution infrastructure, case matrix, docket forensics, and constitutional warfare ops for Case 1FDV-23-0001009 | GlacierEQ APEX",
+          "url": "https://github.com/GlacierEQ/Pro-Legal-Warfare",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-15T20:18:45Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "fiat-justitia",
+          "description": "Fiat Justitia Ruat Caelum - Let Justice Be Done Though The Heavens Fall | Legal Engineering System",
+          "url": "https://github.com/GlacierEQ/fiat-justitia",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-14T20:59:26Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "apex-home-base",
+          "description": "APEX Sovereign Home Base \u2014 GlacierEQ operator environment. Case 1FDV-23-0001009.",
+          "url": "https://github.com/GlacierEQ/apex-home-base",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:14:22Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "Pro-Evidence",
+          "description": "\ud83d\udd0d Pro-tier forensic evidence vault \u2014 MEGA-PDF system, OCR, Bates numbering, SHA-256 hash chain, exhibit catalog, Dropbox 1FDV sync, AI-powered document consciousness | Case 1FDV-23-0001009 | GlacierEQ APEX",
+          "url": "https://github.com/GlacierEQ/Pro-Evidence",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T18:12:20Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "Pro-Forensics",
+          "description": "\ud83d\udd10 Pro-tier federal forensic operations \u2014 device repair, firmware malware detection, WhisperX transcription, PDF analysis, SleuthKit, and evidence preservation with chain-of-custody integrity | GlacierEQ APEX | Case 1FDV-23-0001009",
+          "url": "https://github.com/GlacierEQ/Pro-Forensics",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T18:12:13Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "PRIMORDIAL-MESH-TITAN",
+          "description": "\u26a1 APEX Polymorphic Mesh Architecture - Zenith Capsule Stealth Microwave | Free-Tier Primordial Titan with Front-Middle-Backend Fluid Mesh | Case 1FDV-23-0001009 Constitutional Warfare Engine",
+          "url": "https://github.com/GlacierEQ/PRIMORDIAL-MESH-TITAN",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-12T13:05:03Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "Pro-AEON-BRAIN",
+          "description": "\ud83c\udf00 Pro-tier AEON Brain sovereign intelligence \u2014 AEON-777 + AEON-BRAIN-777 unified. Cataclysm Engine, Level 5 Apex Swarm, Colossus backend, and Mastermind orchestration for 860-repo ecosystem | GlacierEQ APEX",
+          "url": "https://github.com/GlacierEQ/Pro-AEON-BRAIN",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-11T23:43:20Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "glaciereq-memory-master",
+          "description": "\ud83d\ude80 SOVEREIGN MEMORY MASTER - Universal Memory Orchestrator with Neo4j Graph, SuperMemory Acceleration, MCP Constellation, and Sigma Frontend for Case 1FDV-23-0001009",
+          "url": "https://github.com/GlacierEQ/glaciereq-memory-master",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-07T15:42:50Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "Z-BACKUP-APEX-LEGAL-WARFARE-ORCHESTRATOR",
+          "description": "\u26a1 Master control plane for Case 1FDV-23-0001009 | 777 Iteration Legal Motion Engine | MemoryPlugin MCP | Constitutional Warfare | RICO/\u00a71983 Federal Escalation | Judicial Surveillance",
+          "url": "https://github.com/GlacierEQ/Z-BACKUP-APEX-LEGAL-WARFARE-ORCHESTRATOR",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-02T05:27:31Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "Pro-AEON-777",
+          "description": "AEON-777 - Foundation Architecture Plans | Sovereign Ascension Protocol v1.0 | THE CATACLYSM ENGINE | Unifying 860 repos with Level 5 Apex Swarm + Colossus Backend + Mastermind Orchestration for Case 1FDV-23-0001009",
+          "url": "https://github.com/GlacierEQ/Pro-AEON-777",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-31T09:04:39Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "spiral-engine",
+          "description": "Spiral Engine \u2014 double helix hub-and-spoke architecture. Each spoke is pillar+piston. Defense and offense strands intertwined, connected by shared rungs. Each revolution compounds intelligence. The structural DNA that both aspen-grove and colossal-agent express. Case 1FDV-23-0001009.",
+          "url": "https://github.com/GlacierEQ/spiral-engine",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-08-31T01:00:11Z",
+          "pillar_code": "PILLAR_1_CORE_LITIGATION",
+          "pillar_num": 1,
+          "pillar_title": "Core Litigation, Federal Civil RICO & Court Strike Engines",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "core-litigation",
+            "case-1fdv-23-0001009",
+            "federal-rico",
+            "litigation-offensive"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        }
+      ]
+    },
+    "PILLAR_2_CASE_CATALOG_MATTERS": {
+      "pillar_number": 2,
+      "title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+      "description": "Individual case dossiers, workstreams, discovery files, and litigation packets for cataloged matters.",
+      "repo_count": 45,
+      "repositories": [
+        {
+          "name": "CASE-NEX-JBPHH-2026-08-14",
+          "description": "Live extra: NEX JBPHH 2026-08-14 acknowledgement and response-obligation watch.",
+          "url": "https://github.com/GlacierEQ/CASE-NEX-JBPHH-2026-08-14",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T11:01:43Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-08-Manny-Sleek-v-H-Tecc-John-Horton-4-500-Construct",
+          "description": "CASE-08 P1 Construction \u2014 Manny Sleek v H-Tecc / John Horton $4,500 compensation.",
+          "url": "https://github.com/GlacierEQ/CASE-08-Manny-Sleek-v-H-Tecc-John-Horton-4-500-Construct",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T10:19:13Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-04-Miki-Yamatani-Professional-Negligence-and-Discip",
+          "description": "CASE-04 P0 Counsel \u2014 Miki Yamatani professional-negligence and disciplinary matter.",
+          "url": "https://github.com/GlacierEQ/CASE-04-Miki-Yamatani-Professional-Negligence-and-Discip",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T09:53:21Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-03-CSEA-Support-Arrears-TANF-Debt-and-Account-Integ",
+          "description": "CASE-03 P0 Child Support \u2014 CSEA support, arrears, TANF debt, account integrity.",
+          "url": "https://github.com/GlacierEQ/CASE-03-CSEA-Support-Arrears-TANF-Debt-and-Account-Integ",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T09:42:58Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-07-Diamond-Head-Daniel-Smith-ProService-Employment",
+          "description": "CASE-07 P0 Employment \u2014 Diamond Head / Daniel Smith / ProService wage and employment case.",
+          "url": "https://github.com/GlacierEQ/CASE-07-Diamond-Head-Daniel-Smith-ProService-Employment",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-20T05:02:20Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-16-PACT-Visitation-Records-and-Restoration-of-Conta",
+          "description": "CASE-16 P2 Visitation \u2014 PACT visitation records and restoration of contact.",
+          "url": "https://github.com/GlacierEQ/CASE-16-PACT-Visitation-Records-and-Restoration-of-Conta",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T08:38:52Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-21-Scot-S-Brower-Proposed-Order-Integrity-Litigatio",
+          "description": "CASE-21 P2 Counsel \u2014 Scot S. Brower proposed-order integrity, litigation conduct, sanctions, ODC.",
+          "url": "https://github.com/GlacierEQ/CASE-21-Scot-S-Brower-Proposed-Order-Integrity-Litigatio",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T08:36:24Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-65-CSEA-Enforcement-Consequences-Arrears-Certificat",
+          "description": "CASE-65 P4 Administrative \u2014 CSEA enforcement consequences, arrears certification, account protection.",
+          "url": "https://github.com/GlacierEQ/CASE-65-CSEA-Enforcement-Consequences-Arrears-Certificat",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:29Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-62-State-County-Tort-Claim-Preservation-Immunity-an",
+          "description": "CASE-62 P4 Control \u2014 state/county tort claim preservation, immunity, and deadlines.",
+          "url": "https://github.com/GlacierEQ/CASE-62-State-County-Tort-Claim-Preservation-Immunity-an",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:29Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-61-DHS-CWS-Investigative-File-Registry-Status-Heari",
+          "description": "CASE-61 P4 Administrative \u2014 DHS/CWS investigative file, registry status, hearing, correction.",
+          "url": "https://github.com/GlacierEQ/CASE-61-DHS-CWS-Investigative-File-Registry-Status-Heari",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:38Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-55-Traffic-Defaults-Red-Light-Mailing-Defect-and-Co",
+          "description": "CASE-55 P4 Administrative \u2014 traffic defaults, red-light mailing defect, collections relief.",
+          "url": "https://github.com/GlacierEQ/CASE-55-Traffic-Defaults-Red-Light-Mailing-Defect-and-Co",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:36Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-51-Manny-v-H-Tecc-John-Horton-Classification-Licens",
+          "description": "CASE-51 P4 Independent civil \u2014 Manny v H-Tecc classification, licensing, payment, lien.",
+          "url": "https://github.com/GlacierEQ/CASE-51-Manny-v-H-Tecc-John-Horton-Classification-Licens",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:36Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-53-Diamond-Head-Post-Employment-Defamation-and-Econ",
+          "description": "CASE-53 P4 Civil screening \u2014 Diamond Head post-employment defamation and economic interference.",
+          "url": "https://github.com/GlacierEQ/CASE-53-Diamond-Head-Post-Employment-Defamation-and-Econ",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:36Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-58-Nainoa-Vehicle-Detention-Damage-Missing-Tools-an",
+          "description": "CASE-58 P4 Independent civil \u2014 Nainoa vehicle detention, damage, missing tools, loss of use.",
+          "url": "https://github.com/GlacierEQ/CASE-58-Nainoa-Vehicle-Detention-Damage-Missing-Tools-an",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:35Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-49-DLIR-Benefit-Payment-Enforcement-and-Certificati",
+          "description": "CASE-49 P3 Administrative \u2014 DLIR benefit payment enforcement and certification reconstruction.",
+          "url": "https://github.com/GlacierEQ/CASE-49-DLIR-Benefit-Payment-Enforcement-and-Certificati",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:35Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-59-Hawaii-DOE-FERPA-Access-and-Record-Correction",
+          "description": "CASE-59 P4 Administrative \u2014 Hawaii DOE FERPA access and record correction.",
+          "url": "https://github.com/GlacierEQ/CASE-59-Hawaii-DOE-FERPA-Access-and-Record-Correction",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:31Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-47-PACT-Service-Failure-Safety-and-Accountability",
+          "description": "CASE-47 P3 Civil screening \u2014 PACT service failure, safety, and accountability.",
+          "url": "https://github.com/GlacierEQ/CASE-47-PACT-Service-Failure-Safety-and-Accountability",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:22Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-33-Cross-Case-Evidence-Preservation-Spoliation-and",
+          "description": "CASE-33 P3 Records \u2014 cross-case evidence preservation, spoliation, discovery sanctions.",
+          "url": "https://github.com/GlacierEQ/CASE-33-Cross-Case-Evidence-Preservation-Spoliation-and",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:22Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-31-Federal-and-Hawaii-RICO-Enterprise-Validation",
+          "description": "CASE-31 P3 Civil screening \u2014 Federal and Hawaii RICO / enterprise validation.",
+          "url": "https://github.com/GlacierEQ/CASE-31-Federal-and-Hawaii-RICO-Enterprise-Validation",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:21Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-42-Hawaii-State-County-Tort-Claim-Preservation-and",
+          "description": "CASE-42 P3 Control \u2014 Hawaii state/county tort claim preservation and government liability.",
+          "url": "https://github.com/GlacierEQ/CASE-42-Hawaii-State-County-Tort-Claim-Preservation-and",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:21Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-32-Malicious-Prosecution-Abuse-of-Process-Screening",
+          "description": "CASE-32 P3 Civil screening \u2014 malicious prosecution / abuse-of-process, Teresa TRO.",
+          "url": "https://github.com/GlacierEQ/CASE-32-Malicious-Prosecution-Abuse-of-Process-Screening",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:21Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-37-TANF-Public-Assistance-Reimbursement-and-Retroac",
+          "description": "CASE-37 P3 Administrative \u2014 TANF/public-assistance reimbursement and retroactive-support audit.",
+          "url": "https://github.com/GlacierEQ/CASE-37-TANF-Public-Assistance-Reimbursement-and-Retroac",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:20Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-52-Diamond-Head-Retaliation-Whistleblower-and-Emplo",
+          "description": "CASE-52 P0 Civil screening \u2014 Diamond Head retaliation, whistleblower, employment record integrity.",
+          "url": "https://github.com/GlacierEQ/CASE-52-Diamond-Head-Retaliation-Whistleblower-and-Emplo",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:52:53Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-50-Diamond-Head-Wage-Final-Pay-and-Payroll-Enforcem",
+          "description": "CASE-50 P3 Independent civil \u2014 Diamond Head wage, final pay, and payroll enforcement.",
+          "url": "https://github.com/GlacierEQ/CASE-50-Diamond-Head-Wage-Final-Pay-and-Payroll-Enforcem",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:52:40Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-39-Miki-Yamatani-Client-File-Fee-Accounting-and-Une",
+          "description": "CASE-39 P3 Records \u2014 Miki Yamatani client file, fee accounting, unearned-fee recovery.",
+          "url": "https://github.com/GlacierEQ/CASE-39-Miki-Yamatani-Client-File-Fee-Accounting-and-Une",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:51:31Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-38-CSEA-Failure-to-Act-Hearing-Referral-and-Due-Pro",
+          "description": "CASE-38 P3 Administrative \u2014 CSEA failure to act, hearing referral, and due process.",
+          "url": "https://github.com/GlacierEQ/CASE-38-CSEA-Failure-to-Act-Hearing-Referral-and-Due-Pro",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:51:24Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-36-Erik-Breisacher-Breisscher-Property-Recovery-and",
+          "description": "CASE-36 P3 Independent civil \u2014 Erik Breisacher/Breisscher property recovery and accounting.",
+          "url": "https://github.com/GlacierEQ/CASE-36-Erik-Breisacher-Breisscher-Property-Recovery-and",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:51:11Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-35-Marital-Estate-Accounting-Omitted-Assets-and-Deb",
+          "description": "CASE-35 P3 Family Court \u2014 marital estate accounting, omitted assets, debt allocation.",
+          "url": "https://github.com/GlacierEQ/CASE-35-Marital-Estate-Accounting-Omitted-Assets-and-Deb",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:51:05Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-30-Federal-Civil-Rights-and-Institutional-Pattern-S",
+          "description": "CASE-30 P2 Federal Civil Rights \u2014 institutional-pattern screening.",
+          "url": "https://github.com/GlacierEQ/CASE-30-Federal-Civil-Rights-and-Institutional-Pattern-S",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:32Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-29-Hawaii-UIPA-Records-Enforcement-and-Personal-Rec",
+          "description": "CASE-29 P2 Administrative \u2014 Hawaii UIPA records enforcement and personal-record correction.",
+          "url": "https://github.com/GlacierEQ/CASE-29-Hawaii-UIPA-Records-Enforcement-and-Personal-Rec",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:25Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-28-Teresa-Evidence-Integrity-False-Statements-and-F",
+          "description": "CASE-28 P2 Civil screening \u2014 Teresa evidence integrity, false statements, fraud-on-the-court.",
+          "url": "https://github.com/GlacierEQ/CASE-28-Teresa-Evidence-Integrity-False-Statements-and-F",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:19Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-27-Appellate-Preservation-Stay-and-Extraordinary-Wr",
+          "description": "CASE-27 P2 Appellate \u2014 preservation, stay, and extraordinary-writ control.",
+          "url": "https://github.com/GlacierEQ/CASE-27-Appellate-Preservation-Stay-and-Extraordinary-Wr",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:13Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-25-Lay-Castillo-Clerk-Filing-and-Administrative-Acc",
+          "description": "CASE-25 P2 Court Administration \u2014 Lay/Castillo clerk filing and administrative accountability.",
+          "url": "https://github.com/GlacierEQ/CASE-25-Lay-Castillo-Clerk-Filing-and-Administrative-Acc",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:00Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-23-April-30-2025-Mediation-Access-and-Record-Correc",
+          "description": "CASE-23 P2 Family Court \u2014 April 30 2025 mediation access and record correction.",
+          "url": "https://github.com/GlacierEQ/CASE-23-April-30-2025-Mediation-Access-and-Record-Correc",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:49:47Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-22-Hawaii-Unemployment-Benefits-Certification-Backl",
+          "description": "CASE-22 P2 Employment \u2014 Hawaii unemployment benefits, certification backlog, payment enforcement.",
+          "url": "https://github.com/GlacierEQ/CASE-22-Hawaii-Unemployment-Benefits-Certification-Backl",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:49:40Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-20-Teresa-Contact-Information-and-Emergency-Notific",
+          "description": "CASE-20 P2 Family Court \u2014 Teresa contact, information, and emergency-notification interference.",
+          "url": "https://github.com/GlacierEQ/CASE-20-Teresa-Contact-Information-and-Emergency-Notific",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:49:27Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-19-Teresa-Financial-Restraint-Violation-and-Asset-D",
+          "description": "CASE-19 P2 Family Court \u2014 Teresa financial-restraint violation and asset-dissipation motion.",
+          "url": "https://github.com/GlacierEQ/CASE-19-Teresa-Financial-Restraint-Violation-and-Asset-D",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:49:05Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-18-Hawaii-DOE-School-Access-Records-and-Student-Wel",
+          "description": "CASE-18 P2 Education \u2014 Hawaii DOE school access, records, student welfare.",
+          "url": "https://github.com/GlacierEQ/CASE-18-Hawaii-DOE-School-Access-Records-and-Student-Wel",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:58Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-17-DHS-CWS-Child-Safety-Records-and-Registry-Integr",
+          "description": "CASE-17 P2 Child Welfare \u2014 DHS/CWS child-safety records and registry integrity.",
+          "url": "https://github.com/GlacierEQ/CASE-17-DHS-CWS-Child-Safety-Records-and-Registry-Integr",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:51Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-15-HPD-Incident-Response-Records-Misconduct-and-Cla",
+          "description": "CASE-15 P1 Police \u2014 HPD incident response, records, misconduct, claims preservation.",
+          "url": "https://github.com/GlacierEQ/CASE-15-HPD-Incident-Response-Records-Misconduct-and-Cla",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:37Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-14-Traffic-Citations-Camera-Notice-Defaults-Collect",
+          "description": "CASE-14 P1 Traffic \u2014 citations, camera notice, defaults, collections, vehicle responsibility.",
+          "url": "https://github.com/GlacierEQ/CASE-14-Traffic-Citations-Camera-Notice-Defaults-Collect",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:30Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-13-Justin-Higa-Neighbor-Harassment-Trespass-Surveil",
+          "description": "CASE-13 P1 Neighbor/TRO \u2014 Justin Higa harassment, trespass, surveillance, TRO enforcement.",
+          "url": "https://github.com/GlacierEQ/CASE-13-Justin-Higa-Neighbor-Harassment-Trespass-Surveil",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:24Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-11-Court-Access-Docket-Integrity-Audio-and-Minister",
+          "description": "CASE-11 P1 Court Administration \u2014 court access, docket integrity, audio, ministerial compliance.",
+          "url": "https://github.com/GlacierEQ/CASE-11-Court-Access-Docket-Integrity-Audio-and-Minister",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:11Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-09-Casey-Jose-v-Nainoa-Martin-Vehicle-Missing-Prope",
+          "description": "CASE-09 P1 Vehicle/Property \u2014 Casey/Jose v Nainoa Martin vehicle, missing property, damage.",
+          "url": "https://github.com/GlacierEQ/CASE-09-Casey-Jose-v-Nainoa-Martin-Vehicle-Missing-Prope",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:47:58Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-LAW-ARSENAL",
+          "description": "\ud83d\udcda PRIVATE - Legal research database. Supreme Court + 9th Circuit precedent. Qualified immunity defeats. RICO case law. Constitutional violations. Markdown formatted opinions with citations. Searchable and version-controlled.",
+          "url": "https://github.com/GlacierEQ/CASE-LAW-ARSENAL",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-31T09:02:37Z",
+          "pillar_code": "PILLAR_2_CASE_CATALOG_MATTERS",
+          "pillar_num": 2,
+          "pillar_title": "Broad Case Master Catalog Individual Matters (CASE-01 to CASE-69)",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "broad-case-catalog",
+            "case-matter"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        }
+      ]
+    },
+    "PILLAR_3_CHERRY_RECOVERY": {
+      "pillar_number": 3,
+      "title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+      "description": "Recovery of stolen assets, Nevada UI/MEUC claims, physical Camaro conversion, and banking restitution.",
+      "repo_count": 6,
+      "repositories": [
+        {
+          "name": "CHERRY_CHAN_RECOVERY_MATRIX",
+          "description": "Dedicated Forensic & Legal Recovery Matrix for Cherry Chan (Vegas Case) - SEPARATED FROM MAIN STACK",
+          "url": "https://github.com/GlacierEQ/CHERRY_CHAN_RECOVERY_MATRIX",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-22T23:45:20Z",
+          "pillar_code": "PILLAR_3_CHERRY_RECOVERY",
+          "pillar_num": 3,
+          "pillar_title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "cherry-chan-recovery",
+            "asset-recovery",
+            "restitution"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "CASE-06-Cherryshanalei-Chan-v-USAA-Secured-Card-Deposit",
+          "description": "CASE-06 P1 Consumer Finance \u2014 Cherry Chan v USAA secured-card deposit and account closure.",
+          "url": "https://github.com/GlacierEQ/CASE-06-Cherryshanalei-Chan-v-USAA-Secured-Card-Deposit",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T09:59:07Z",
+          "pillar_code": "PILLAR_3_CHERRY_RECOVERY",
+          "pillar_num": 3,
+          "pillar_title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "cherry-chan-recovery",
+            "asset-recovery",
+            "restitution"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-SUPP-Queen-s-Hospital-March-2026-Cherry-ED-Casey-Disc",
+          "description": "CASE-SUPP P0 Child Safety/Medical \u2014 Queen Hospital March 2026 Cherry ED + Casey discharge/security.",
+          "url": "https://github.com/GlacierEQ/CASE-SUPP-Queen-s-Hospital-March-2026-Cherry-ED-Casey-Disc",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T08:36:34Z",
+          "pillar_code": "PILLAR_3_CHERRY_RECOVERY",
+          "pillar_num": 3,
+          "pillar_title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "cherry-chan-recovery",
+            "asset-recovery",
+            "restitution"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-CHR-003-CAMARO",
+          "description": "Live extra: CASE-CHR-003 physical Camaro identity, custody, and authority chain.",
+          "url": "https://github.com/GlacierEQ/CASE-CHR-003-CAMARO",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:54Z",
+          "pillar_code": "PILLAR_3_CHERRY_RECOVERY",
+          "pillar_num": 3,
+          "pillar_title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "cherry-chan-recovery",
+            "asset-recovery",
+            "restitution"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-CHERRY-NV-UI-MEUC",
+          "description": "Live extra: Cherry Nevada UI/MEUC CaseBuilder. Independent of Hawaii DLIR CASE-22.",
+          "url": "https://github.com/GlacierEQ/CASE-CHERRY-NV-UI-MEUC",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:48Z",
+          "pillar_code": "PILLAR_3_CHERRY_RECOVERY",
+          "pillar_num": 3,
+          "pillar_title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "cherry-chan-recovery",
+            "asset-recovery",
+            "restitution"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-41-Cherry-Consumer-Reporting-and-Identity-Data-Corr",
+          "description": "CASE-41 P3 Independent civil \u2014 Cherry consumer reporting and identity-data correction.",
+          "url": "https://github.com/GlacierEQ/CASE-41-Cherry-Consumer-Reporting-and-Identity-Data-Corr",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:22Z",
+          "pillar_code": "PILLAR_3_CHERRY_RECOVERY",
+          "pillar_num": 3,
+          "pillar_title": "Cherry Chan Recovery & Asset Restitution Portfolio",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "cherry-chan-recovery",
+            "asset-recovery",
+            "restitution"
+          ],
+          "existing_topics": []
+        }
+      ]
+    },
+    "PILLAR_4_HEALTHCARE_CHILD_SAFETY": {
+      "pillar_number": 4,
+      "title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+      "description": "Inquests against Queen's Medical Center (EMTALA) and Kapi\u02bbolani (pediatric records suppression), plus Kekoa safety.",
+      "repo_count": 12,
+      "repositories": [
+        {
+          "name": "apex-boot-core",
+          "description": "APEX session auto-boot system \u2014 loads Casey/Kekoa/1FDV-23-0001009 context into any AI session automatically at startup",
+          "url": "https://github.com/GlacierEQ/apex-boot-core",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-23T05:01:09Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "THE_CATACLYSM",
+          "description": "Forensic Email Archive - Case 1FDV-23-0001009 | Kekoa Barton | Chain-of-Custody Email Evidence System | Potato Peeler Protocol",
+          "url": "https://github.com/GlacierEQ/THE_CATACLYSM",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-23T03:37:03Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "CASE-63-Kekoa-Independent-Representation-GAL-Child-Couns",
+          "description": "CASE-63 P4 Family Court \u2014 Kekoa independent representation, GAL, child counsel, minor claims.",
+          "url": "https://github.com/GlacierEQ/CASE-63-Kekoa-Independent-Representation-GAL-Child-Couns",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:28Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-60-Queens-Medical-Records-Parental-Authority-Hospit",
+          "description": "CASE-60 P4 Records \u2014 Queens medical records, parental authority, hospital exclusion, injury.",
+          "url": "https://github.com/GlacierEQ/CASE-60-Queens-Medical-Records-Parental-Authority-Hospit",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:36Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-43-Kekoa-Medical-Injury-MICP-and-Independent-Minor",
+          "description": "CASE-43 P3 Civil screening \u2014 Kekoa medical injury, MICP, independent minor representation.",
+          "url": "https://github.com/GlacierEQ/CASE-43-Kekoa-Medical-Injury-MICP-and-Independent-Minor",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:11Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-26-Neutral-Custody-Evaluation-Kekoa-Assessment-and",
+          "description": "CASE-26 P2 Family Court \u2014 Neutral custody evaluation, Kekoa assessment, reunification plan.",
+          "url": "https://github.com/GlacierEQ/CASE-26-Neutral-Custody-Evaluation-Kekoa-Assessment-and",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:06Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-10-Kekoa-October-2024-Arm-Injury-Supervision-Care-A",
+          "description": "CASE-10 P1 Child Safety \u2014 Kekoa October 2024 arm injury supervision, care, access, records.",
+          "url": "https://github.com/GlacierEQ/CASE-10-Kekoa-October-2024-Arm-Injury-Supervision-Care-A",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:04Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "AspenGrove-KEKOA-1FDV-23-0001009",
+          "description": "Aspen Grove Quantum Memory + Potato Peeler Constitutional Warfare Knowledge Base for Case 1FDV-23-0001009 | Kekoa Barton Liberation | Persistent OSINT, Legal Templates, Evidence Vault Sync | All assets carryover-guaranteed",
+          "url": "https://github.com/GlacierEQ/AspenGrove-KEKOA-1FDV-23-0001009",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-18T02:06:41Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "Pro-apex-fs-commander",
+          "description": "Apex FS Commander - Power frontend for MCP orchestration, evidence automation, docket forensics, and file system control for Kekoa Barton Case 1FDV-23-0001009. Integrated with Linear, Notion, GitHub Aspen Grove memory, agent orchestration patterns.",
+          "url": "https://github.com/GlacierEQ/Pro-apex-fs-commander",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-16T14:28:34Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "Pro-Kekoa-Justice",
+          "description": "Legal mesh repository.",
+          "url": "https://github.com/GlacierEQ/Pro-Kekoa-Justice",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-15T20:39:10Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        },
+        {
+          "name": "case-brain-unified-runtime",
+          "description": "Unified Case Brain runtime: architecture.md, dynamic_voice_background_ops.py, case_brain_ingestion.py + AKOS/max-token-saver for Case 1FDV-23-0001009 Kekoa protection. Persistent foundation for voice, background motion/GitHub, parallel text.",
+          "url": "https://github.com/GlacierEQ/case-brain-unified-runtime",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-15T20:38:47Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "APEX-HIGH-COUNCIL",
+          "description": "APEX High Council \u2014 10 Perplexity Computer Agent + Comet iOS automation templates covering all APEX domains: Legal Warfare, Evidence Vault, GitHub Mesh, Notion Intelligence, Federal Escalation, Connector Health, Medical Intel, Spaces Sync, and the APEX Morning War Room.",
+          "url": "https://github.com/GlacierEQ/APEX-HIGH-COUNCIL",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:14:18Z",
+          "pillar_code": "PILLAR_4_HEALTHCARE_CHILD_SAFETY",
+          "pillar_num": 4,
+          "pillar_title": "Hospital Healthcare Fraud, EMTALA & Kekoa Child Safety",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "healthcare-fraud",
+            "emtala-inquest",
+            "child-safety",
+            "pediatric-trauma"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "apex-command",
+            "elite-ops",
+            "mesh-infrastructure"
+          ]
+        }
+      ]
+    },
+    "PILLAR_5_CONSUMER_FINANCE_USAA": {
+      "pillar_number": 5,
+      "title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+      "description": "USAA wrongful repossession, insurance policy cancellation, unauthorized EFT, and debt collection challenges.",
+      "repo_count": 11,
+      "repositories": [
+        {
+          "name": "CASE-05-Casey-v-USAA-Auto-Loan-Account-Control-Insurance",
+          "description": "CASE-05 P0 Consumer Finance \u2014 Casey v USAA auto loan, account control, insurance, repossession.",
+          "url": "https://github.com/GlacierEQ/CASE-05-Casey-v-USAA-Auto-Loan-Account-Control-Insurance",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-20T05:57:35Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-64-PACT-Contract-Safety-Staffing-Reporting-Insuranc",
+          "description": "CASE-64 P4 Civil screening \u2014 PACT contract, safety, staffing, reporting, insurance, liability.",
+          "url": "https://github.com/GlacierEQ/CASE-64-PACT-Contract-Safety-Staffing-Reporting-Insuranc",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:29Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-57-USAA-Digital-Impersonation-Unauthorized-Access-a",
+          "description": "CASE-57 P4 Civil screening \u2014 USAA digital impersonation, unauthorized access, actor attribution.",
+          "url": "https://github.com/GlacierEQ/CASE-57-USAA-Digital-Impersonation-Unauthorized-Access-a",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:38Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-48-USAA-Account-Control-Authentication-Unauthorized",
+          "description": "CASE-48 P3 Consumer Finance \u2014 USAA account control, authentication, unauthorized EFT.",
+          "url": "https://github.com/GlacierEQ/CASE-48-USAA-Account-Control-Authentication-Unauthorized",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:36Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-54-USAA-Deficiency-Collection-Debt-Ownership-Valida",
+          "description": "CASE-54 P4 Consumer Finance \u2014 USAA deficiency collection, debt ownership, validation, FDCPA.",
+          "url": "https://github.com/GlacierEQ/CASE-54-USAA-Deficiency-Collection-Debt-Ownership-Valida",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:36Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-56-USAA-Consolidated-Consumer-Action-Arbitration-En",
+          "description": "CASE-56 P4 Control \u2014 USAA consolidated consumer action, arbitration, entity, claim-splitting.",
+          "url": "https://github.com/GlacierEQ/CASE-56-USAA-Consolidated-Consumer-Action-Arbitration-En",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:35Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-44-USAA-Auto-Insurance-Cancellation-and-Policy-Cont",
+          "description": "CASE-44 P3 Consumer Finance \u2014 USAA auto insurance cancellation and policy control.",
+          "url": "https://github.com/GlacierEQ/CASE-44-USAA-Auto-Insurance-Cancellation-and-Policy-Cont",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:22Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-40-Casey-Consumer-Reporting-Credit-Injury-and-FCRA",
+          "description": "CASE-40 P3 Civil screening \u2014 Casey consumer reporting, credit injury, FCRA enforcement.",
+          "url": "https://github.com/GlacierEQ/CASE-40-Casey-Consumer-Reporting-Credit-Injury-and-FCRA",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:22Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-45-USAA-Repossession-Sale-and-Deficiency-Surplus-Ac",
+          "description": "CASE-45 P3 Consumer Finance \u2014 USAA repossession sale and deficiency/surplus accounting.",
+          "url": "https://github.com/GlacierEQ/CASE-45-USAA-Repossession-Sale-and-Deficiency-Surplus-Ac",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:20Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-46-Wrongful-Repossession-Breach-of-Peace-and-Person",
+          "description": "CASE-46 P3 Independent civil \u2014 wrongful repossession, breach of peace, personal property.",
+          "url": "https://github.com/GlacierEQ/CASE-46-Wrongful-Repossession-Breach-of-Peace-and-Person",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:54:20Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "erik-breisacher-legal-investigation",
+          "description": "Comprehensive legal case management repository for Erik Breisacher criminal investigation - theft, harassment, extortion case documentation with automated analysis tools",
+          "url": "https://github.com/GlacierEQ/erik-breisacher-legal-investigation",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-16T04:33:40Z",
+          "pillar_code": "PILLAR_5_CONSUMER_FINANCE_USAA",
+          "pillar_num": 5,
+          "pillar_title": "Consumer Finance, Insurance Bad Faith & USAA Repossession",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "consumer-finance",
+            "usaa-repossession",
+            "insurance-bad-faith",
+            "fdcpa"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "casebuilder",
+            "holographic-mesh",
+            "legal-mesh",
+            "litigation-action"
+          ]
+        }
+      ]
+    },
+    "PILLAR_6_JUDICIAL_ETHICS_AUDIT": {
+      "pillar_number": 6,
+      "title": "Judicial Conduct & Institutional Integrity Audits",
+      "description": "Audits of judicial decisions, conflict disclosures, Commission on Judicial Conduct complaints, and court accountability.",
+      "repo_count": 7,
+      "repositories": [
+        {
+          "name": "CASE-68-Judge-Robert-J-Brown-Complete-Case-Universe-and",
+          "description": "CASE-68 P4 Audit \u2014 Judge Robert J. Brown complete case-universe and CWS-crossover audit.",
+          "url": "https://github.com/GlacierEQ/CASE-68-Judge-Robert-J-Brown-Complete-Case-Universe-and",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:29Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-69-Judge-Kyle-T-Dowd-Complete-Per-Diem-Case-Univers",
+          "description": "CASE-69 P4 Audit \u2014 Judge Kyle T. Dowd complete per-diem case-universe and dual-role audit.",
+          "url": "https://github.com/GlacierEQ/CASE-69-Judge-Kyle-T-Dowd-Complete-Per-Diem-Case-Univers",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:29Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-66-Judge-Natasha-Shaw-Complete-Case-Universe-and-Co",
+          "description": "CASE-66 P4 Audit \u2014 Judge Natasha Shaw complete case-universe and comparative-treatment audit.",
+          "url": "https://github.com/GlacierEQ/CASE-66-Judge-Natasha-Shaw-Complete-Case-Universe-and-Co",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:29Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-67-Judge-Courtney-N-Naso-Complete-Case-Universe-and",
+          "description": "CASE-67 P4 Audit \u2014 Judge Courtney N. Naso complete case-universe and comparative-treatment audit.",
+          "url": "https://github.com/GlacierEQ/CASE-67-Judge-Courtney-N-Naso-Complete-Case-Universe-and",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:56:23Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-34-Judge-Kyle-Dowd-Disclosure-and-Post-Disclosure-R",
+          "description": "CASE-34 P3 Audit \u2014 Judge Kyle Dowd disclosure and post-disclosure ruling audit.",
+          "url": "https://github.com/GlacierEQ/CASE-34-Judge-Kyle-Dowd-Disclosure-and-Post-Disclosure-R",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:50:58Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-24-Hawaii-Commission-on-Judicial-Conduct-Complaint",
+          "description": "CASE-24 P2 Judicial Conduct \u2014 Hawaii Commission on Judicial Conduct complaint, verified events only.",
+          "url": "https://github.com/GlacierEQ/CASE-24-Hawaii-Commission-on-Judicial-Conduct-Complaint",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:49:53Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "CASE-12-Judge-Natasha-Shaw-Recusal-and-Disclosure-Track",
+          "description": "CASE-12 P1 Judicial Conduct \u2014 Judge Natasha Shaw recusal and disclosure track.",
+          "url": "https://github.com/GlacierEQ/CASE-12-Judge-Natasha-Shaw-Recusal-and-Disclosure-Track",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:48:17Z",
+          "pillar_code": "PILLAR_6_JUDICIAL_ETHICS_AUDIT",
+          "pillar_num": 6,
+          "pillar_title": "Judicial Conduct & Institutional Integrity Audits",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "judicial-conduct-audit",
+            "ethics-complaint",
+            "court-integrity"
+          ],
+          "existing_topics": []
+        }
+      ]
+    },
+    "PILLAR_7_LEGAL_AI_ENGINES": {
+      "pillar_number": 7,
+      "title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+      "description": "Autonomous legal reasoning systems, automated docket scrapers, pleading draft engines, and adversarial matrix generators.",
+      "repo_count": 25,
+      "repositories": [
+        {
+          "name": "apex-legal-ops-dashboard",
+          "description": "APEX Automated Deployment - apex-legal-ops-dashboard",
+          "url": "https://github.com/GlacierEQ/apex-legal-ops-dashboard",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T09:08:11Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "Forward-Deployed-Agentic-Powerhouse",
+          "description": "Zero-to-hero Forward Deployed Agentic AI powerhouse \u2014 ground-up and existing-system upgrade. Integrates mega-skills, mega-pipelines, genius, memory. Universal: invent, innovate, refactor, repoint, merge, upgrade.",
+          "url": "https://github.com/GlacierEQ/Forward-Deployed-Agentic-Powerhouse",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-20T13:50:58Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "nexus-legal-grid",
+          "description": "APEX Legal-MCP-Omni-Grid Infrastructure manifest and deployment package",
+          "url": "https://github.com/GlacierEQ/nexus-legal-grid",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:58:40Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "legal-mcp",
+            "legal-mesh",
+            "mcp-server",
+            "orchestration"
+          ]
+        },
+        {
+          "name": "legal-powerhouse",
+          "description": "Legal Powerhouse - The relentless pursuit of truth | Unified legal engineering system",
+          "url": "https://github.com/GlacierEQ/legal-powerhouse",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:58:33Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "legal-motion-automation",
+          "description": "Advanced legal motion generation system with Hawaii Family Court formatting, LaTeX compilation, and cross-platform document management",
+          "url": "https://github.com/GlacierEQ/legal-motion-automation",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:58:24Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "court-automation",
+            "legal-brief",
+            "legal-mesh",
+            "pro-code"
+          ]
+        },
+        {
+          "name": "Solomon-Codex-Quantum-Legal-Intelligence-System",
+          "description": "high powered corruption killer",
+          "url": "https://github.com/GlacierEQ/Solomon-Codex-Quantum-Legal-Intelligence-System",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:57:16Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "LEGAL-AI-NEXUS",
+          "description": "\u2696\ufe0f Enterprise Legal AI Platform - Complete automation suite consolidating hawaii-family-court-legal-automation + legal-motion-automation + AI userscripts for court-specific deployment and multi-jurisdiction support",
+          "url": "https://github.com/GlacierEQ/LEGAL-AI-NEXUS",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-19T04:55:41Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "GodMind",
+          "description": "GlacierEQ GodMind: Unified Intelligence & Case Management Hub [Phase 8]",
+          "url": "https://github.com/GlacierEQ/GodMind",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-16T01:29:49Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "legal-brief-pipeline",
+          "description": "Automated legal brief compilation pipeline: Overleaf LaTeX \u2192 GitHub \u2192 Supabase \u2192 Notion | LawTeX + Bluebook citation management",
+          "url": "https://github.com/GlacierEQ/legal-brief-pipeline",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-15T20:18:37Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "court-automation",
+            "legal-brief",
+            "legal-mesh",
+            "pro-code"
+          ]
+        },
+        {
+          "name": "legal-brief-system",
+          "description": "Automated legal brief pipeline: Overleaf LaTeX \u2192 GitHub \u2192 Supabase PDF storage \u2192 Notion case management \u2192 MotherDuck analytics",
+          "url": "https://github.com/GlacierEQ/legal-brief-system",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-15T20:18:28Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "court-automation",
+            "legal-brief",
+            "legal-mesh",
+            "pro-code"
+          ]
+        },
+        {
+          "name": "automation-powerhouse",
+          "description": "Comprehensive browser automation (Selenium, Playwright, Puppeteer, Scrapy) with TDD methodology and intelligent document processing MCP server",
+          "url": "https://github.com/GlacierEQ/automation-powerhouse",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:15:48Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "ai-legal-agent-team",
+          "description": "AI Legal Agent Team project files and documentation",
+          "url": "https://github.com/GlacierEQ/ai-legal-agent-team",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:12:19Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "AI-Legal-Advisor",
+          "description": "AI Legal Advisor is an innovative AI-based legal advisor, harnessing the power of Generative AI and ChatGPT API to revolutionize the legal industry. This project provides automated and accurate legal advice through a user-friendly chat interface, enabling legal professionals to streamline their workflows and enhance productivity.",
+          "url": "https://github.com/GlacierEQ/AI-Legal-Advisor",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:12:18Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "ai-cognitive-nexus-mcp",
+          "description": "\u4e00\u4e2a\u4e13\u4e1a\u7684\u3001\u53ef\u52a8\u6001\u7f16\u7ec4\u7684 AI \u56e2\u961f\u534f\u4f5c\u4e0e\u7f16\u6392\u7684MCP\u3002\u5141\u8bb8\u60a8\u901a\u8fc7\u7b80\u5355\u7684\u6307\u4ee4\u521b\u5efa\u3001\u7ba1\u7406\u548c\u6307\u6325\u7531\u591a\u4e2a AI \u667a\u80fd\u4f53 (Agent) \u7ec4\u6210\u7684\u5c42\u7ea7\u5316\u56e2\u961f\uff0c\u4ee5\u89e3\u51b3\u590d\u6742\u548c\u591a\u9636\u6bb5\u7684\u4efb\u52a1\u3002",
+          "url": "https://github.com/GlacierEQ/ai-cognitive-nexus-mcp",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:12:12Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "agentdevlaw",
+          "description": "A middleware for multiagent systems providing legal knowledge with a legal ontology. Um middleware para sistemas multiagentes que fornece conhecimento jur\u00eddico com uma ontologia legal.",
+          "url": "https://github.com/GlacierEQ/agentdevlaw",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:11:50Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "Pro-Mastermind",
+          "description": "\ud83e\udd16 Pro-tier AI orchestration engine \u2014 Mastermind + Doctor Strange universal coordination layer. 9-agent microservice generation, swarm intelligence, and sovereign development operating system | GlacierEQ APEX",
+          "url": "https://github.com/GlacierEQ/Pro-Mastermind",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T18:09:42Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "Pro-xAI",
+          "description": "\ud83d\udd31 Pro-tier xAI sovereign flagship \u2014 Colossus infrastructure suite, Grok agent architecture, legal intelligence, thermal engineering, energy systems, waterplant, microcode, security, and community ops | GlacierEQ APEX",
+          "url": "https://github.com/GlacierEQ/Pro-xAI",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-09T19:51:57Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "quantum-legal",
+          "description": "Legal mesh repository.",
+          "url": "https://github.com/GlacierEQ/quantum-legal",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-07T16:46:20Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "Z-BACKUP-apex-command-center",
+          "description": "\ud83d\ude80 APEX Command Center - Production MCP Server with GitHub \u00d7 Notion \u00d7 Memory Plugin integration. Memory-first architecture with 96.9% token reduction, Aspen Grove Orchestrator, and real-time AI intelligence.",
+          "url": "https://github.com/GlacierEQ/Z-BACKUP-apex-command-center",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-02T05:27:29Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "supabase-policy-carrying-ai-data-plane",
+          "description": "GlacierEQ excellence pack \u2014 independent reference (no company affiliation claimed)",
+          "url": "https://github.com/GlacierEQ/supabase-policy-carrying-ai-data-plane",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-08-31T06:24:43Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "apex-omega",
+          "description": "Omega Strand: Controller/Executor - pro-code UI, nexus-api gateway, apex-workers, MCP orchestration",
+          "url": "https://github.com/GlacierEQ/apex-omega",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T20:40:01Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "legal-ai-editor",
+          "description": "Legal mesh repository.",
+          "url": "https://github.com/GlacierEQ/legal-ai-editor",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T19:18:36Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "court-automation",
+            "legal-brief",
+            "legal-mesh",
+            "pro-code"
+          ]
+        },
+        {
+          "name": "legal-aid-chatbot",
+          "description": "Legal mesh repository.",
+          "url": "https://github.com/GlacierEQ/legal-aid-chatbot",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T19:18:31Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "holographic-mesh",
+            "legal-ai",
+            "legal-mesh",
+            "legal-reasoning"
+          ]
+        },
+        {
+          "name": "jefs-legal-ai-fortress",
+          "description": "Nuclear Legal AI System for Hawaii JEFS Integration - Maximum Power Legal Automation with Document Processing, Security, and Case Intelligence",
+          "url": "https://github.com/GlacierEQ/jefs-legal-ai-fortress",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T00:34:07Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "court-automation",
+            "legal-brief",
+            "legal-mesh",
+            "pro-code"
+          ]
+        },
+        {
+          "name": "hawaii-docket-automation",
+          "description": "\ud83c\udfdb\ufe0f Enterprise-grade Hawaii court docket processing system with MCP integration, automated analysis, report generation, and multi-platform sync",
+          "url": "https://github.com/GlacierEQ/hawaii-docket-automation",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T00:31:55Z",
+          "pillar_code": "PILLAR_7_LEGAL_AI_ENGINES",
+          "pillar_num": 7,
+          "pillar_title": "Legal AI Engines, Quantum Reasoning & Docket Automation",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-ai",
+            "quantum-forensics",
+            "docket-automation",
+            "brief-pipeline"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "court-automation",
+            "legal-brief",
+            "legal-mesh",
+            "pro-code"
+          ]
+        }
+      ]
+    },
+    "PILLAR_8_LEGAL_MCP_AND_VAULTS": {
+      "pillar_number": 8,
+      "title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+      "description": "Live Model Context Protocol (MCP) servers, cryptographic evidence vaults, case law citators, and statutes databases.",
+      "repo_count": 19,
+      "repositories": [
+        {
+          "name": "APEX-IMPACT-ENGINE",
+          "description": "Executable strategy engine enforcing BUILD \u2192 USE \u2192 POLISH \u2192 COMPLETE with strict evidence-based \u22659 quality gates. Continuously evaluates materially changed state. Prioritizes real operator impact and external leverage over heartbeat activity.",
+          "url": "https://github.com/GlacierEQ/APEX-IMPACT-ENGINE",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T10:52:17Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "llm-runner-teams",
+          "description": "Multi-agent runner team framework: Case & Evidence, Document Processing, Coding, Evolution/Optimization \u2014 forensic-grade, nothing deleted without analysis",
+          "url": "https://github.com/GlacierEQ/llm-runner-teams",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T08:52:31Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "gmail-mcp-server",
+          "description": "A Model Context Protocol (MCP) server for Gmail integration in Claude Desktop with auto authentication support. This server enables AI assistants to manage Gmail through natural language interactions.",
+          "url": "https://github.com/GlacierEQ/gmail-mcp-server",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-21T08:01:09Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "github-mcp-server",
+          "description": "GitHub's official MCP Server",
+          "url": "https://github.com/GlacierEQ/github-mcp-server",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-16T10:53:57Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "google-drive-mcp",
+          "description": "Maximum Control Point Google Drive Connector with OAuth management, health monitoring, forensic logging, and MemoryPlugin integration for AI-powered workflows",
+          "url": "https://github.com/GlacierEQ/google-drive-mcp",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T23:22:53Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "awesome-forensics",
+          "description": "\u2b50\ufe0f A curated list of awesome forensic analysis tools and resources",
+          "url": "https://github.com/GlacierEQ/awesome-forensics",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:16:04Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "archEYEvist",
+          "description": "EYEonic Tree \u2014 he who walks the halls. A recursive, evidence-preserving archivist for stationary metadata repair, intake mapping, and provenance-aware file systems.",
+          "url": "https://github.com/GlacierEQ/archEYEvist",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:14:59Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "apex-stack",
+          "description": "\ud83d\udd31 APEX Stack \u2014 GitHub + Notion + Vercel + Supabase + Supermemory.ai sovereign AI development infrastructure",
+          "url": "https://github.com/GlacierEQ/apex-stack",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:14:47Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "apex-law-library",
+          "description": "Legal mesh repository.",
+          "url": "https://github.com/GlacierEQ/apex-law-library",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:14:31Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "Alex_MCPSuperAssistant",
+          "description": "Simplified and improved version of the open source MCP chrome extension called MCP Super Assistant",
+          "url": "https://github.com/GlacierEQ/Alex_MCPSuperAssistant",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T19:13:12Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "Z-BACKUP-DesktopCommanderMCP",
+          "description": "This is MCP server for Claude that gives it terminal control, file system search and diff file editing capabilities",
+          "url": "https://github.com/GlacierEQ/Z-BACKUP-DesktopCommanderMCP",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T18:13:45Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "unified-case-brain-web",
+          "description": "Unified Case Brain Web Hub \u2014 governed dashboard and evidence navigation",
+          "url": "https://github.com/GlacierEQ/unified-case-brain-web",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-13T18:07:15Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "federal-email-evidence-toolkit",
+          "description": "Federal Rules of Evidence compliant email collection, preservation, and authentication toolkit with comprehensive chain of custody documentation and forensic integrity verification",
+          "url": "https://github.com/GlacierEQ/federal-email-evidence-toolkit",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-09-11T18:20:23Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "evidence-vault",
+            "fre-902",
+            "legal-forensics",
+            "legal-mesh"
+          ]
+        },
+        {
+          "name": "glaciereq-mcp-stack",
+          "description": "MCP tool router with allow-list (portfolio) \u00b7 AKOS P0",
+          "url": "https://github.com/GlacierEQ/glaciereq-mcp-stack",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-09-09T03:20:18Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "Pro-Gateway",
+          "description": "\ud83d\udd31 Pro-tier sovereign MCP gateway \u2014 unified proxy routing Vercel, Supabase, Sentry, ClickUp, Linear, Notion, Dropbox through one APEX endpoint. Control plane + audit loop | GlacierEQ APEX",
+          "url": "https://github.com/GlacierEQ/Pro-Gateway",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-31T08:55:03Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "notion-mcp-empowerment-engine",
+          "description": "Intent\u2192Notion MCP tool chains (portfolio) \u00b7 AKOS P0",
+          "url": "https://github.com/GlacierEQ/notion-mcp-empowerment-engine",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-31T05:10:48Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        },
+        {
+          "name": "MCP-OMNI-PLATFORM",
+          "description": "\ud83d\ude80 Universal AI Orchestration Platform - Consolidating MCP-MASTER-OMNI-GRID + MCP-SOVEREIGN-DEPLOYMENT-COMPLETE with 25+ API connectors, quantum-enhanced memory, and enterprise-grade legal automation infrastructure",
+          "url": "https://github.com/GlacierEQ/MCP-OMNI-PLATFORM",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T23:48:54Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-command",
+            "apex-legal",
+            "elite-ops",
+            "legal-mesh",
+            "mesh-infrastructure"
+          ]
+        },
+        {
+          "name": "deadline-tracker-mcp",
+          "description": "Critical MCP server for tracking TRO expirations and motion deadlines in legal case management",
+          "url": "https://github.com/GlacierEQ/deadline-tracker-mcp",
+          "is_private": true,
+          "is_archived": false,
+          "pushed_at": "2026-08-30T00:41:00Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": [
+            "apex-legal",
+            "legal-mcp",
+            "legal-mesh",
+            "mcp-server",
+            "orchestration"
+          ]
+        },
+        {
+          "name": "lockheed-evidence-binding-gateway",
+          "description": "GlacierEQ excellence pack \u2014 independent reference (no company affiliation claimed)",
+          "url": "https://github.com/GlacierEQ/lockheed-evidence-binding-gateway",
+          "is_private": false,
+          "is_archived": false,
+          "pushed_at": "2026-08-29T20:57:57Z",
+          "pillar_code": "PILLAR_8_LEGAL_MCP_AND_VAULTS",
+          "pillar_num": 8,
+          "pillar_title": "Legal MCP Connectors, Forensic Vaults & Research Arsenals",
+          "target_topics": [
+            "apex-legal",
+            "legal-mesh",
+            "legal-mcp",
+            "evidence-vault",
+            "fre-601-verified",
+            "legal-research"
+          ],
+          "existing_topics": []
+        }
+      ]
+    }
+  }
+}

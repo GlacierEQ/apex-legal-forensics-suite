@@ -31,6 +31,8 @@ from backend.app.main import (
     get_estate_capabilities_route,
     get_strike_manifest_route,
     download_unpacked_file_route,
+    get_legal_repositories_route,
+    load_legal_repositories,
 )
 
 class TestEstateMeshEngine(unittest.TestCase):
@@ -189,6 +191,50 @@ class TestEstateMeshEngine(unittest.TestCase):
         file_resp = download_unpacked_file_route(folder, filename)
         self.assertEqual(file_resp.status_code, 200)
         self.assertGreater(len(file_resp.body), 0)
+
+    def test_legal_repositories_mesh(self):
+        # 1. Total legal repositories catalog
+        res = get_legal_repositories_route()
+        self.assertEqual(res["total_repositories"], 160)
+        self.assertEqual(res["total_estate_legal_nodes"], 160)
+        self.assertEqual(len(res["pillars"]), 8)
+
+        # 2. Verify all 8 Strategic Pillars
+        pillar_ids = [p["pillar_number"] for p in res["pillars"]]
+        self.assertEqual(pillar_ids, [1, 2, 3, 4, 5, 6, 7, 8])
+
+        # 3. Test Pillar 1 filter (Core Litigation & RICO)
+        p1_res = get_legal_repositories_route(pillar=1)
+        self.assertEqual(p1_res["total_repositories"], 35)
+        for r in p1_res["repositories"]:
+            self.assertEqual(r["pillar_number"], 1)
+            self.assertIn("apex-legal", r["topics"])
+            self.assertIn("legal-mesh", r["topics"])
+            self.assertIn("core-litigation", r["topics"])
+
+        # 4. Test Pillar 3 filter (Cherry Chan Recovery)
+        p3_res = get_legal_repositories_route(pillar=3)
+        self.assertEqual(p3_res["total_repositories"], 6)
+        p3_names = [r["name"] for r in p3_res["repositories"]]
+        self.assertTrue(any("CAMARO" in n for n in p3_names))
+        self.assertTrue(any("NV-UI" in n or "MEUC" in n for n in p3_names))
+
+        # 5. Test Pillar 4 filter (Hospital Fraud & Kekoa Child Safety)
+        p4_res = get_legal_repositories_route(pillar=4)
+        self.assertEqual(p4_res["total_repositories"], 12)
+        for r in p4_res["repositories"]:
+            self.assertEqual(r["pillar_number"], 4)
+
+        # 6. Test keyword search
+        search_res = get_legal_repositories_route(search="USAA")
+        self.assertGreaterEqual(search_res["total_repositories"], 7)
+        for r in search_res["repositories"]:
+            matched = "usaa" in r["name"].lower() or "usaa" in r["description"].lower() or any("usaa" in t.lower() for t in r["topics"])
+            self.assertTrue(matched)
+
+        # 7. Check 1FDV flagship presence
+        search_1fdv = get_legal_repositories_route(search="1FDV-23-0001009")
+        self.assertGreaterEqual(search_1fdv["total_repositories"], 5)
 
 if __name__ == "__main__":
     unittest.main()

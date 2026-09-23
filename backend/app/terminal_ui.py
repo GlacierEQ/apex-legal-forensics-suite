@@ -154,7 +154,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
 
       <button onclick="switchTab('capabilities')" id="tab-btn-capabilities" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
         <span>🚀 GitHub Capabilities</span>
-        <span class="bg-indigo-400/20 text-indigo-300 text-xs px-2 py-0.5 rounded font-mono">8 Pillars · 64 Nodes</span>
+        <span class="bg-indigo-400/20 text-indigo-300 text-xs px-2 py-0.5 rounded font-mono">160 Repos · 8 Pillars</span>
       </button>
 
       <button onclick="switchTab('vault')" id="tab-btn-vault" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 bg-gray-900 text-gray-400 hover:text-gray-200 hover:bg-gray-800">
@@ -687,51 +687,98 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
       </section>
     </div>
 
-    <!-- TAB 8: GITHUB CAPABILITIES -->
+    <!-- TAB 8: GITHUB CAPABILITIES & LEGAL REPOSITORIES -->
     <div id="tab-capabilities" class="hidden space-y-6">
       <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div class="flex items-center gap-2">
-            <span class="bg-indigo-950 text-indigo-400 border border-indigo-800/60 text-xs px-2.5 py-0.5 rounded font-mono font-bold">ESTATE CAPABILITY CATALOG</span>
-            <span class="text-xs text-gray-500 font-mono">glaciereq.capability-inventory.v2</span>
+            <span class="bg-indigo-950 text-indigo-400 border border-indigo-800/60 text-xs px-2.5 py-0.5 rounded font-mono font-bold">HOLOGRAPHIC MESH REPOSITORIES</span>
+            <span class="text-xs text-emerald-400 font-mono font-bold">160 NODES SYNCHRONIZED</span>
+            <span class="text-xs text-gray-500 font-mono">GlacierEQ</span>
           </div>
-          <h2 class="text-2xl font-black text-white mt-1">APEX GitHub Holographic Mesh Capabilities</h2>
-          <p class="text-xs text-gray-400 mt-1">Verified capability nodes, blueprints, and multi-interface entrypoints across all 8 strategic estate domains.</p>
+          <h2 class="text-2xl font-black text-white mt-1">APEX GitHub Legal Repositories & Capability Mesh</h2>
+          <p class="text-xs text-gray-400 mt-1">All 160 specialized legal repositories organized across the 8 Strategic Holographic Mesh Pillars, tagged and synchronized with GitHub.</p>
         </div>
-        <div class="flex gap-4">
-          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
-            <div class="text-[10px] text-gray-500 uppercase font-bold">Total Nodes</div>
-            <div class="text-xl font-black text-indigo-400 font-mono">64</div>
+        <div class="flex flex-wrap gap-3">
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center min-w-[90px]">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Legal Repos</div>
+            <div class="text-xl font-black text-indigo-400 font-mono" id="statLegalReposCount">160</div>
           </div>
-          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
-            <div class="text-[10px] text-gray-500 uppercase font-bold">Strategic Domains</div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center min-w-[90px]">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Strategic Pillars</div>
             <div class="text-xl font-black text-emerald-400 font-mono">8</div>
           </div>
-          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center">
-            <div class="text-[10px] text-gray-500 uppercase font-bold">Epistemic Standard</div>
-            <div class="text-xl font-black text-amber-400 font-mono">L5</div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center min-w-[90px]">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Core Blueprints</div>
+            <div class="text-xl font-black text-amber-400 font-mono">64</div>
+          </div>
+          <div class="bg-gray-950 border border-gray-800 px-4 py-2 rounded-xl text-center min-w-[110px]">
+            <div class="text-[10px] text-gray-500 uppercase font-bold">Adverse Exposure</div>
+            <div class="text-xl font-black text-rose-400 font-mono">$220.5M</div>
           </div>
         </div>
       </div>
 
-      <!-- Domain Filter Buttons -->
-      <div class="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
-        <div class="flex flex-wrap gap-2" id="capabilitiesFilterButtons">
-          <button onclick="filterCapabilities('ALL')" id="cap-btn-all" class="px-3 py-1 text-xs font-bold rounded bg-indigo-600 text-white">All (64)</button>
-          <button onclick="filterCapabilities('MEGA_SKILLS')" id="cap-btn-mega_skills" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mega Skills (9)</button>
-          <button onclick="filterCapabilities('MEGA_PIPELINES')" id="cap-btn-mega_pipelines" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mega Pipelines (6)</button>
-          <button onclick="filterCapabilities('GENIUS_MASTERY')" id="cap-btn-genius_mastery" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Genius (6)</button>
-          <button onclick="filterCapabilities('AKOS')" id="cap-btn-akos" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">AKOS (6)</button>
-          <button onclick="filterCapabilities('PRO_CODE')" id="cap-btn-pro_code" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Pro Code (5)</button>
-          <button onclick="filterCapabilities('ASPEN_GROVE')" id="cap-btn-aspen_grove" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Aspen Grove (12)</button>
-          <button onclick="filterCapabilities('COMPUTER_USER')" id="cap-btn-computer_user" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Computer User (12)</button>
-          <button onclick="filterCapabilities('LEGAL_WARFARE')" id="cap-btn-legal_warfare" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-rose-300 hover:text-white">Legal Warfare (10)</button>
-        </div>
-        <span class="text-xs font-mono text-gray-400">100% Proved / Zero Fake Truth</span>
+      <!-- View Switcher Tabs -->
+      <div class="flex items-center gap-3 border-b border-gray-800 pb-3">
+        <button onclick="switchCapView('legal')" id="view-btn-legal" class="px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white flex items-center gap-2">
+          <span>⚖️ Legal Repositories Mesh (160 Nodes)</span>
+        </button>
+        <button onclick="switchCapView('capabilities')" id="view-btn-caps" class="px-4 py-2 text-xs font-bold rounded-lg bg-gray-800 text-gray-400 hover:text-white flex items-center gap-2">
+          <span>🚀 Core Capabilities (64 Blueprint Nodes)</span>
+        </button>
       </div>
 
-      <!-- Capabilities Grid -->
-      <div id="capabilitiesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <!-- SUBVIEW 1: LEGAL REPOSITORIES MESH -->
+      <div id="subview-legal-repos" class="space-y-4">
+        <!-- Search and Pillar Filter Controls -->
+        <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-4 space-y-3">
+          <div class="flex flex-col md:flex-row gap-3 justify-between items-center">
+            <div class="relative w-full md:w-96">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xs">🔍</span>
+              <input type="text" id="legalRepoSearch" placeholder="Search 160 legal repos (name, topic, keyword)..." oninput="searchLegalRepos(this.value)" class="bg-gray-950 border border-gray-700 rounded-lg pl-8 pr-3 py-1.5 text-xs text-gray-200 font-mono w-full focus:border-indigo-500 focus:outline-none">
+            </div>
+            <div class="text-xs text-gray-400 font-mono" id="legalRepoMatchCount">Showing 160 of 160 repositories</div>
+          </div>
+          <!-- 8 Pillar Filter Buttons -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-gray-800/60" id="pillarFilterButtons">
+            <button onclick="filterLegalPillar(0)" id="pillar-btn-0" class="px-2.5 py-1 text-xs font-bold rounded bg-indigo-600 text-white">All (160)</button>
+            <button onclick="filterLegalPillar(1)" id="pillar-btn-1" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-red-300 hover:text-white">P1: Core Litigation & RICO (35)</button>
+            <button onclick="filterLegalPillar(2)" id="pillar-btn-2" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-indigo-300 hover:text-white">P2: Broad Case Catalog (45)</button>
+            <button onclick="filterLegalPillar(3)" id="pillar-btn-3" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-emerald-300 hover:text-white">P3: Cherry Chan Recovery (6)</button>
+            <button onclick="filterLegalPillar(4)" id="pillar-btn-4" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-pink-300 hover:text-white">P4: Healthcare & Kekoa (12)</button>
+            <button onclick="filterLegalPillar(5)" id="pillar-btn-5" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-amber-300 hover:text-white">P5: Consumer Finance & USAA (11)</button>
+            <button onclick="filterLegalPillar(6)" id="pillar-btn-6" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-purple-300 hover:text-white">P6: Judicial Integrity Audits (7)</button>
+            <button onclick="filterLegalPillar(7)" id="pillar-btn-7" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-cyan-300 hover:text-white">P7: Legal AI & Automation (25)</button>
+            <button onclick="filterLegalPillar(8)" id="pillar-btn-8" class="px-2.5 py-1 text-xs font-bold rounded bg-gray-800 text-teal-300 hover:text-white">P8: Legal MCP & Vaults (19)</button>
+          </div>
+        </div>
+
+        <!-- Legal Repos Grid -->
+        <div id="legalReposContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- SUBVIEW 2: CORE CAPABILITIES -->
+      <div id="subview-core-caps" class="hidden space-y-4">
+        <!-- Domain Filter Buttons -->
+        <div class="flex flex-wrap gap-2 items-center justify-between border-b border-gray-800 pb-3">
+          <div class="flex flex-wrap gap-2" id="capabilitiesFilterButtons">
+            <button onclick="filterCapabilities('ALL')" id="cap-btn-all" class="px-3 py-1 text-xs font-bold rounded bg-indigo-600 text-white">All (64)</button>
+            <button onclick="filterCapabilities('MEGA_SKILLS')" id="cap-btn-mega_skills" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mega Skills (9)</button>
+            <button onclick="filterCapabilities('MEGA_PIPELINES')" id="cap-btn-mega_pipelines" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Mega Pipelines (6)</button>
+            <button onclick="filterCapabilities('GENIUS_MASTERY')" id="cap-btn-genius_mastery" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Genius (6)</button>
+            <button onclick="filterCapabilities('AKOS')" id="cap-btn-akos" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">AKOS (6)</button>
+            <button onclick="filterCapabilities('PRO_CODE')" id="cap-btn-pro_code" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Pro Code (5)</button>
+            <button onclick="filterCapabilities('ASPEN_GROVE')" id="cap-btn-aspen_grove" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Aspen Grove (12)</button>
+            <button onclick="filterCapabilities('COMPUTER_USER')" id="cap-btn-computer_user" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-gray-400 hover:text-white">Computer User (12)</button>
+            <button onclick="filterCapabilities('LEGAL_WARFARE')" id="cap-btn-legal_warfare" class="px-3 py-1 text-xs font-bold rounded bg-gray-800 text-rose-300 hover:text-white">Legal Warfare (10)</button>
+          </div>
+          <span class="text-xs font-mono text-gray-400">100% Proved / Zero Fake Truth</span>
+        </div>
+
+        <!-- Capabilities Grid -->
+        <div id="capabilitiesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
     </div>
 
     <!-- TAB 9: MASTER STRIKE ARSENAL VAULT -->
@@ -1246,6 +1293,10 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
     let ESTATE_ACTORS = [];
     let ESTATE_TRAPS = [];
     let CAPABILITIES = [];
+    let LEGAL_REPOSITORIES = [];
+    let ACTIVE_PILLAR_FILTER = 0;
+    let LEGAL_REPO_SEARCH = '';
+    let ACTIVE_CAP_VIEW = 'legal';
     let STRIKE_MANIFEST = null;
     let PERSONAS = [];
     let CRUCIBLE_DATA = null;
@@ -1257,7 +1308,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
 
     async function init() {{
       try {{
-        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, strikeRes, persRes, crucRes, servRes, hospRes, jefsRes] = await Promise.all([
+        const [alRes, coRes, hwRes, rcRes, emMatters, emActors, emTraps, capRes, legRes, strikeRes, persRes, crucRes, servRes, hospRes, jefsRes] = await Promise.all([
           fetch('/api/v1/forensics/allegations').then(r => r.json()),
           fetch('/api/v1/forensics/contradictions').then(r => r.json()),
           fetch('/api/v1/forensics/filing/hawaii-motion-packet').then(r => r.json()),
@@ -1266,6 +1317,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
           fetch('/api/v1/forensics/estate/actors').then(r => r.json()),
           fetch('/api/v1/forensics/estate/perjury-traps').then(r => r.json()),
           fetch('/api/v1/forensics/estate/capabilities').then(r => r.json()),
+          fetch('/api/v1/forensics/estate/legal-repositories').then(r => r.json()),
           fetch('/api/v1/forensics/strikes/manifest').then(r => r.json()),
           fetch('/api/v1/forensics/estate/personas').then(r => r.json()),
           fetch('/api/v1/forensics/estate/deposition-crucible').then(r => r.json()),
@@ -1281,6 +1333,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         ESTATE_ACTORS = emActors.actors || [];
         ESTATE_TRAPS = emTraps.traps || [];
         CAPABILITIES = capRes.capabilities || [];
+        LEGAL_REPOSITORIES = legRes.repositories || [];
         STRIKE_MANIFEST = strikeRes;
         PERSONAS = persRes.personas || [];
         CRUCIBLE_DATA = crucRes;
@@ -1294,6 +1347,7 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         renderEstateActors(ESTATE_ACTORS);
         renderEstateTraps(ESTATE_TRAPS);
         renderCapabilities(CAPABILITIES);
+        renderLegalRepositories(LEGAL_REPOSITORIES);
         renderStrikeVault(STRIKE_MANIFEST);
         renderPersonas(PERSONAS);
         renderCrucible(CRUCIBLE_DATA);
@@ -1833,6 +1887,140 @@ def get_terminal_html(overview: dict, allegations: list, contradictions: list, m
         btn.disabled = false;
         btn.innerHTML = '<span>⚔️ Impeach Deponent</span>';
       }}
+    }}
+
+    function switchCapView(view) {{
+      ACTIVE_CAP_VIEW = view;
+      const subLegal = document.getElementById('subview-legal-repos');
+      const subCaps = document.getElementById('subview-core-caps');
+      const btnLegal = document.getElementById('view-btn-legal');
+      const btnCaps = document.getElementById('view-btn-caps');
+      if (view === 'legal') {{
+        if (subLegal) subLegal.classList.remove('hidden');
+        if (subCaps) subCaps.classList.add('hidden');
+        if (btnLegal) btnLegal.className = 'px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white flex items-center gap-2';
+        if (btnCaps) btnCaps.className = 'px-4 py-2 text-xs font-bold rounded-lg bg-gray-800 text-gray-400 hover:text-white flex items-center gap-2';
+      }} else {{
+        if (subLegal) subLegal.classList.add('hidden');
+        if (subCaps) subCaps.classList.remove('hidden');
+        if (btnLegal) btnLegal.className = 'px-4 py-2 text-xs font-bold rounded-lg bg-gray-800 text-gray-400 hover:text-white flex items-center gap-2';
+        if (btnCaps) btnCaps.className = 'px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white flex items-center gap-2';
+      }}
+    }}
+
+    function filterLegalPillar(pillarNum) {{
+      ACTIVE_PILLAR_FILTER = pillarNum;
+      for (let i = 0; i <= 8; i++) {{
+        const btn = document.getElementById('pillar-btn-' + i);
+        if (btn) {{
+          if (i === pillarNum) {{
+            btn.className = 'px-2.5 py-1 text-xs font-bold rounded bg-indigo-600 text-white';
+          }} else {{
+            const colors = [
+              'text-white', 'text-red-300', 'text-indigo-300', 'text-emerald-300',
+              'text-pink-300', 'text-amber-300', 'text-purple-300', 'text-cyan-300', 'text-teal-300'
+            ];
+            btn.className = 'px-2.5 py-1 text-xs font-bold rounded bg-gray-800 ' + colors[i] + ' hover:text-white';
+          }}
+        }}
+      }}
+      applyLegalRepoFilters();
+    }}
+
+    function searchLegalRepos(query) {{
+      LEGAL_REPO_SEARCH = (query || '').toLowerCase().trim();
+      applyLegalRepoFilters();
+    }}
+
+    function applyLegalRepoFilters() {{
+      let filtered = LEGAL_REPOSITORIES;
+      if (ACTIVE_PILLAR_FILTER > 0) {{
+        filtered = filtered.filter(r => r.pillar_number === ACTIVE_PILLAR_FILTER);
+      }}
+      if (LEGAL_REPO_SEARCH) {{
+        filtered = filtered.filter(r => 
+          (r.name || '').toLowerCase().includes(LEGAL_REPO_SEARCH) ||
+          (r.description || '').toLowerCase().includes(LEGAL_REPO_SEARCH) ||
+          (r.pillar_name || '').toLowerCase().includes(LEGAL_REPO_SEARCH) ||
+          (r.topics || []).some(t => t.toLowerCase().includes(LEGAL_REPO_SEARCH))
+        );
+      }}
+      const countEl = document.getElementById('legalRepoMatchCount');
+      if (countEl) {{
+        countEl.textContent = 'Showing ' + filtered.length + ' of ' + LEGAL_REPOSITORIES.length + ' repositories';
+      }}
+      renderLegalRepositories(filtered);
+    }}
+
+    function renderLegalRepositories(items) {{
+      const container = document.getElementById('legalReposContainer');
+      if (!container) return;
+      if (!items || items.length === 0) {{
+        container.innerHTML = '<div class="col-span-3 text-center py-12 text-gray-500 font-mono text-xs">No legal repositories match current filter/search.</div>';
+        return;
+      }}
+      const statCount = document.getElementById('statLegalReposCount');
+      if (statCount && LEGAL_REPOSITORIES.length > 0) {{
+        statCount.textContent = LEGAL_REPOSITORIES.length;
+      }}
+
+      container.innerHTML = items.map(r => {{
+        const pNum = r.pillar_number || 1;
+        const pName = r.pillar_name || 'Legal Mesh';
+        const colorClasses = [
+          '',
+          'bg-red-950 text-red-300 border-red-800/60',
+          'bg-indigo-950 text-indigo-300 border-indigo-800/60',
+          'bg-emerald-950 text-emerald-300 border-emerald-800/60',
+          'bg-pink-950 text-pink-300 border-pink-800/60',
+          'bg-amber-950 text-amber-300 border-amber-800/60',
+          'bg-purple-950 text-purple-300 border-purple-800/60',
+          'bg-cyan-950 text-cyan-300 border-cyan-800/60',
+          'bg-teal-950 text-teal-300 border-teal-800/60'
+        ];
+        const pillarColor = colorClasses[pNum] || 'bg-gray-800 text-gray-300 border-gray-700';
+        const isPrivate = r.is_private !== false;
+        const privBadge = isPrivate 
+          ? '<span class="text-[10px] font-mono font-bold bg-gray-800 text-gray-300 border border-gray-700 px-2 py-0.5 rounded">🔒 Private</span>'
+          : '<span class="text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded">🌐 Public</span>';
+
+        const topics = (r.topics || []).slice(0, 4).map(t => 
+          '<span class="text-[10px] font-mono bg-gray-950 text-gray-400 border border-gray-800 px-1.5 py-0.5 rounded">' + t + '</span>'
+        ).join(' ');
+
+        const repoUrl = r.url || ('https://github.com/' + (r.name.includes('/') ? r.name : 'GlacierEQ/' + r.name));
+        const shortName = r.name.includes('/') ? r.name.split('/')[1] : r.name;
+
+        return `
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-indigo-800/60 transition flex flex-col justify-between shadow-lg">
+            <div>
+              <div class="flex justify-between items-start gap-2 mb-2">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${{pillarColor}}">
+                  Pillar ${{pNum}}: ${{pName}}
+                </span>
+                ${{privBadge}}
+              </div>
+              <h4 class="text-sm font-bold text-gray-100 break-words hover:text-indigo-300 transition">
+                <a href="${{repoUrl}}" target="_blank" rel="noopener noreferrer">
+                  ${{shortName}}
+                </a>
+              </h4>
+              <p class="text-xs text-gray-300 mt-2 line-clamp-3 leading-relaxed">${{r.description || 'Verified GlacierEQ legal mesh repository.'}}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-gray-800/80 space-y-2">
+              <div class="flex flex-wrap gap-1">
+                ${{topics}}
+              </div>
+              <div class="flex justify-between items-center text-xs pt-1">
+                <a href="${{repoUrl}}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-200 font-mono font-bold flex items-center gap-1">
+                  <span>GitHub Repository ↗</span>
+                </a>
+                <span class="text-[10px] text-gray-500 font-mono">${{r.status || 'Active Node'}}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }}).join('');
     }}
 
     function renderCapabilities(items) {{

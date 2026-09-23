@@ -1083,6 +1083,67 @@ def load_estate_capabilities(domain: Optional[str] = None) -> Dict[str, Any]:
                 pass
     return {"total_capabilities": 0, "domains": [], "capabilities": []}
 
+def load_legal_repositories(pillar: Optional[int] = None, search: Optional[str] = None) -> Dict[str, Any]:
+    candidate_paths = [
+        Path("/root/LEGAL_REPOSITORIES_REGISTRY.json"),
+        Path(__file__).parent.parent / "data" / "LEGAL_REPOSITORIES_REGISTRY.json",
+        Path("/root/.gemini/antigravity-cli/brain/9c74fa2a-90ec-4eea-8987-7f695775ce19/APEX_LEGAL_REPOSITORIES_REGISTRY.json")
+    ]
+    for p in candidate_paths:
+        if p.exists():
+            try:
+                data = json.loads(p.read_text())
+                pillars_dict = data.get("pillars", {})
+                pillars_list = []
+                all_repos = []
+
+                if isinstance(pillars_dict, dict):
+                    for code, pdata in pillars_dict.items():
+                        p_num = pdata.get("pillar_number")
+                        p_title = pdata.get("title")
+                        p_desc = pdata.get("description")
+                        p_repos = pdata.get("repositories", [])
+                        pillars_list.append({
+                            "pillar_code": code,
+                            "pillar_number": p_num,
+                            "title": p_title,
+                            "description": p_desc,
+                            "repo_count": len(p_repos)
+                        })
+                        for r in p_repos:
+                            repo_item = dict(r)
+                            repo_item["pillar_number"] = r.get("pillar_num", p_num)
+                            repo_item["pillar_name"] = r.get("pillar_title", p_title)
+                            repo_item["topics"] = r.get("target_topics", [])
+                            all_repos.append(repo_item)
+                    pillars_list.sort(key=lambda x: x["pillar_number"])
+                elif isinstance(data.get("repositories"), list):
+                    all_repos = data.get("repositories", [])
+                    pillars_list = data.get("pillars", [])
+
+                repos = all_repos
+                if pillar is not None and pillar > 0:
+                    repos = [r for r in repos if r.get("pillar_number") == pillar]
+                if search:
+                    q = search.lower().strip()
+                    repos = [
+                        r for r in repos
+                        if q in r.get("name", "").lower()
+                        or q in r.get("description", "").lower()
+                        or q in r.get("pillar_name", "").lower()
+                        or any(q in t.lower() for t in r.get("topics", []))
+                    ]
+                return {
+                    "schema": "apex.holographic-mesh.legal-repositories.v1",
+                    "total_repositories": len(repos),
+                    "total_estate_legal_nodes": len(all_repos),
+                    "pillars": pillars_list,
+                    "repositories": repos
+                }
+            except Exception:
+                pass
+    return {"total_repositories": 0, "total_estate_legal_nodes": 0, "pillars": [], "repositories": []}
+
 def load_strike_manifest() -> Dict[str, Any]:
     receipt_path = Path("/root/artifacts/strikes/APEX_STRIKE_EXECUTION_RECEIPT.json")
     packets_dir = Path("/root/artifacts/strikes/packets")
@@ -1110,6 +1171,10 @@ def load_strike_manifest() -> Dict[str, Any]:
 @app.get("/api/v1/forensics/estate/capabilities", tags=["Estate Capabilities"])
 def get_estate_capabilities_route(domain: Optional[str] = None):
     return load_estate_capabilities(domain)
+
+@app.get("/api/v1/forensics/estate/legal-repositories", tags=["Estate Legal Repositories"])
+def get_legal_repositories_route(pillar: Optional[int] = None, search: Optional[str] = None):
+    return load_legal_repositories(pillar, search)
 
 @app.get("/api/v1/forensics/strikes/manifest", tags=["Strikes"])
 def get_strike_manifest_route():
@@ -1674,6 +1739,11 @@ class ForensicsHTTPHandler(BaseHTTPRequestHandler):
         elif path == "/api/v1/forensics/estate/capabilities":
             dom = query.get("domain", [None])[0]
             self._send_json(200, load_estate_capabilities(dom))
+        elif path == "/api/v1/forensics/estate/legal-repositories":
+            p_val = query.get("pillar", [None])[0]
+            pillar = int(p_val) if p_val and p_val.isdigit() else None
+            search = query.get("search", [None])[0]
+            self._send_json(200, load_legal_repositories(pillar, search))
         elif path == "/api/v1/forensics/strikes/manifest":
             self._send_json(200, load_strike_manifest())
         elif path.startswith("/api/v1/forensics/download/unpacked/"):
